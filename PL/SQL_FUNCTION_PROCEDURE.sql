@@ -1,4 +1,4 @@
---QU?N LÝ TÀI KHO?N
+--QUAN LY TAI KHOAN
 1. Cap nhat mat khau cua tai khoan theo ma tai khoan nhap vao
 SET SERVEROUTPUT ON
 DECLARE 
@@ -11,9 +11,9 @@ BEGIN
     SET MatKhau = p_MatKhauMoi
     WHERE MaTaiKhoan = p_MaTaiKhoan;
     
-    DBMS_OUTPUT.PUT_LINE('Doi mat khau thành công cho tài khoan có mã: ' || p_MaTaiKhoan);
+    DBMS_OUTPUT.PUT_LINE('Doi mat khau thï¿½nh cï¿½ng cho tï¿½i khoan cï¿½ mï¿½: ' || p_MaTaiKhoan);
 END;
-2. Dua ra danh sách tài khoan theo chuc vu
+2. Dua ra danh sï¿½ch tï¿½i khoan theo chuc vu
 SET SERVEROUTPUT ON
 DECLARE
     p_ChucVu VARCHAR2(10) :='&p_ChucVu';
@@ -26,7 +26,7 @@ BEGIN
     END LOOP;
 END;
 
-3. S? l??ng tài kho?n s? d?ng Reddit theo n?m
+3. S? l??ng tï¿½i kho?n s? d?ng Reddit theo n?m
 SET SERVEROUTPUT ON
 CREATE OR REPLACE PROCEDURE
 sum_tk(v_year NUMBER)
@@ -36,13 +36,13 @@ BEGIN
     FROM TaiKhoan
     WHERE EXTRACT(YEAR FROM NgayThamGia) = v_year;
    
-    DBMS_OUTPUT.PUT_LINE('So tài khoan trong nam ' || v_year || ': ' || num_tk);
+    DBMS_OUTPUT.PUT_LINE('So tï¿½i khoan trong nam ' || v_year || ': ' || num_tk);
 END;
 EXEC sum_tk(&v_year);
 
 
---QU?N LÝ BÀI ??NG
-1. Tong so bài dang cua theo tài khoan 
+--QU?N Lï¿½ Bï¿½I ??NG
+1. Tong so bï¿½i dang cua theo tï¿½i khoan 
 SET SERVEROUTPUT ON
 DECLARE
     p_MaTaiKhoan NUMBER;
@@ -52,9 +52,9 @@ BEGIN
     SELECT sum(MaBaiDang) INTO sum_MaBaiDang
     FROM BaiDang
     WHERE MaTaiKhoan=p_MaTaiKhoan;
-    DBMS_OUTPUT.PUT_LINE('Tài khoan'||' '||p_MaTaiKhoan||' '||'có'||' '||sum_MaBaiDang||' bài dang');
+    DBMS_OUTPUT.PUT_LINE('Tï¿½i khoan'||' '||p_MaTaiKhoan||' '||'cï¿½'||' '||sum_MaBaiDang||' bï¿½i dang');
 END;
-2. Xóa bài ??ng
+2. Xï¿½a bï¿½i ??ng
 SET SERVEROUTPUT ON
 DECLARE
     p_MaBaiDang NUMBER;
@@ -64,8 +64,8 @@ BEGIN
     WHERE MaBaiDang=p_MaBaiDang;
 END;
 
---QU?N LÝ H?I NHÓM
-1. Lay danh sách các thành viên theo hoi nhóm
+--QU?N Lï¿½ H?I NHï¿½M
+1. Lay danh sï¿½ch cï¿½c thï¿½nh viï¿½n theo hoi nhï¿½m
 SET SERVEROUTPUT ON
 DECLARE
     p_MaHoiNhom NUMBER;
@@ -86,7 +86,7 @@ BEGIN
         END LOOP;
     END IF;
 END;
-2. Thêm tài khoan vào hoi nhóm
+2. Thï¿½m tï¿½i khoan vï¿½o hoi nhï¿½m
 SET SERVEROUTPUT ON
 DECLARE
     p_MaTaiKhoan NUMBER;
@@ -96,12 +96,12 @@ BEGIN
     p_MaTaiKhoan := &p_MaTaiKhoan;
     p_MaHoiNhom := &p_MaHoiNhom;
     IF NOT EXISTS (SELECT 1 FROM TaiKhoan WHERE MaTaiKhoan = p_MaTaiKhoan) THEN
-        DBMS_OUTPUT.PUT_LINE('MaTaiKhoan không ton tai trong bang TaiKhoan.');
+        DBMS_OUTPUT.PUT_LINE('MaTaiKhoan khï¿½ng ton tai trong bang TaiKhoan.');
         RETURN;
     END IF;
 
     IF NOT EXISTS (SELECT 1 FROM HoiNhom WHERE MaHoiNhom = p_MaHoiNhom) THEN
-        DBMS_OUTPUT.PUT_LINE('MaHoiNhom không ton tai trong bang HoiNhom.');
+        DBMS_OUTPUT.PUT_LINE('MaHoiNhom khï¿½ng ton tai trong bang HoiNhom.');
         RETURN;
     END IF;
     
@@ -113,12 +113,12 @@ BEGIN
     ELSE
         INSERT INTO TaiKhoan_ThamGia_HoiNhom( MaTaiKhoan, MaHoiNhom)
         VALUES (p_MaTaiKhoan, p_MaHoiNhom);
-        DBMS_OUTPUT.PUT_LINE('Thêm thành công vào hoi nhóm.');
+        DBMS_OUTPUT.PUT_LINE('Thï¿½m thï¿½nh cï¿½ng vï¿½o hoi nhï¿½m.');
     END IF;
 END;
 
---QU?N LÝ PHÒNG TIN NH?N
-1. Lay danh sách phòng tin nhan mà 1 tài kho?n ?ã tham gia
+--QU?N Lï¿½ PHï¿½NG TIN NH?N
+1. Lay danh sï¿½ch phï¿½ng tin nhan mï¿½ 1 tï¿½i kho?n ?ï¿½ tham gia
 SET SERVEROUTPUT ON
 DECLARE
     v_MaTaiKhoan NUMBER := &v_MaTaiKhoan;
@@ -129,7 +129,7 @@ BEGIN
     FROM TaiKhoan
     WHERE MaTaiKhoan= v_MaTaiKhoan;
     IF v_count = 0 THEN
-        DBMS_OUTPUT.PUT_LINE('Không có ma tài khoan nay.');
+        DBMS_OUTPUT.PUT_LINE('Khï¿½ng cï¿½ ma tï¿½i khoan nay.');
     ELSE 
         FOR rec IN (SELECT p.MaPhongNhanTin, p.TenPhong, p.ChuDePhong
                     FROM TaiKhoan_NhanTin_PhongNhanTin tp JOIN PhongNhanTin p 
@@ -137,14 +137,14 @@ BEGIN
                     WHERE tp.MaTaiKhoan = v_MaTaiKhoan)
         LOOP
         count_rows:=count_rows+1;
-        DBMS_OUTPUT.PUT_LINE('Mã Phòng: ' || rec.MaPhongNhanTin || ' | Tên Phòng: ' || rec.TenPhong || ' | Ch? ?? Phòng: ' || rec.ChuDePhong);
+        DBMS_OUTPUT.PUT_LINE('Mï¿½ Phï¿½ng: ' || rec.MaPhongNhanTin || ' | Tï¿½n Phï¿½ng: ' || rec.TenPhong || ' | Ch? ?? Phï¿½ng: ' || rec.ChuDePhong);
         END LOOP;
         IF count_rows=0 then
-        dbms_output.put_line('Tài khoan không tham gia phòng nh?n tin nào.');
+        dbms_output.put_line('Tï¿½i khoan khï¿½ng tham gia phï¿½ng nh?n tin nï¿½o.');
         END IF;
     END IF;
 END;
-2. Gui tin nhan vào phong
+2. Gui tin nhan vï¿½o phong
 SET SERVEROUTPUT ON
 DECLARE
     rowtn TaiKhoan_NhanTin_PhongTinNhan%TYPE;
@@ -156,11 +156,11 @@ BEGIN
     rowtn.TepDinhKem := '&TepDinhKem';
     INSERT INTO TaiKhoan_NhanTin_PhongTinNhan
     VALUES(rowtn.MaTaiKhoan, rowtn.MaPhongNhanTin, rowtn.NoiDungNhanTin, rowtn.ThoiGianNhanTin, rowtn.TepDinhKem);
-    DBMS_OUTPUT.PUT_LINE('Gui tin nhan thành công.');
+    DBMS_OUTPUT.PUT_LINE('Gui tin nhan thï¿½nh cï¿½ng.');
 END;
 
---QU?N LÝ CHI?N D?CH QU?NG CÁO
-1. ??a ra danh sách các tài kho?n quang cao ??ng ký chi?n d?ch theo mã chi?n d?ch 
+--QU?N Lï¿½ CHI?N D?CH QU?NG Cï¿½O
+1. ??a ra danh sï¿½ch cï¿½c tï¿½i kho?n quang cao ??ng kï¿½ chi?n d?ch theo mï¿½ chi?n d?ch 
 DECLARE
     v_MaChienDich NUMBER := &v_MaChienDich;
     v_count NUMBER;
@@ -170,7 +170,7 @@ BEGIN
     FROM ChienDich
     WHERE MaChienDich=v_MaChienDich;
     IF v_count =0 THEN
-        DBMS_OUTPUT.PUT_LINE('Không có mã chien dich dã nhap');
+        DBMS_OUTPUT.PUT_LINE('Khï¿½ng cï¿½ mï¿½ chien dich dï¿½ nhap');
     ELSE
         FOR rec IN ( SELECT tq.MaTaiKhoanQuangCao, tk.TenDoanhNghiep, tk.LinhVuc
                      FROM TaiKhoan_QuangCao_DangKy_ChienDich tq JOIN TaiKhoanQuangCao tk 
@@ -178,30 +178,30 @@ BEGIN
                      WHERE tq.MaChienDich = v_MaChienDich)
         LOOP
         count_rows:=count_rows+1;
-        DBMS_OUTPUT.PUT_LINE('Mã Tài Khoan: ' || rec.MaTaiKhoanQuangCao || ' | Tên Doanh Nghiep: ' || rec.TenDoanhNghiep || 
+        DBMS_OUTPUT.PUT_LINE('Mï¿½ Tï¿½i Khoan: ' || rec.MaTaiKhoanQuangCao || ' | Tï¿½n Doanh Nghiep: ' || rec.TenDoanhNghiep || 
                              ' | Linh vuc: ' || rec.LinhVuc);
         END LOOP;
         IF count_rows=0 then
-        dbms_output.put_line('Khong có tài khoan nào dang ký chien dich.');
+        dbms_output.put_line('Khong cï¿½ tï¿½i khoan nï¿½o dang kï¿½ chien dich.');
         END IF;
     END IF;      
 END;
     
-2. C?p nh?t thông tin chi?n d?ch
+2. C?p nh?t thï¿½ng tin chi?n d?ch
 BEGIN
     UPDATE ChienDich
-    SET TieuDe = 'Chien dich Hè 2024',
-        NoiDung = 'Cap nhat noi dung chien dich Hè 2024'
+    SET TieuDe = 'Chien dich Hï¿½ 2024',
+        NoiDung = 'Cap nhat noi dung chien dich Hï¿½ 2024'
     WHERE MaChienDich = 1;
 
     IF SQL%ROWCOUNT > 0 THEN
-        DBMS_OUTPUT.PUT_LINE('Cap nhat thông tin chien dich thành công.');
+        DBMS_OUTPUT.PUT_LINE('Cap nhat thï¿½ng tin chien dich thï¿½nh cï¿½ng.');
     ELSE
-        DBMS_OUTPUT.PUT_LINE('Không tìm thay chien dich voi mã tuong ung.');
+        DBMS_OUTPUT.PUT_LINE('Khï¿½ng tï¿½m thay chien dich voi mï¿½ tuong ung.');
     END IF;
 END;
 
-3. Ki?m tra tài kho?n có tham gia ??ng ký qu?ng cáo c?a 1 chi?n d?ch nào ?ó hay không
+3. Ki?m tra tï¿½i kho?n cï¿½ tham gia ??ng kï¿½ qu?ng cï¿½o c?a 1 chi?n d?ch nï¿½o ?ï¿½ hay khï¿½ng
 CREATE OR REPLACE FUNCTION 
 KiemTraTaiKhoanQuangCao(v_MaTaiKhoan NUMBER, v_MaChienDich NUMBER)
 RETURN VARCHAR2
@@ -216,15 +216,15 @@ BEGIN
     WHERE tk.MaTaiKhoan = v_MaTaiKhoan AND tkcd.MaChienDich = v_MaChienDich;
 
     IF v_count > 0 THEN
-        RETURN 'Tài kho?n ?ã tham gia qu?ng cáo c?a chi?n d?ch.';
+        RETURN 'Tï¿½i kho?n ?ï¿½ tham gia qu?ng cï¿½o c?a chi?n d?ch.';
     ELSE
-        RETURN 'Tài kho?n ch?a tham gia qu?ng cáo nào c?a chi?n d?ch.';
+        RETURN 'Tï¿½i kho?n ch?a tham gia qu?ng cï¿½o nï¿½o c?a chi?n d?ch.';
     END IF;
 END;
 SELECT KiemTraTaiKhoanQuangCao(&v_MaTaiKhoan, &v_MaChienDich);
 
--- BÁO CÁO VÀ TH?NG KÊ
-1. Bài ??ng có l??t upvote cao nh?t
+-- Bï¿½O Cï¿½O Vï¿½ TH?NG Kï¿½
+1. Bï¿½i ??ng cï¿½ l??t upvote cao nh?t
 CREATE OR REPLACE PROCEDURE BaiDangUpvoteCaoNhat 
 AS
     v_MaBaiDang    BaiDang.MaBaiDang%TYPE;
@@ -241,21 +241,21 @@ BEGIN
     ORDER BY MAX(tt.Upvote) DESC
     FETCH FIRST 1 ROWS ONLY;
 
-    DBMS_OUTPUT.PUT_LINE('Bài dang có luong upvote cao nhat:');
-    DBMS_OUTPUT.PUT_LINE('Mã bài dang: ' || v_MaBaiDang);
-    DBMS_OUTPUT.PUT_LINE('Tiêu de: ' || v_TieuDe);
+    DBMS_OUTPUT.PUT_LINE('Bï¿½i dang cï¿½ luong upvote cao nhat:');
+    DBMS_OUTPUT.PUT_LINE('Mï¿½ bï¿½i dang: ' || v_MaBaiDang);
+    DBMS_OUTPUT.PUT_LINE('Tiï¿½u de: ' || v_TieuDe);
     DBMS_OUTPUT.PUT_LINE('Noi dung: ' || v_NoiDung);
     DBMS_OUTPUT.PUT_LINE('So luong upvote: ' || v_SoUpvote);
 
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('Không có bài dang nào trong he thong.');
+        DBMS_OUTPUT.PUT_LINE('Khï¿½ng cï¿½ bï¿½i dang nï¿½o trong he thong.');
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Loi xay ra: ' || SQLERRM);
 END;
 EXEC BaiDangUpvoteCaoNhat
 
-2. Th?ng kê v? TOP 5 chi?n d?ch có chi phí qu?ng cáo cao nh?t
+2. Th?ng kï¿½ v? TOP 5 chi?n d?ch cï¿½ chi phï¿½ qu?ng cï¿½o cao nh?t
 CREATE OR REPLACE PROCEDURE TOP5_EXPENSIVE_CAMPAIGNS 
 AS
 BEGIN
@@ -269,7 +269,7 @@ BEGIN
                 ORDER BY TongChiPhi DESC
                 FETCH FIRST 5 ROWS ONLY)
     LOOP
-        DBMS_OUTPUT.PUT_LINE('Chien dich: ' || rec.TieuDe || ', Tong chi phí quang cáo: ' || rec.TongChiPhi);
+        DBMS_OUTPUT.PUT_LINE('Chien dich: ' || rec.TieuDe || ', Tong chi phï¿½ quang cï¿½o: ' || rec.TongChiPhi);
     END LOOP;
 END;
 EXEC TOP5_EXPENSIVE_CAMPAIGNS 
