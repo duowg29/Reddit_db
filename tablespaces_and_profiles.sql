@@ -46,3 +46,61 @@ CREATE PROFILE user_profile LIMIT
     PASSWORD_LOCK_TIME 1              -- Tài khoản bị khóa trong 1 ngày nếu đăng nhập thất bại.
     PASSWORD_VERIFY_FUNCTION verify_function; -- Hàm xác minh độ mạnh của mật khẩu (nếu đã triển khai).
 
+/*
+CREATE TABLESPACE tb_internal
+DATAFILE 'C:/database/tablespace/tb_internal_datafile.dbf'
+SIZE 100M 
+AUTOEXTEND ON 
+NEXT 10M 
+MAXSIZE UNLIMITED;
+
+CREATE TABLESPACE tb_index
+DATAFILE 'C:/database/tablespace/tb_index_datafile.dbf'
+SIZE 100M 
+AUTOEXTEND ON 
+NEXT 10M 
+MAXSIZE UNLIMITED;
+
+CREATE TABLESPACE tb_user
+DATAFILE 'C:/database/tablespace/tb_user_datafile.dbf'
+SIZE 100M 
+AUTOEXTEND ON 
+NEXT 10M 
+MAXSIZE UNLIMITED;
+
+CREATE TEMPORARY TABLESPACE tb_temp 
+TEMPFILE 'C:/database/tablespace/tb_temp_datafile.dbf'
+SIZE 50M 
+AUTOEXTEND ON 
+NEXT 5M 
+MAXSIZE UNLIMITED;
+
+CREATE PROFILE index_profile LIMIT
+    SESSIONS_PER_USER 5
+    CPU_PER_SESSION 5000
+    CONNECT_TIME 120
+    IDLE_TIME 20
+    PASSWORD_LIFE_TIME 90;
+
+CREATE PROFILE user_profile LIMIT
+    SESSIONS_PER_USER 10
+    CPU_PER_SESSION 10000
+    CONNECT_TIME 60
+    IDLE_TIME 30
+    PASSWORD_LIFE_TIME 30
+    FAILED_LOGIN_ATTEMPTS 5
+    PASSWORD_LOCK_TIME 1;
+
+CREATE PROFILE internal_profile LIMIT
+    SESSIONS_PER_USER UNLIMITED
+    CPU_PER_SESSION UNLIMITED
+    CONNECT_TIME UNLIMITED
+    IDLE_TIME UNLIMITED
+    PASSWORD_LIFE_TIME 180;
+
+CREATE PROFILE temp_profile LIMIT
+    SESSIONS_PER_USER 2
+    CPU_PER_SESSION 3000
+    CONNECT_TIME 30
+    IDLE_TIME 10
+    PASSWORD_LIFE_TIME 7;
