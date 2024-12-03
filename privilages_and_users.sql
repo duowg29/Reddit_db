@@ -20,41 +20,41 @@ GRANT MONITOR SESSION TO Supervisor;
 -- 2. Quản trị viên cơ sở dữ liệu (DB Admin)
 -- Nhiệm vụ: Quản lý các cơ sở dữ liệu, bao gồm bảo trì và thay đổi cấu trúc.
 -- Tạo vai trò Quản trị viên cơ sở dữ liệu
-CREATE ROLE DB_Admin;
+CREATE ROLE DBAdmin;
 
 -- Các quyền liên quan đến bảng
-GRANT CREATE ANY TABLE TO DB_Admin;
-GRANT ALTER ANY TABLE TO DB_Admin;
-GRANT DELETE ANY TABLE TO DB_Admin;
-GRANT SELECT ON schema_name.* TO DB_Admin;
-GRANT UPDATE ANY TABLE TO DB_Admin;
+GRANT CREATE ANY TABLE TO DBAdmin;
+GRANT ALTER ANY TABLE TO DBAdmin;
+GRANT DELETE ANY TABLE TO DBAdmin;
+GRANT SELECT ON schema_name.* TO DBAdmin;
+GRANT UPDATE ANY TABLE TO DBAdmin;
 
 -- Các quyền liên quan đến thủ tục
-GRANT CREATE PROCEDURE TO DB_Admin;
-GRANT ALTER ANY PROCEDURE TO DB_Admin;
-GRANT DROP ANY PROCEDURE TO DB_Admin;
-GRANT EXECUTE ANY PROCEDURE TO DB_Admin;
+GRANT CREATE PROCEDURE TO DBAdmin;
+GRANT ALTER ANY PROCEDURE TO DBAdmin;
+GRANT DROP ANY PROCEDURE TO DBAdmin;
+GRANT EXECUTE ANY PROCEDURE TO DBAdmin;
 
 -- Các quyền liên quan đến chỉ số
-GRANT CREATE ANY INDEX TO DB_Admin;
-GRANT DROP ANY INDEX TO DB_Admin;
+GRANT CREATE ANY INDEX TO DBAdmin;
+GRANT DROP ANY INDEX TO DBAdmin;
 
 -- Các quyền liên quan đến tablespace
-GRANT CREATE TABLESPACE TO DB_Admin;
-GRANT ALTER TABLESPACE TO DB_Admin;
+GRANT CREATE TABLESPACE TO DBAdmin;
+GRANT ALTER TABLESPACE TO DBAdmin;
 
 -- Các quyền liên quan đến sao lưu/phục hồi
-GRANT BACKUP ANY TABLE TO DB_Admin;
-GRANT FLASHBACK ANY TABLE TO DB_Admin;
-GRANT ALTER SYSTEM TO DB_Admin;
+GRANT BACKUP ANY TABLE TO DBAdmin;
+GRANT FLASHBACK ANY TABLE TO DBAdmin;
+GRANT ALTER SYSTEM TO DBAdmin;
 
 -- Quyền giám sát
-GRANT ANALYZE ANY TO DB_Admin;
-GRANT MONITOR SESSION TO DB_Admin;
+GRANT ANALYZE ANY TO DBAdmin;
+GRANT MONITOR SESSION TO DBAdmin;
 
 -- Quyền kết nối và quản lý phiên
-GRANT CREATE SESSION TO DB_Admin;
-GRANT ALTER SESSION TO DB_Admin;
+GRANT CREATE SESSION TO DBAdmin;
+GRANT ALTER SESSION TO DBAdmin;
 
 -- 3. Quản trị viên hệ thống (SysAdmin)
 -- Nhiệm vụ: Quản lý cấp cao liên quan đến hệ thống, tài nguyên và bảo mật tổng quát.
@@ -226,37 +226,68 @@ GRANT SELECT ON V_$SQLSTATS TO PerformanceTuner;                 -- Truy vấn t
 -- Nhiệm vụ: Xây dựng và bảo trì các chức năng phía back-end của hệ thống, bao gồm tạo, sửa đổi và thực thi các thủ tục, trigger; xử lý dữ liệu trong các bảng chính.
 CREATE ROLE BackendDeveloper;
 
-GRANT CREATE SESSION TO BackendDeveloper; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT CREATE PROCEDURE, ALTER PROCEDURE, EXECUTE ANY PROCEDURE TO BackendDeveloper; -- Cho phép tạo, sửa đổi và thực thi các thủ tục
-GRANT CREATE TRIGGER, ALTER TRIGGER TO BackendDeveloper; -- Cho phép tạo và sửa đổi trigger
-GRANT INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper; -- Cho phép thao tác thêm, sửa, xóa dữ liệu trong bảng BaiDang
-GRANT INSERT, UPDATE, DELETE ON HoiNhom TO BackendDeveloper; -- Cho phép thao tác thêm, sửa, xóa dữ liệu trong bảng HoiNhom
-GRANT SELECT ON ALL TABLES TO BackendDeveloper; -- Cho phép đọc dữ liệu từ tất cả các bảng
+-- Cấp quyền đăng nhập
+GRANT CREATE SESSION TO BackendDeveloper;
 
--- 9. Nhà quản lý nhật ký hoạt động (Log Manager)
--- Nhiệm vụ: Theo dõi và quản lý nhật ký hoạt động của hệ thống.
-CREATE ROLE LogManager;
+-- Cấp quyền thao tác thủ tục
+GRANT CREATE PROCEDURE, ALTER PROCEDURE, EXECUTE ANY PROCEDURE TO BackendDeveloper;
 
-GRANT CREATE SESSION TO LogManager; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT ON BaoCao TO LogManager; -- Cho phép xem dữ liệu trong bảng BaoCao
-GRANT SELECT ON TaiKhoan TO LogManager; -- Cho phép xem dữ liệu trong bảng TaiKhoan
-GRANT SELECT ON TaiKhoan_Gui_BaoCao TO LogManager; -- Cho phép xem dữ liệu trong bảng TaiKhoan_Gui_BaoCao
-GRANT SELECT ON TaiKhoan_TuongTac_BaiDang TO LogManager; -- Cho phép xem dữ liệu trong bảng TaiKhoan_TuongTac_BaiDang
+-- Cấp quyền thao tác trigger
+GRANT CREATE TRIGGER, ALTER TRIGGER TO BackendDeveloper;
 
-GRANT LogManager TO LogManager_user; -- Gán vai trò LogManager cho người dùng LogManager_user
+-- Cấp quyền thao tác trên các bảng chính
+GRANT INSERT, UPDATE, DELETE ON TaiKhoan TO BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON PhongNhanTin TO BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON BaoCao TO BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON TaiKhoanQuangCao TO BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON ChienDich TO BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON MucTieu TO BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
+
+-- Cấp quyền SELECT trên tất cả các bảng
+GRANT SELECT ANY TABLE TO BackendDeveloper;
+
+-- Cấp quyền đăng nhập
+GRANT CREATE SESSION TO LogManager;
+
+-- Cấp quyền truy vấn các bảng nhật ký hệ thống
+GRANT SELECT ANY TABLE TO LogManager;  -- Có thể thay bằng các quyền cụ thể
+GRANT SELECT ON DBA_AUDIT_TRAIL TO LogManager;
+GRANT SELECT ON V_$LOG TO LogManager;
+GRANT SELECT ON V_$LOGFILE TO LogManager;
+GRANT SELECT ON DBA_LOGS TO LogManager;
 
 -- 10. Kỹ sư dữ liệu (Data Engineer)
 -- Nhiệm vụ: Thiết kế, xây dựng, và duy trì cơ sở dữ liệu; xử lý dữ liệu từ nhiều nguồn.
 CREATE ROLE DataEngineer;
 
-GRANT CREATE SESSION TO DataEngineer; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT ANY TABLE TO DataEngineer; -- Cho phép đọc dữ liệu từ tất cả các bảng
-GRANT INSERT, UPDATE, DELETE ON BaiDang TO DataEngineer; -- Cho phép thao tác thêm, sửa, xóa dữ liệu trong bảng BaiDang
-GRANT INSERT, UPDATE, DELETE ON HoiNhom TO DataEngineer; -- Cho phép thao tác thêm, sửa, xóa dữ liệu trong bảng HoiNhom
-GRANT CREATE TABLE, ALTER ANY TABLE TO DataEngineer; -- Cho phép tạo và sửa đổi bảng
-GRANT CREATE VIEW, DROP VIEW TO DataEngineer; -- Cho phép tạo và xóa view
+-- Cấp quyền đăng nhập
+GRANT CREATE SESSION TO DataEngineer;
 
-GRANT DataEngineer TO backend_developer_user; -- Gán vai trò DataEngineer cho người dùng backend_developer_user
+-- Cấp quyền thao tác trên dữ liệu
+GRANT SELECT ANY TABLE TO DataEngineer;
+GRANT INSERT, UPDATE, DELETE ANY TABLE TO DataEngineer;
+
+-- Cấp quyền thao tác cấu trúc cơ sở dữ liệu
+GRANT CREATE TABLE, ALTER ANY TABLE TO DataEngineer;
+GRANT CREATE VIEW, DROP VIEW TO DataEngineer;
+GRANT CREATE SEQUENCE, DROP SEQUENCE TO DataEngineer;
+
+-- Cấp quyền truy cập bảng hệ thống
+GRANT SELECT ON DBA_TABLES TO DataEngineer;
+GRANT SELECT ON DBA_TAB_COLUMNS TO DataEngineer;
+GRANT SELECT ON DBA_INDEXES TO DataEngineer;
+
+-- Cấp quyền tạo thủ tục, hàm, chỉ mục
+GRANT CREATE PROCEDURE, CREATE FUNCTION TO DataEngineer;
+GRANT CREATE INDEX, DROP INDEX TO DataEngineer;
+
+-- Cấp quyền thực thi thủ tục tối ưu hóa
+GRANT EXECUTE ON DBMS_STATS TO DataEngineer;
+
+-- Cấp quyền tạo và thay đổi sequence
+GRANT CREATE SEQUENCE, ALTER SEQUENCE TO DataEngineer;
 
 -- 11. Nhà phân tích dữ liệu (Data Analyst)
 -- Nhiệm vụ: Phân tích và trực quan hóa dữ liệu, tạo view để hỗ trợ báo cáo.
@@ -273,38 +304,55 @@ GRANT SELECT ON TaiKhoan TO DataAnalyst; -- Cho phép xem dữ liệu trong bả
 -- Nhiệm vụ: Tích hợp công cụ bên thứ ba với hệ thống cơ sở dữ liệu.
 CREATE ROLE ThirdPartyDeveloper;
 
-GRANT CREATE SESSION TO ThirdPartyDeveloper; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT ON BaiDang TO ThirdPartyDeveloper; -- Cho phép xem dữ liệu trong bảng BaiDang
-GRANT EXECUTE ON ALL PROCEDURES TO ThirdPartyDeveloper; -- Cho phép thực thi tất cả các thủ tục
-GRANT SELECT ON ALL TABLES TO ThirdPartyDeveloper; -- Cho phép đọc dữ liệu từ tất cả các bảng
+-- Cấp quyền đăng nhập
+GRANT CREATE SESSION TO ThirdPartyDeveloper;
+
+-- Cấp quyền SELECT
+GRANT SELECT ON ANY TABLES TO ThirdPartyDeveloper;
+
+-- Cấp quyền thực thi cho các thủ tục cần thiết (nếu có)
+GRANT EXECUTE ON procedure_name TO ThirdPartyDeveloper;
 
 -- 13. Quản lý (Moderator)
 -- Nhiệm vụ: Quản lý nội dung và các hoạt động của người dùng trên hệ thống.
 CREATE ROLE Moderator;
 
-GRANT CREATE SESSION TO Moderator; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO Moderator; -- Cho phép thao tác trên bảng BaiDang
+-- Cho phép đăng nhập vào cơ sở dữ liệu
+GRANT CREATE SESSION TO Moderator; 
+
+-- Cấp quyền quản lý dữ liệu trong các bảng nội dung và người dùng
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO Moderator; -- Cho phép thao tác trên bảng TaiKhoan
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO Moderator; -- Cho phép thao tác trên bảng BaiDang
+GRANT SELECT, INSERT, UPDATE, DELETE ON PhongNhanTin TO Moderator; -- Cho phép thao tác trên bảng PhongNhanTin
 GRANT SELECT, INSERT, UPDATE, DELETE ON BaoCao TO Moderator; -- Cho phép thao tác trên bảng BaoCao
-GRANT SELECT ON HoiNhom TO Moderator; -- Cho phép xem dữ liệu trong bảng HoiNhom
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoanQuangCao TO Moderator; -- Cho phép thao tác trên bảng TaiKhoanQuangCao
+GRANT SELECT, INSERT, UPDATE, DELETE ON ChienDich TO Moderator; -- Cho phép thao tác trên bảng ChienDich
+GRANT SELECT, INSERT, UPDATE, DELETE ON MucTieu TO Moderator; -- Cho phép thao tác trên bảng MucTieu
+GRANT SELECT, INSERT, UPDATE, DELETE ON QuangCao TO Moderator; -- Cho phép thao tác trên bảng QuangCao
+
+-- Cấp quyền xem báo cáo và các hoạt động liên quan
 GRANT SELECT ON TaiKhoan_Gui_BaoCao TO Moderator; -- Cho phép xem dữ liệu trong bảng TaiKhoan_Gui_BaoCao
+
 
 -- 14. Người dùng (End-User)
 -- Nhiệm vụ: Sử dụng các tính năng cơ bản của hệ thống như xem và tương tác với dữ liệu.
 CREATE ROLE EndUser;
 
 GRANT CREATE SESSION TO EndUser; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT ON BaiDang TO EndUser; -- Cho phép xem dữ liệu trong bảng BaiDang
-GRANT INSERT ON TaiKhoan_TuongTac_BaiDang TO EndUser; -- Cho phép thêm dữ liệu vào bảng TaiKhoan_TuongTac_BaiDang
-GRANT INSERT ON TaiKhoan_BinhLuan_BaiDang TO EndUser; -- Cho phép thêm dữ liệu vào bảng TaiKhoan_BinhLuan_BaiDang
-GRANT SELECT ON HoiNhom TO EndUser; -- Cho phép xem dữ liệu trong bảng HoiNhom
-GRANT INSERT ON TaiKhoan_ThamGia_HoiNhom TO EndUser; -- Cho phép thêm dữ liệu vào bảng TaiKhoan_ThamGia_HoiNhom
-GRANT SELECT ON BaoCao TO EndUser; -- Cho phép xem dữ liệu trong bảng BaoCao
 
+-- Cấp quyền xem và thêm dữ liệu trên các bảng
+GRANT SELECT, INSERT ON TaiKhoan TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng TaiKhoan
+GRANT SELECT, INSERT ON BaiDang TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng BaiDang
+GRANT SELECT, INSERT ON PhongNhanTin TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng PhongNhanTin
+GRANT SELECT, INSERT ON BaoCao TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng BaoCao
+GRANT SELECT, INSERT ON TaiKhoanQuangCao TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng TaiKhoanQuangCao
+GRANT SELECT, INSERT ON ChienDich TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng ChienDich
+GRANT SELECT, INSERT ON MucTieu TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng MucTieu
+GRANT SELECT, INSERT ON QuangCao TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng QuangCao
 
 -- Gán các vai trò cho người dùng tương ứng
 GRANT Supervisor TO supervisor_user;
-GRANT DB_Admin TO db_admin_user;
+GRANT DBAdmin TO db_admin_user;
 GRANT SysAdmin TO sys_admin_user;
 GRANT DatabaseDeveloper TO db_developer_user;
 GRANT DatabaseSecuritySpecialist TO db_security_user;
