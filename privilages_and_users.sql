@@ -1,45 +1,75 @@
 -- USER CREATION
--- 1. Giám sát viên (Supervisor)
-CREATE USER supervisor_user IDENTIFIED BY supervisor_password;
+-- Tạo các user với tablespace và profile
+CREATE USER supervisor_user IDENTIFIED BY supervisor_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 2. Quản trị viên cơ sở dữ liệu (DB Admin)
-CREATE USER db_admin IDENTIFIED BY dbadmin_password;
+CREATE USER db_admin IDENTIFIED BY dbadmin_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 3. Quản trị viên hệ thống (SysAdmin)
-CREATE USER sys_admin IDENTIFIED BY sysadmin_password;
+CREATE USER sys_admin IDENTIFIED BY sysadmin_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 4. Nhà phát triển cơ sở dữ liệu (Database Developer)
-CREATE USER db_developer IDENTIFIED BY dbdeveloper_password;
+CREATE USER db_developer IDENTIFIED BY dbdeveloper_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 5. Chuyên viên bảo mật cơ sở dữ liệu (Database Security Specialist)
-CREATE USER db_security IDENTIFIED BY dbsecurity_password;
+CREATE USER db_security IDENTIFIED BY dbsecurity_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 6. Chuyên viên quản lý sao lưu và khôi phục (Backup & Recovery Specialist)
-CREATE USER backup_recovery IDENTIFIED BY backuprecovery_password;
+CREATE USER backup_recovery IDENTIFIED BY backuprecovery_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 7. Chuyên viên tối ưu hóa hiệu suất (Database Performance Tuner)
-CREATE USER performance_tuner IDENTIFIED BY performancetuner_password;
+CREATE USER performance_tuner IDENTIFIED BY performancetuner_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 8. Nhà phát triển ứng dụng (Back-end Developer)
-CREATE USER backend_developer IDENTIFIED BY backenddeveloper_password;
+CREATE USER backend_developer IDENTIFIED BY backenddeveloper_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 9. Quản lý nhật ký hệ thống (Log Manager)
-CREATE USER log_manager IDENTIFIED BY logmanager_password;
+CREATE USER log_manager IDENTIFIED BY logmanager_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 10. Kỹ sư dữ liệu (Data Engineer)
-CREATE USER data_engineer IDENTIFIED BY dataengineer_password;
+CREATE USER data_engineer IDENTIFIED BY dataengineer_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 11. Nhà phân tích dữ liệu (Data Analyst)
-CREATE USER data_analyst IDENTIFIED BY dataanalyst_password;
+CREATE USER data_analyst IDENTIFIED BY dataanalyst_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 12. Nhà phát triển bên thứ ba (Third-party Tool Developer)
-CREATE USER third_party_developer IDENTIFIED BY thirdpartydeveloper_password;
+CREATE USER third_party_developer IDENTIFIED BY thirdpartydeveloper_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 13. Quản lý (Moderator)
-CREATE USER moderator_user IDENTIFIED BY moderator_password;
+CREATE USER moderator_user IDENTIFIED BY moderator_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
 
--- 14. Người dùng (End-User)
-CREATE USER end_user IDENTIFIED BY enduser_password;
+CREATE USER end_user IDENTIFIED BY enduser_password
+DEFAULT TABLESPACE user_data
+TEMPORARY TABLESPACE user_temp
+PROFILE user_profile;
+
 
 -- ROLE CREATION
 -- 1. Giám sát viên (Supervisor)
