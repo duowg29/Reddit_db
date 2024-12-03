@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TRG_TAIKHOAN_TUONGTAC_BAIDANG_THOIGIANTUONGTAC" directorySegmentName="seg_0" id="B1D597B5-B2EF-F654-6473-A8FE64508D70">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>TRG_TAIKHOAN_TUONGTAC_BAIDANG_THOIGIANTUONGTAC</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[BEGIN
+    IF :NEW.ThoiGianTuongTac > SYSDATE THEN
+        RAISE_APPLICATION_ERROR(-20001, 'ThoiGianTuongTac must be less than or equal to today');
+    END IF;
+END;
+]]></body>
+<triggerTime>BEFORE</triggerTime>
+<owner>1B7E332E-9DBA-7798-A7E4-3AEF0DF92072</owner>
+<table>A7678DB5-A65C-8166-AEBD-6E3AB9D5F06A</table>
+</TriggerOraclev10g>

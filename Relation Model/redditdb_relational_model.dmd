@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="redditdb_relational_model" id="23C73C69-CB1F-EE7A-C5E4-A0577034B6BE" version="3.5">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 10:32:44 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>23C73C69-CB1F-EE7A-C5E4-A0577034B6BE</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="DB57736B-E521-A612-0058-79F39F8D48A9">
+<designStoragePath>C:\</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>

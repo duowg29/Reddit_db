@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="88B82B3C-8D24-D965-CD4A-6A5F2ECC4938" schemaObject="4BC73497-ED19-A3B5-8D19-07F18E7C3EB6" name="CHIENDICH_CO_MUCTIEU">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>CHIENDICH_CO_MUCTIEU</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="MACHIENDICH" id="6ABB3331-1EAB-222F-5813-395174D6FEF6">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>CHIENDICH_CO_MUCTIEU</sourceObjSchema>
+<sourceObjName>MACHIENDICH</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="218CD7A1-E6EC-5EB5-10EC-C53F254D3E85" referredColumn="E70E6683-CD05-D82E-D6E5-5C02E4B5DA71"/>
+</associations>
+</Column>
+<Column name="MAMUCTIEU" id="31B16BA3-FA01-88C9-F715-D6765F9530FB">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>CHIENDICH_CO_MUCTIEU</sourceObjSchema>
+<sourceObjName>MAMUCTIEU</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BFF18A17-1C98-F88D-AA8F-2A81402F533F" referredColumn="71FF8D92-C17D-0169-4647-5BD25576631A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0E2F296B-9B7D-5FCC-21D9-3D4206F284AF" schemaObject="4BC73497-ED19-A3B5-8D19-07F18E7C3EB6" name="CHIENDICH_CO_MUCTIEU_PK">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>SYS_C008681</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6ABB3331-1EAB-222F-5813-395174D6FEF6"/>
+<colUsage columnID="31B16BA3-FA01-88C9-F715-D6765F9530FB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="44A087E2-2A04-0AE3-8AA7-C0B0A27996E6" name="SYS_C008682">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6ABB3331-1EAB-222F-5813-395174D6FEF6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7BFE993C-AC58-25C1-60ED-B80887C2D3E9" name="SYS_C008683">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="31B16BA3-FA01-88C9-F715-D6765F9530FB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

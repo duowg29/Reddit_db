@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="6D69352E-D52F-1CB0-EA70-9BA7BF47CDA6" containerWithKeyObject="732BE73D-2BD0-6144-7489-DE6A62AD77D8" localFKIndex="B8D84288-8D5A-32AB-A031-AE5AEE53258F" name="SYS_C008634">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>SYS_C008634</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<referredTableLongName>SYSTEM.BAIDANG</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>4B2B4717-7D8F-278A-0737-DF8655AC696B</referredTableID>
+<keyObject>2312343A-7791-2834-4863-6F64963608BB</keyObject>
+<referredKeyID>2312343A-7791-2834-4863-6F64963608BB</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>MABAIDANG</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
