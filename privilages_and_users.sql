@@ -1,3 +1,32 @@
+-- Tạo Tablespace chính
+CREATE TABLESPACE user_data 
+DATAFILE 'D:/app/oracle/ora/data/tempt_ts.dbf' 
+SIZE 100M 
+AUTOEXTEND ON 
+NEXT 10M 
+MAXSIZE 500M;
+
+-- Tạo Temporary Tablespace
+CREATE TEMPORARY TABLESPACE user_temp 
+TEMPFILE 'D:/app/oracle/ora/data/tempt_ts.dbf' 
+SIZE 50M 
+AUTOEXTEND ON 
+NEXT 5M 
+MAXSIZE 100M;
+
+CREATE PROFILE user_profile LIMIT
+    SESSIONS_PER_USER 5               -- Giới hạn tối đa 5 phiên đăng nhập đồng thời.
+    CPU_PER_SESSION 10000             -- Giới hạn CPU sử dụng cho mỗi phiên.
+    CONNECT_TIME 60                   -- Giới hạn thời gian kết nối tối đa 60 phút.
+    IDLE_TIME 30                      -- Ngắt kết nối nếu người dùng không hoạt động trong 30 phút.
+    PASSWORD_LIFE_TIME 30             -- Mật khẩu hết hạn sau 30 ngày.
+    PASSWORD_REUSE_TIME 180           -- Không cho phép sử dụng lại mật khẩu cũ trong 180 ngày.
+    PASSWORD_REUSE_MAX 5              -- Không cho phép sử dụng lại 5 mật khẩu gần nhất.
+    FAILED_LOGIN_ATTEMPTS 5           -- Khóa tài khoản sau 5 lần đăng nhập thất bại.
+    PASSWORD_LOCK_TIME 1              -- Tài khoản bị khóa trong 1 ngày nếu đăng nhập thất bại.
+    PASSWORD_VERIFY_FUNCTION verify_function; -- Hàm xác minh độ mạnh của mật khẩu (nếu đã triển khai).
+
+
 -- 1. Giám sát viên (Supervisor)
 -- Nhiệm vụ: Theo dõi hoạt động chung của hệ thống, không thực hiện các thay đổi lớn.
 -- Tạo vai trò Giám sát viên
@@ -124,126 +153,177 @@ GRANT UPDATE ANY VIEW TO DatabaseDeveloper;  -- Cập nhật dữ liệu vào m�
 -- Cấp quyền truy cập vào các đối tượng khác nếu cần
 GRANT SELECT ANY TABLE TO DatabaseDeveloper;  -- Đọc dữ liệu từ mọi bảng trong cơ sở dữ liệu
 
-        -- 5. Chuyên viên bảo mật cơ sở dữ liệu (Database Security Specialist)
-        -- Nhiệm vụ: Quản lý bảo mật và phân quyền truy cập.
-        -- Tạo vai trò Chuyên viên bảo mật cơ sở dữ liệu
-        CREATE ROLE DatabaseSecuritySpecialist;
+-- 5. Chuyên viên bảo mật cơ sở dữ liệu (Database Security Specialist)
+-- Nhiệm vụ: Quản lý bảo mật và phân quyền truy cập.
+-- Tạo vai trò Chuyên viên bảo mật cơ sở dữ liệu
+CREATE ROLE DatabaseSecuritySpecialist;
 
-        -- Cấp quyền cho DatabaseSecuritySpecialist
-        GRANT CREATE USER TO DatabaseSecuritySpecialist;
-        GRANT ALTER USER TO DatabaseSecuritySpecialist;
-        GRANT DROP USER TO DatabaseSecuritySpecialist;
-        GRANT GRANT ANY ROLE TO DatabaseSecuritySpecialist;
-        GRANT SELECT ANY TABLE TO DatabaseSecuritySpecialist;
-        GRANT AUDIT SYSTEM TO DatabaseSecuritySpecialist;
-        GRANT ANALYZE ANY TO DatabaseSecuritySpecialist;
+-- Quản lý tài khoản người dùng
+GRANT CREATE USER TO DatabaseSecuritySpecialist;  -- Cho phép tạo người dùng mới
+GRANT ALTER USER TO DatabaseSecuritySpecialist;   -- Cho phép thay đổi thuộc tính của người dùng
+GRANT DROP USER TO DatabaseSecuritySpecialist;    -- Cho phép xóa người dùng
 
+-- Quản lý vai trò
+GRANT GRANT ANY ROLE TO DatabaseSecuritySpecialist; -- Cấp quyền cấp vai trò cho người khác
+GRANT CREATE ROLE TO DatabaseSecuritySpecialist;   -- Cấp quyền tạo vai trò mới
+GRANT ALTER ANY ROLE TO DatabaseSecuritySpecialist; -- Cấp quyền thay đổi vai trò của người dùng
 
--- 6. Chuyên viên quản lý sao lưu và khôi phục (Backup & Recovery Specialist)
+-- Quản lý bảo mật và giám sát
+GRANT SELECT ANY TABLE TO DatabaseSecuritySpecialist;  -- Đọc dữ liệu từ mọi bảng (dành cho kiểm tra bảo mật)
+GRANT AUDIT SYSTEM TO DatabaseSecuritySpecialist;      -- Giám sát các sự kiện và hành vi hệ thống
+GRANT AUDIT ANY TO DatabaseSecuritySpecialist;        -- Giám sát các sự kiện trên các đối tượng trong cơ sở dữ liệu
+
+-- Quản lý phân tích và giám sát dữ liệu
+GRANT ANALYZE ANY TO DatabaseSecuritySpecialist;  -- Phân tích dữ liệu và cấu trúc bảng
+GRANT SELECT ANY DICTIONARY TO DatabaseSecuritySpecialist;  -- Đọc thông tin từ các từ điển hệ thống (cho kiểm tra bảo mật)
+
+-- Cấp quyền truy cập cao vào các đối tượng hệ thống
+GRANT SELECT ON dba_users TO DatabaseSecuritySpecialist;  -- Truy cập vào thông tin người dùng trong cơ sở dữ liệu
+GRANT SELECT ON dba_roles TO DatabaseSecuritySpecialist;  -- Truy cập vào thông tin về vai trò của người dùng
+
+-- Cấp quyền giám sát hệ thống
+GRANT MONITOR SESSION TO DatabaseSecuritySpecialist;  -- Giám sát phiên làm việc của người dùng
+GRANT ALTER SESSION TO DatabaseSecuritySpecialist;    -- Thay đổi các cài đặt của phiên làm việc
+
+-- 6. Chuyên viên quản lý sao lưu và khôi phục (Backup & Recovery Specialist) 
 -- Nhiệm vụ: Đảm bảo sao lưu và khôi phục dữ liệu khi cần.
 -- Tạo vai trò Chuyên viên quản lý sao lưu và khôi phục
 CREATE ROLE BackupRecoverySpecialist;
 
--- Cấp quyền cho BackupRecoverySpecialist
-GRANT BACKUP ANY TABLE TO BackupRecoverySpecialist;
-GRANT FLASHBACK ANY TABLE TO BackupRecoverySpecialist;
-GRANT ALTER SYSTEM TO BackupRecoverySpecialist;
-GRANT SYSBACKUP TO BackupRecoverySpecialist;
+-- Quản lý sao lưu và khôi phục
+GRANT BACKUP ANY TABLE TO BackupRecoverySpecialist;           -- Cho phép sao lưu bất kỳ bảng nào trong cơ sở dữ liệu
+GRANT FLASHBACK ANY TABLE TO BackupRecoverySpecialist;        -- Cho phép sử dụng tính năng Flashback để khôi phục dữ liệu
+GRANT SYSBACKUP TO BackupRecoverySpecialist;                  -- Quyền truy cập vào các lệnh sao lưu và khôi phục của hệ thống
 
+-- Quản lý hệ thống sao lưu và khôi phục
+GRANT ALTER SYSTEM TO BackupRecoverySpecialist;              -- Cho phép thay đổi các cài đặt của hệ thống liên quan đến sao lưu và khôi phục
 
+-- Quản lý quản lý tài nguyên sao lưu
+GRANT CREATE TABLESPACE TO BackupRecoverySpecialist;          -- Cho phép tạo và quản lý các không gian bảng (tablespace) cho sao lưu và khôi phục
+GRANT ALTER TABLESPACE TO BackupRecoverySpecialist;           -- Cấp quyền thay đổi không gian bảng (tablespace) cho sao lưu và khôi phục
 
+-- Quản lý lịch sử sao lưu và khôi phục
+GRANT SELECT ON DBA_BACKUP_SET TO BackupRecoverySpecialist;   -- Cho phép truy vấn thông tin sao lưu từ bảng DBA_BACKUP_SET
+GRANT SELECT ON DBA_RECOVERY_FILE_DEST TO BackupRecoverySpecialist; -- Cho phép truy vấn thông tin về thư mục khôi phục
+GRANT SELECT ON V_$BACKUP_REDOLOG TO BackupRecoverySpecialist; -- Truy vấn thông tin sao lưu các redo log
+
+-- Quản lý các nhiệm vụ sao lưu và khôi phục
+GRANT EXECUTE ON DBMS_BACKUP_RESTORE TO BackupRecoverySpecialist; -- Cấp quyền thực thi các thủ tục trong gói DBMS_BACKUP_RESTORE
+GRANT EXECUTE ON DBMS_FLASHBACK TO BackupRecoverySpecialist;      -- Cấp quyền thực thi các thủ tục trong gói DBMS_FLASHBACK
+
+-- Quản lý kiểm tra tính toàn vẹn sao lưu
+GRANT SELECT ON DBA_BACKUP_ARCHIVE_DEST TO BackupRecoverySpecialist; -- Truy vấn thông tin về sao lưu lưu trữ
+GRANT SELECT ON DBA_DATA_FILES TO BackupRecoverySpecialist;         -- Truy vấn thông tin về các file dữ liệu đã sao lưu
+
+-- Giám sát sao lưu và khôi phục
+GRANT MONITOR BACKUP TO BackupRecoverySpecialist;                -- Giám sát các quá trình sao lưu và khôi phục
+GRANT AUDIT BACKUP TO BackupRecoverySpecialist;                  -- Giám sát và ghi nhận các sự kiện liên quan đến sao lưu và khôi phục
 -- 7. Chuyên viên tối ưu hóa hiệu suất (Database Performance Tuner)
 -- Nhiệm vụ: Tối ưu hóa truy vấn và hiệu suất cơ sở dữ liệu.
 -- Tạo vai trò Chuyên viên tối ưu hóa hiệu suất
 CREATE ROLE PerformanceTuner;
 
--- Cấp quyền cho PerformanceTuner
-GRANT SELECT ANY TABLE TO PerformanceTuner;
-GRANT INDEX TO PerformanceTuner;
-GRANT SELECT ON ANY VIEW TO PerformanceTuner;
-GRANT ALTER SESSION TO PerformanceTuner;
-GRANT ANALYZE ANY TO PerformanceTuner;
-GRANT FORCE TRANSACTION TO PerformanceTuner;
+-- Quản lý truy vấn và chỉ mục
+GRANT SELECT ANY TABLE TO PerformanceTuner;                      -- Cho phép truy vấn bất kỳ bảng nào để phân tích dữ liệu
+GRANT SELECT ON ANY VIEW TO PerformanceTuner;                     -- Cho phép truy vấn bất kỳ view nào để phân tích dữ liệu
+GRANT CREATE INDEX TO PerformanceTuner;                           -- Cấp quyền tạo chỉ mục để tối ưu hóa truy vấn
+GRANT ALTER INDEX TO PerformanceTuner;                            -- Cấp quyền thay đổi chỉ mục để điều chỉnh và tối ưu hóa chúng
+GRANT DROP INDEX TO PerformanceTuner;                             -- Cấp quyền xóa chỉ mục khi không cần thiết nữa
 
+-- Quản lý phiên làm việc và tối ưu hóa truy vấn
+GRANT ALTER SESSION TO PerformanceTuner;                         -- Cho phép thay đổi các tham số phiên làm việc để tối ưu hóa
+GRANT FORCE TRANSACTION TO PerformanceTuner;                      -- Cho phép ép buộc một giao dịch, có thể giúp giải quyết các vấn đề tắc nghẽn
+
+-- Phân tích và tối ưu hóa cơ sở dữ liệu
+GRANT ANALYZE ANY TO PerformanceTuner;                           -- Cấp quyền phân tích bất kỳ đối tượng nào trong cơ sở dữ liệu
+GRANT MONITOR ANY TO PerformanceTuner;                           -- Cấp quyền giám sát và theo dõi hiệu suất cơ sở dữ liệu
+GRANT EXECUTE ON DBMS_STATS TO PerformanceTuner;                 -- Cho phép thực thi gói DBMS_STATS để thu thập thống kê và tối ưu hóa cơ sở dữ liệu
+
+-- Quản lý hiệu suất truy vấn
+GRANT EXECUTE ON DBMS_SQL TO PerformanceTuner;                   -- Cấp quyền thực thi các thủ tục trong gói DBMS_SQL để phân tích và tối ưu hóa truy vấn
+GRANT EXECUTE ON DBMS_SESSION TO PerformanceTuner;               -- Cho phép sử dụng các thủ tục của gói DBMS_SESSION để theo dõi và điều chỉnh phiên làm việc
+GRANT EXECUTE ON DBMS_MONITOR TO PerformanceTuner;               -- Cấp quyền thực thi các thủ tục trong gói DBMS_MONITOR để theo dõi và tối ưu hóa hiệu suất
+
+-- Quản lý tài nguyên và tham số
+GRANT ALTER SYSTEM TO PerformanceTuner;                          -- Cho phép thay đổi tham số hệ thống liên quan đến hiệu suất
+GRANT SELECT ON V_$PARAMETER TO PerformanceTuner;                -- Cấp quyền truy vấn các tham số hệ thống để tối ưu hóa
+
+-- Giám sát và đánh giá hiệu suất
+GRANT SELECT ON V_$SESSION TO PerformanceTuner;                  -- Truy vấn thông tin về các phiên làm việc để đánh giá hiệu suất
+GRANT SELECT ON V_$SQL_PLAN TO PerformanceTuner;                 -- Truy vấn kế hoạch thực thi SQL để phân tích các truy vấn chậm
+GRANT SELECT ON V_$SQLSTATS TO PerformanceTuner;                 -- Truy vấn thông tin thống kê về các truy vấn SQL để tối ưu hóa
 
 -- 8. Nhà phát triển ứng dụng (Back-end Developer)
--- Nhiệm vụ: Xây dựng và bảo trì các chức năng phía back-end của hệ thống, bao gồm tạo, sửa đổi và thực thi các thủ tục, trigger; xử lý dữ liệu trong các bảng chính.
 CREATE ROLE BackendDeveloper;
 
-GRANT CREATE SESSION TO BackendDeveloper; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT CREATE PROCEDURE, ALTER PROCEDURE, EXECUTE ANY PROCEDURE TO BackendDeveloper; -- Cho phép tạo, sửa đổi và thực thi các thủ tục
-GRANT CREATE TRIGGER, ALTER TRIGGER TO BackendDeveloper; -- Cho phép tạo và sửa đổi trigger
-GRANT INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper; -- Cho phép thao tác thêm, sửa, xóa dữ liệu trong bảng BaiDang
-GRANT INSERT, UPDATE, DELETE ON HoiNhom TO BackendDeveloper; -- Cho phép thao tác thêm, sửa, xóa dữ liệu trong bảng HoiNhom
-GRANT SELECT ON ALL TABLES TO BackendDeveloper; -- Cho phép đọc dữ liệu từ tất cả các bảng
+GRANT CREATE SESSION TO BackendDeveloper;
+GRANT CREATE PROCEDURE, ALTER PROCEDURE, EXECUTE ANY PROCEDURE TO BackendDeveloper;
+GRANT CREATE TRIGGER, ALTER TRIGGER TO BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON HoiNhom TO BackendDeveloper;
+GRANT SELECT ON ALL TABLES TO BackendDeveloper;
 
 -- 9. Nhà quản lý nhật ký hoạt động (Log Manager)
--- Nhiệm vụ: Theo dõi và quản lý nhật ký hoạt động của hệ thống.
 CREATE ROLE LogManager;
 
-GRANT CREATE SESSION TO LogManager; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT ON BaoCao TO LogManager; -- Cho phép xem dữ liệu trong bảng BaoCao
-GRANT SELECT ON TaiKhoan TO LogManager; -- Cho phép xem dữ liệu trong bảng TaiKhoan
-GRANT SELECT ON TaiKhoan_Gui_BaoCao TO LogManager; -- Cho phép xem dữ liệu trong bảng TaiKhoan_Gui_BaoCao
-GRANT SELECT ON TaiKhoan_TuongTac_BaiDang TO LogManager; -- Cho phép xem dữ liệu trong bảng TaiKhoan_TuongTac_BaiDang
+GRANT CREATE SESSION TO LogManager;
+GRANT SELECT ON BaoCao TO LogManager;
+GRANT SELECT ON TaiKhoan TO LogManager;
+GRANT SELECT ON TaiKhoan_Gui_BaoCao TO LogManager;
+GRANT SELECT ON TaiKhoan_TuongTac_BaiDang TO LogManager;
 
-GRANT LogManager TO LogManager_user; -- Gán vai trò LogManager cho người dùng LogManager_user
+GRANT LogManager TO LogManager_user;
 
 -- 10. Kỹ sư dữ liệu (Data Engineer)
--- Nhiệm vụ: Thiết kế, xây dựng, và duy trì cơ sở dữ liệu; xử lý dữ liệu từ nhiều nguồn.
 CREATE ROLE DataEngineer;
 
-GRANT CREATE SESSION TO DataEngineer; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT ANY TABLE TO DataEngineer; -- Cho phép đọc dữ liệu từ tất cả các bảng
-GRANT INSERT, UPDATE, DELETE ON BaiDang TO DataEngineer; -- Cho phép thao tác thêm, sửa, xóa dữ liệu trong bảng BaiDang
-GRANT INSERT, UPDATE, DELETE ON HoiNhom TO DataEngineer; -- Cho phép thao tác thêm, sửa, xóa dữ liệu trong bảng HoiNhom
-GRANT CREATE TABLE, ALTER ANY TABLE TO DataEngineer; -- Cho phép tạo và sửa đổi bảng
-GRANT CREATE VIEW, DROP VIEW TO DataEngineer; -- Cho phép tạo và xóa view
+GRANT CREATE SESSION TO DataEngineer;
+GRANT SELECT ANY TABLE TO DataEngineer;
+GRANT INSERT, UPDATE, DELETE ON BaiDang TO DataEngineer;
+GRANT INSERT, UPDATE, DELETE ON HoiNhom TO DataEngineer;
+GRANT CREATE TABLE, ALTER ANY TABLE TO DataEngineer;
+GRANT CREATE VIEW, DROP VIEW TO DataEngineer;
 
-GRANT DataEngineer TO backend_developer_user; -- Gán vai trò DataEngineer cho người dùng backend_developer_user
+GRANT  TO backend_developer_user;
 
 -- 11. Nhà phân tích dữ liệu (Data Analyst)
--- Nhiệm vụ: Phân tích và trực quan hóa dữ liệu, tạo view để hỗ trợ báo cáo.
 CREATE ROLE DataAnalyst;
 
-GRANT CREATE SESSION TO DataAnalyst; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT ANY TABLE TO DataAnalyst; -- Cho phép đọc dữ liệu từ tất cả các bảng
-GRANT CREATE VIEW TO DataAnalyst; -- Cho phép tạo view
-GRANT SELECT ON BaiDang TO DataAnalyst; -- Cho phép xem dữ liệu trong bảng BaiDang
-GRANT SELECT ON HoiNhom TO DataAnalyst; -- Cho phép xem dữ liệu trong bảng HoiNhom
-GRANT SELECT ON TaiKhoan TO DataAnalyst; -- Cho phép xem dữ liệu trong bảng TaiKhoan
+GRANT CREATE SESSION TO DataAnalyst;
+GRANT SELECT ANY TABLE TO DataAnalyst;
+GRANT CREATE VIEW TO DataAnalyst;
+GRANT SELECT ON BaiDang TO DataAnalyst;
+GRANT SELECT ON HoiNhom TO DataAnalyst;
+GRANT SELECT ON TaiKhoan TO DataAnalyst;
 
 -- 12. Nhà phát triển bên thứ ba (Third-party Tool Developer)
--- Nhiệm vụ: Tích hợp công cụ bên thứ ba với hệ thống cơ sở dữ liệu.
 CREATE ROLE ThirdPartyDeveloper;
 
-GRANT CREATE SESSION TO ThirdPartyDeveloper; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT ON BaiDang TO ThirdPartyDeveloper; -- Cho phép xem dữ liệu trong bảng BaiDang
-GRANT EXECUTE ON ALL PROCEDURES TO ThirdPartyDeveloper; -- Cho phép thực thi tất cả các thủ tục
-GRANT SELECT ON ALL TABLES TO ThirdPartyDeveloper; -- Cho phép đọc dữ liệu từ tất cả các bảng
+GRANT CREATE SESSION TO ThirdPartyDeveloper;
+GRANT SELECT ON BaiDang TO ThirdPartyDeveloper;
+GRANT EXECUTE ON ALL PROCEDURES TO ThirdPartyDeveloper;
+GRANT SELECT ON ALL TABLES TO ThirdPartyDeveloper;
 
 -- 13. Quản lý (Moderator)
--- Nhiệm vụ: Quản lý nội dung và các hoạt động của người dùng trên hệ thống.
 CREATE ROLE Moderator;
 
-GRANT CREATE SESSION TO Moderator; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO Moderator; -- Cho phép thao tác trên bảng BaiDang
-GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO Moderator; -- Cho phép thao tác trên bảng TaiKhoan
-GRANT SELECT, INSERT, UPDATE, DELETE ON BaoCao TO Moderator; -- Cho phép thao tác trên bảng BaoCao
-GRANT SELECT ON HoiNhom TO Moderator; -- Cho phép xem dữ liệu trong bảng HoiNhom
-GRANT SELECT ON TaiKhoan_Gui_BaoCao TO Moderator; -- Cho phép xem dữ liệu trong bảng TaiKhoan_Gui_BaoCao
+GRANT CREATE SESSION TO Moderator;
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO Moderator;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO Moderator;
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaoCao TO Moderator;
+GRANT SELECT ON HoiNhom TO Moderator;
+GRANT SELECT ON TaiKhoan_Gui_BaoCao TO Moderator;
 
 -- 14. Người dùng (End-User)
--- Nhiệm vụ: Sử dụng các tính năng cơ bản của hệ thống như xem và tương tác với dữ liệu.
 CREATE ROLE EndUser;
 
-GRANT CREATE SESSION TO EndUser; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT ON BaiDang TO EndUser; -- Cho phép xem dữ liệu trong bảng BaiDang
-GRANT INSERT ON TaiKhoan_TuongTac_BaiDang TO EndUser; -- Cho phép thêm dữ liệu vào bảng TaiKhoan_TuongTac_BaiDang
-GRANT INSERT ON TaiKhoan_BinhLuan_BaiDang TO EndUser; -- Cho phép thêm dữ liệu vào bảng TaiKhoan_BinhLuan_BaiDang
-GRANT SELECT ON HoiNhom TO EndUser; -- Cho phép xem dữ liệu trong bảng HoiNhom
-GRANT INSERT ON TaiKhoan_ThamGia_HoiNhom TO EndUser; -- Cho phép thêm dữ liệu vào bảng TaiKhoan_ThamGia_HoiNhom
-GRANT SELECT ON BaoCao TO EndUser; -- Cho phép xem dữ liệu trong bảng BaoCao
+GRANT CREATE SESSION TO EndUser;
+GRANT SELECT ON BaiDang TO EndUser;
+GRANT INSERT ON TaiKhoan_TuongTac_BaiDang TO EndUser;
+GRANT INSERT ON TaiKhoan_BinhLuan_BaiDang TO EndUser;
+GRANT SELECT ON HoiNhom TO EndUser;
+GRANT INSERT ON TaiKhoan_ThamGia_HoiNhom TO EndUser;
+GRANT SELECT ON BaoCao TO EndUser;
 
 -- Gán các vai trò cho người dùng tương ứng
 GRANT Supervisor TO supervisor_user;
