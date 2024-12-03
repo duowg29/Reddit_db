@@ -1,3 +1,47 @@
+-- USER CREATION
+-- 1. Giám sát viên (Supervisor)
+CREATE USER supervisor_user IDENTIFIED BY supervisor_password;
+
+-- 2. Quản trị viên cơ sở dữ liệu (DB Admin)
+CREATE USER db_admin IDENTIFIED BY dbadmin_password;
+
+-- 3. Quản trị viên hệ thống (SysAdmin)
+CREATE USER sys_admin IDENTIFIED BY sysadmin_password;
+
+-- 4. Nhà phát triển cơ sở dữ liệu (Database Developer)
+CREATE USER db_developer IDENTIFIED BY dbdeveloper_password;
+
+-- 5. Chuyên viên bảo mật cơ sở dữ liệu (Database Security Specialist)
+CREATE USER db_security IDENTIFIED BY dbsecurity_password;
+
+-- 6. Chuyên viên quản lý sao lưu và khôi phục (Backup & Recovery Specialist)
+CREATE USER backup_recovery IDENTIFIED BY backuprecovery_password;
+
+-- 7. Chuyên viên tối ưu hóa hiệu suất (Database Performance Tuner)
+CREATE USER performance_tuner IDENTIFIED BY performancetuner_password;
+
+-- 8. Nhà phát triển ứng dụng (Back-end Developer)
+CREATE USER backend_developer IDENTIFIED BY backenddeveloper_password;
+
+-- 9. Quản lý nhật ký hệ thống (Log Manager)
+CREATE USER log_manager IDENTIFIED BY logmanager_password;
+
+-- 10. Kỹ sư dữ liệu (Data Engineer)
+CREATE USER data_engineer IDENTIFIED BY dataengineer_password;
+
+-- 11. Nhà phân tích dữ liệu (Data Analyst)
+CREATE USER data_analyst IDENTIFIED BY dataanalyst_password;
+
+-- 12. Nhà phát triển bên thứ ba (Third-party Tool Developer)
+CREATE USER third_party_developer IDENTIFIED BY thirdpartydeveloper_password;
+
+-- 13. Quản lý (Moderator)
+CREATE USER moderator_user IDENTIFIED BY moderator_password;
+
+-- 14. Người dùng (End-User)
+CREATE USER end_user IDENTIFIED BY enduser_password;
+
+-- ROLE CREATION
 -- 1. Giám sát viên (Supervisor)
 -- Nhiệm vụ: Theo dõi hoạt động chung của hệ thống, không thực hiện các thay đổi lớn.
 -- Tạo vai trò Giám sát viên
@@ -352,17 +396,17 @@ GRANT SELECT, INSERT ON QuangCao TO EndUser; -- Cho phép xem và thêm dữ li�
 
 -- Gán các vai trò cho người dùng tương ứng
 GRANT Supervisor TO supervisor_user;
-GRANT DBAdmin TO db_admin_user;
-GRANT SysAdmin TO sys_admin_user;
-GRANT DatabaseDeveloper TO db_developer_user;
-GRANT DatabaseSecuritySpecialist TO db_security_user;
-GRANT BackupRecoverySpecialist TO db_backup_user;
-GRANT PerformanceTuner TO perf_tuner_user;
+GRANT DBAdmin TO db_admin;
+GRANT SysAdmin TO sys_admin;
+GRANT DatabaseDeveloper TO db_developer;
+GRANT DatabaseSecuritySpecialist TO db_security;
+GRANT BackupRecoverySpecialist TO db_backup_recovery_specialist;
+GRANT PerformanceTuner TO perf_tuner;
 
-GRANT Backend_Developer TO backend_dev_user;
-GRANT LogManager TO log_manager_user;
-GRANT DataEngineer TO data_engineer_user;
-GRANT DataAnalyst TO data_analyst_user;
-GRANT ThirdPartyDeveloper TO third_party_dev_user;
+GRANT BackendDeveloper TO backend_developer;
+GRANT LogManager TO log_manager;
+GRANT DataEngineer TO data_engineer;
+GRANT DataAnalyst TO data_analyst;
+GRANT ThirdPartyDeveloper TO third_party_developer;
 GRANT Moderator TO moderator_user;
-GRANT EndUser TO end_user_user;
+GRANT EndUser TO end_user;
