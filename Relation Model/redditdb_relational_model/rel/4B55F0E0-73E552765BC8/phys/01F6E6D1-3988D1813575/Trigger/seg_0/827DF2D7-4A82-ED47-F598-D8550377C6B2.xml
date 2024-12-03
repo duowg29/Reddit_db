@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TRG_QUANGCAO_ID" directorySegmentName="seg_0" id="827DF2D7-4A82-ED47-F598-D8550377C6B2">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>TRG_QUANGCAO_ID</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<actions>INSERT</actions>
+<body><![CDATA[BEGIN
+    SELECT seq_QuangCao_Id.NEXTVAL 
+    INTO :NEW.MaQuangCao 
+    FROM dual;
+END;
+]]></body>
+<triggerTime>BEFORE</triggerTime>
+<owner>1B7E332E-9DBA-7798-A7E4-3AEF0DF92072</owner>
+<table>AFAFDABB-05C3-0A65-1E69-652168753926</table>
+</TriggerOraclev10g>

@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<relationalModel class="oracle.dbtools.crest.model.design.relational.RelationalDesign" name="Relational_1" id="4B55F0E0-8437-538A-42F2-73E552765BC8" mainViewID="41BF4F6B-AAED-C20E-2CE1-870C5EE7D3C3">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:30:57 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+<selectedRDBMSSite>01F6E6D1-21D0-CFBD-ABDD-3988D1813575</selectedRDBMSSite>
+<importConnectionStamps>
+<importConnectionStamp class="oracle.dbtools.crest.imports.DBConnectionStamp">
+<connName>redditdb</connName>
+<connUser>system</connUser>
+<connType>1</connType>
+</importConnectionStamp>
+</importConnectionStamps>
+</relationalModel>

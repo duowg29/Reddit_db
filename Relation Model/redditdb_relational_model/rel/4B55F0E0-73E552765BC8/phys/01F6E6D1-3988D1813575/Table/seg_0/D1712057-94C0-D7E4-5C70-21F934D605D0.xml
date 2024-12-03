@@ -1,0 +1,62 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="HOINHOM" directorySegmentName="seg_0" id="D1712057-94C0-D7E4-5C70-21F934D605D0">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<schemaObject>4BC73497-ED19-A3B5-8D19-07F18E7C3EB6</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>9BC86BD5-E89B-C291-88A2-D0CC79392294</segment>
+<tableSpace>746D0576-2E92-32F1-1E4F-77E1522CF337</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="TENNHOM" id="149641EE-1C3A-B661-B6BD-6A48293B8F52">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MAHOINHOM" id="251DDE1F-BB4B-C1A7-4CD6-A067F0349B08">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="NGAYTHANHLAP" id="A1A294BB-261B-1FF6-F8A1-91FD7DE1F5E2">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MOTA" id="F266E779-6B38-95A5-4FF0-88BF2E611EE3">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<lobStorages>
+<LobStorage class="oracle.dbtools.crest.model.design.storage.oracle.v11g.LobStorageOraclev11g" name="SYS_LOB0000076768C00003$$" id="62C30604-15D7-B3E7-C80A-0024CFB2C976">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<cache>NOCACHE</cache>
+<chunk>8192</chunk>
+<column>MOTA</column>
+<logging>YES</logging>
+<tableSpace>746D0576-2E92-32F1-1E4F-77E1522CF337</tableSpace>
+</LobStorage>
+</lobStorages>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="HOINHOM_PK" id="146E0D97-86C2-2CE9-1192-835E8F4E490F">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<schemaObject>4BC73497-ED19-A3B5-8D19-07F18E7C3EB6</schemaObject>
+<segment>B42EF9AE-6193-B50C-2537-A9D06CF43A6F</segment>
+<tableSpace>746D0576-2E92-32F1-1E4F-77E1522CF337</tableSpace>
+<indexSegment>B42EF9AE-6193-B50C-2537-A9D06CF43A6F</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

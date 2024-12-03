@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ProcessModel class="oracle.dbtools.crest.model.design.process.ProcessModel" name="Process Model" id="B4136B3C-8F24-C033-8966-DFC49E325458">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 10:32:44 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</ProcessModel>

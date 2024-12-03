@@ -1,0 +1,63 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="MUCTIEU" directorySegmentName="seg_0" id="E569E43B-51E7-B0FF-CAB0-8A252D562C96">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<schemaObject>4BC73497-ED19-A3B5-8D19-07F18E7C3EB6</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>9BC86BD5-E89B-C291-88A2-D0CC79392294</segment>
+<tableSpace>746D0576-2E92-32F1-1E4F-77E1522CF337</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="TEPDINHKEM" id="22D6D8A8-03A2-03C5-19DF-FCABA63BBBBD">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CHIPHI" id="44805456-61B2-56F9-DB73-21784A33ABDD">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<defaultValue>0</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="TENMUCTIEU" id="54308744-DF93-1E11-3677-31278A141D4B">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MACHIENDICH" id="63BF30CA-1547-9048-9FCF-489A7A71BB03">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MAMUCTIEU" id="71FF8D92-C17D-0169-4647-5BD25576631A">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SYS_C008605" id="46530607-51FE-A642-9529-3C99B335624E">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="MUCTIEU_PK" id="0641200C-51C0-855E-6929-EEAAF941AF16">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<schemaObject>4BC73497-ED19-A3B5-8D19-07F18E7C3EB6</schemaObject>
+<segment>B42EF9AE-6193-B50C-2537-A9D06CF43A6F</segment>
+<tableSpace>746D0576-2E92-32F1-1E4F-77E1522CF337</tableSpace>
+<indexSegment>B42EF9AE-6193-B50C-2537-A9D06CF43A6F</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

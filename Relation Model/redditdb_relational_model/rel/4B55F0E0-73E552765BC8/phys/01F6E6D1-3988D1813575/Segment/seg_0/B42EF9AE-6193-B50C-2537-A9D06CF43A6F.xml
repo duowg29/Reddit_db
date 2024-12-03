@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SegmentOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.SegmentOraclev10g" name="Storage25" directorySegmentName="seg_0" id="B42EF9AE-6193-B50C-2537-A9D06CF43A6F">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<initrans>2</initrans>
+<maxTrans>255</maxTrans>
+<scInitialExtent>65536</scInitialExtent>
+<scMaxExtents>2147483645</scMaxExtents>
+<scNextExtent>1048576</scNextExtent>
+</SegmentOraclev10g>

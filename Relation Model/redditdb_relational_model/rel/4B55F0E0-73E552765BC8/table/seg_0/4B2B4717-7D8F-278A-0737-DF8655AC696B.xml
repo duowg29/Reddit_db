@@ -1,0 +1,143 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4B2B4717-7D8F-278A-0737-DF8655AC696B" schemaObject="4BC73497-ED19-A3B5-8D19-07F18E7C3EB6" name="BAIDANG">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>BAIDANG</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="MABAIDANG" id="900EC1F8-7A06-FB4E-280C-32649EDDA746">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>BAIDANG</sourceObjSchema>
+<sourceObjName>MABAIDANG</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MATAIKHOAN" id="F0C50FC6-5D3E-35D4-9C76-12C85D4A5B7B">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>BAIDANG</sourceObjSchema>
+<sourceObjName>MATAIKHOAN</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0F97B324-1556-F4D8-9F68-4F45E7DF100F" referredColumn="49052313-1669-F85C-44CD-870A0956E469"/>
+</associations>
+</Column>
+<Column name="TIEUDE" id="91DD8635-AD52-7F8F-C315-9B7DE800DD60">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>BAIDANG</sourceObjSchema>
+<sourceObjName>TIEUDE</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NOIDUNG" id="C30E9F48-5C4A-DC57-85C0-A4ECD96AA728">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>BAIDANG</sourceObjSchema>
+<sourceObjName>NOIDUNG</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LogDes-7DD553FD-11E8-61FA-399D-2E531FB621D0@LOGDT10035</logicalDatatype>
+<dataTypeSize>4000</dataTypeSize>
+<ownDataTypeParameters>4000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TEPDINHKEM" id="7835BBD2-11BF-AC1D-A46B-0CC99E59A6C1">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>BAIDANG</sourceObjSchema>
+<sourceObjName>TEPDINHKEM</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="THE" id="CA0E5816-78E2-F9CD-F743-608DC6D1B646">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>BAIDANG</sourceObjSchema>
+<sourceObjName>THE</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LUOTXEM" id="7E74DB85-65C0-1FBC-9365-DB4BEE924F09">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>BAIDANG</sourceObjSchema>
+<sourceObjName>LUOTXEM</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<defaultValue>0</defaultValue>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2312343A-7791-2834-4863-6F64963608BB" schemaObject="4BC73497-ED19-A3B5-8D19-07F18E7C3EB6" name="BAIDANG_PK">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>SYS_C008582</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="900EC1F8-7A06-FB4E-280C-32649EDDA746"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0A1E7BA6-D603-5D71-40FD-24D7193BC90D" name="SYS_C008583">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F0C50FC6-5D3E-35D4-9C76-12C85D4A5B7B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

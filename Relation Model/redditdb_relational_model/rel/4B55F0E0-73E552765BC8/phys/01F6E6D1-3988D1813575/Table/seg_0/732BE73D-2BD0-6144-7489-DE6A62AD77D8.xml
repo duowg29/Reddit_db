@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="TAIKHOAN_QUANLY_BAIDANG" directorySegmentName="seg_0" id="732BE73D-2BD0-6144-7489-DE6A62AD77D8">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<schemaObject>4BC73497-ED19-A3B5-8D19-07F18E7C3EB6</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>9BC86BD5-E89B-C291-88A2-D0CC79392294</segment>
+<tableSpace>746D0576-2E92-32F1-1E4F-77E1522CF337</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="MATAIKHOAN" id="6BD98D19-272C-5C23-D13F-27D0F1B14116">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MABAIDANG" id="75262660-299F-0F1F-321B-A190B98915D7">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SYS_C008634" id="B8D84288-8D5A-32AB-A031-AE5AEE53258F">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SYS_C008633" id="CAD59EFB-C403-B25C-6CBB-551FC91B06AE">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="TAIKHOAN_QUANLY_BAIDANG_PK" id="DAC2038B-14D7-65D0-C647-746D68E01B0C">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<schemaObject>4BC73497-ED19-A3B5-8D19-07F18E7C3EB6</schemaObject>
+<segment>B42EF9AE-6193-B50C-2537-A9D06CF43A6F</segment>
+<tableSpace>746D0576-2E92-32F1-1E4F-77E1522CF337</tableSpace>
+<indexSegment>B42EF9AE-6193-B50C-2537-A9D06CF43A6F</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

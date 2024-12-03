@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="TAIKHOAN_LAP_HOINHOM" directorySegmentName="seg_0" id="FDD397BB-BBE3-4CC2-953F-7B4F96CDDBE5">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<schemaObject>4BC73497-ED19-A3B5-8D19-07F18E7C3EB6</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>9BC86BD5-E89B-C291-88A2-D0CC79392294</segment>
+<tableSpace>746D0576-2E92-32F1-1E4F-77E1522CF337</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="MATAIKHOAN" id="0802E7D3-0727-F08C-AE50-64FEE26EF249">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MAHOINHOM" id="4CF57926-6A0C-38D8-8316-5BA8F8F02292">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SYS_C008638" id="235FC264-1FEF-7609-8987-13FBDE337FDE">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SYS_C008639" id="33D2964F-90FD-A6AF-C44C-FE9635E4379F">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="TAIKHOAN_LAP_HOINHOM_PK" id="A01075BB-010D-0C51-59A6-DD6248F188F8">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<schemaObject>4BC73497-ED19-A3B5-8D19-07F18E7C3EB6</schemaObject>
+<segment>B42EF9AE-6193-B50C-2537-A9D06CF43A6F</segment>
+<tableSpace>746D0576-2E92-32F1-1E4F-77E1522CF337</tableSpace>
+<indexSegment>B42EF9AE-6193-B50C-2537-A9D06CF43A6F</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TRG_HOINHOM_NGAYTHANHLAP" directorySegmentName="seg_0" id="5CCE40CF-6160-6920-A6D6-4DE99CE3BBC6">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>TRG_HOINHOM_NGAYTHANHLAP</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:46 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<actions>INSERT, UPDATE</actions>
+<body><![CDATA[BEGIN
+    IF :NEW.NgayThanhLap > SYSDATE THEN
+        RAISE_APPLICATION_ERROR(-20001, 'NgayThanhLap must be less than or equal to today');
+    END IF;
+END;
+]]></body>
+<triggerTime>BEFORE</triggerTime>
+<owner>1B7E332E-9DBA-7798-A7E4-3AEF0DF92072</owner>
+<table>D1712057-94C0-D7E4-5C70-21F934D605D0</table>
+</TriggerOraclev10g>

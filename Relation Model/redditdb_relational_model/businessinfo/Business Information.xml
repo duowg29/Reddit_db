@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BusinessInfoDesign class="oracle.dbtools.crest.model.businessinfo.BusinessInfoDesign" name="Business Information" id="CB7A1DB6-F9CA-BD74-E3F9-9C66C1E72975">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 10:32:44 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</BusinessInfoDesign>

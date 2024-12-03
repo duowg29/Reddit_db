@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<relationalModel class="oracle.dbtools.crest.model.design.relational.RelationalDesign" name="Relational_2" id="A9C6B978-E7DB-396D-7E8F-EACAD73040AF" mainViewID="424B2363-3075-DEFB-6B4E-E0D6E8E195BD">
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:33:39 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+<selectedRDBMSSite>32076570-2523-435C-2E92-BF29817DFF70</selectedRDBMSSite>
+</relationalModel>

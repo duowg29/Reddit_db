@@ -1,0 +1,84 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6FD53547-123A-8A87-0353-702EC3DEE518" schemaObject="4BC73497-ED19-A3B5-8D19-07F18E7C3EB6" name="TAIKHOANQUANGCAO">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>TAIKHOANQUANGCAO</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="MATAIKHOANQUANGCAO" id="0E8EE3C6-8A17-F7F6-EE15-A8C918AE7422">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>TAIKHOANQUANGCAO</sourceObjSchema>
+<sourceObjName>MATAIKHOANQUANGCAO</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TENDOANHNGHIEP" id="C6FF4C42-41A3-FAAF-E576-D8C09962B177">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>TAIKHOANQUANGCAO</sourceObjSchema>
+<sourceObjName>TENDOANHNGHIEP</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LINHVUC" id="FEEA802D-C24D-2FAD-EB5E-4839DA2D9809">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>TAIKHOANQUANGCAO</sourceObjSchema>
+<sourceObjName>LINHVUC</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2C7D6EF9-7BF1-D767-994B-AFAD01613DA7" schemaObject="4BC73497-ED19-A3B5-8D19-07F18E7C3EB6" name="TAIKHOANQUANGCAO_PK">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>SYS_C008596</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0E8EE3C6-8A17-F7F6-EE15-A8C918AE7422"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D9616EFC-EF43-7C70-13CA-D974A6D9D38A" schemaObject="4BC73497-ED19-A3B5-8D19-07F18E7C3EB6" name="TAIKHOANQUANGCAO_TENDOANHNGHIEP_UN">
+<sourceConnName>redditdb</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>SYS_C008597</sourceObjName>
+<createdBy>Hung Tran</createdBy>
+<createdTime>2024-12-02 13:31:45 UTC</createdTime>
+<ownerDesignName>redditdb_relational_model</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C6FF4C42-41A3-FAAF-E576-D8C09962B177"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
