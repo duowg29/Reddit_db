@@ -36,6 +36,7 @@ LEFT JOIN TaiKhoan_TuongTac_BaiDang tt ON bd.MaBaiDang = tt.MaBaiDang
 GROUP BY bd.MaBaiDang, bd.TieuDe, bd.NoiDung
 HAVING SUM(CASE WHEN tt.LoaiTuongTac = 'Downvote' THEN 1 ELSE 0 END) > 10
 ORDER BY SoDownvote DESC;
+
 -- các báo cáo được gửi theo chủ đề
 CREATE OR REPLACE VIEW View_BaoCao_ByChuDe AS
 SELECT ChuDe, COUNT(MaBaoCao) AS SoLuongBaoCao
@@ -65,14 +66,22 @@ CREATE OR REPLACE VIEW View_TaiKhoan_Inactive AS
 SELECT tk.MaTaiKhoan, tk.TenTaiKhoan, tk.Email, tk.NgayThamGia
 FROM TaiKhoan tk
 WHERE NOT EXISTS (
-    SELECT 1 FROM TaiKhoan_Dang_BaiDang db 
+    SELECT 1 
+    FROM TaiKhoan_Dang_BaiDang db 
     WHERE db.MaTaiKhoan = tk.MaTaiKhoan AND db.ThoiGianDangBai >= SYSDATE - 30
 )
 AND NOT EXISTS (
-    SELECT 1 FROM TaiKhoan_TuongTac_BaiDang tt 
+    SELECT 1 
+    FROM TaiKhoan_TuongTac_BaiDang tt 
     WHERE tt.MaTaiKhoan = tk.MaTaiKhoan AND tt.ThoiGianTuongTac >= SYSDATE - 30
 )
 AND NOT EXISTS (
-    SELECT 1 FROM TaiKhoan_ThamGia_HoiNhom th 
+    SELECT 1 
+    FROM TaiKhoan_ThamGia_HoiNhom th 
     WHERE th.MaTaiKhoan = tk.MaTaiKhoan AND th.MaHoiNhom IS NOT NULL
+)
+AND NOT EXISTS (
+    SELECT 1 
+    FROM TaiKhoan_NhanTin_PhongNhanTin tn 
+    WHERE tn.MaTaiKhoan = tk.MaTaiKhoan AND tn.ThoiGianNhanTin >= SYSDATE - 30
 );

@@ -56,8 +56,6 @@ GRANT MONITOR SESSION TO DB_Admin;
 GRANT CREATE SESSION TO DB_Admin;
 GRANT ALTER SESSION TO DB_Admin;
 
-
-
 -- 3. Quản trị viên hệ thống (SysAdmin)
 -- Nhiệm vụ: Quản lý cấp cao liên quan đến hệ thống, tài nguyên và bảo mật tổng quát.
 -- Tạo vai trò Quản trị viên hệ thống
