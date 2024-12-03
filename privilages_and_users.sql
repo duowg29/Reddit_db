@@ -26,6 +26,7 @@ CREATE PROFILE user_profile LIMIT
     PASSWORD_LOCK_TIME 1              -- Tài khoản bị khóa trong 1 ngày nếu đăng nhập thất bại.
     PASSWORD_VERIFY_FUNCTION verify_function; -- Hàm xác minh độ mạnh của mật khẩu (nếu đã triển khai).
 
+
 -- 1. Giám sát viên (Supervisor)
 -- Nhiệm vụ: Theo dõi hoạt động chung của hệ thống, không thực hiện các thay đổi lớn.
 -- Tạo vai trò Giám sát viên
@@ -37,8 +38,6 @@ GRANT RESTRICTED SESSION TO Supervisor;
 GRANT SELECT ANY TABLE TO Supervisor;
 GRANT ALTER SESSION TO Supervisor;
 
--- Gán vai trò Supervisor cho người dùng john_doe
-GRANT Supervisor TO john_doe;
 
 -- 2. Quản trị viên cơ sở dữ liệu (DB Admin)
 -- Nhiệm vụ: Quản lý các cơ sở dữ liệu, bao gồm bảo trì và thay đổi cấu trúc.
@@ -62,8 +61,6 @@ GRANT ALTER USER TO DB_Admin;
 GRANT CREATE SESSION TO DB_Admin;
 GRANT ALTER SESSION TO DB_Admin;
 
--- Gán vai trò DB_Admin cho người dùng admin_user
-GRANT DB_Admin TO admin_user;
 
 -- 3. Quản trị viên hệ thống (SysAdmin)
 -- Nhiệm vụ: Quản lý cấp cao liên quan đến hệ thống, tài nguyên và bảo mật tổng quát.
@@ -84,9 +81,6 @@ GRANT CREATE SESSION TO SysAdmin;
 GRANT RESTRICTED SESSION TO SysAdmin;
 GRANT DROP USER TO SysAdmin;
 
--- Gán vai trò SysAdmin cho người dùng sys_admin_user
-GRANT SysAdmin TO sys_admin_user;
-
 -- 4. Nhà phát triển cơ sở dữ liệu (Database Developer)
 -- Nhiệm vụ: Xây dựng, phát triển và thử nghiệm các chức năng mới trong cơ sở dữ liệu.
 -- Tạo vai trò Nhà phát triển cơ sở dữ liệu
@@ -99,6 +93,11 @@ GRANT UPDATE ANY TABLE TO DatabaseDeveloper;
 GRANT DELETE ANY TABLE TO DatabaseDeveloper;
 GRANT CREATE PROCEDURE TO DatabaseDeveloper;
 GRANT EXECUTE ANY PROCEDURE TO DatabaseDeveloper;
+GRANT CREATE TRIGGER TO DatabaseDeveloper;
+GRANT ALTER ANY TRIGGER TO DatabaseDeveloper;
+GRANT SELECT ON ANY VIEW TO DatabaseDeveloper;
+GRANT INSERT ON ANY VIEW TO DatabaseDeveloper;
+GRANT UPDATE ON ANY VIEW TO DatabaseDeveloper;
 
 -- 5. Chuyên viên bảo mật cơ sở dữ liệu (Database Security Specialist)
 -- Nhiệm vụ: Quản lý bảo mật và phân quyền truy cập.
@@ -114,18 +113,6 @@ GRANT SELECT ANY TABLE TO DatabaseSecuritySpecialist;
 GRANT AUDIT SYSTEM TO DatabaseSecuritySpecialist;
 GRANT ANALYZE ANY TO DatabaseSecuritySpecialist;
 
--- Gán vai trò cho người dùng security_user
-GRANT DatabaseSecuritySpecialist TO security_user;
-
--- Cấp quyền cho DatabaseDeveloper (có thể tối ưu theo từng trường hợp)
-GRANT CREATE TRIGGER TO DatabaseDeveloper;
-GRANT ALTER ANY TRIGGER TO DatabaseDeveloper;
-GRANT SELECT ON ANY VIEW TO DatabaseDeveloper;
-GRANT INSERT ON ANY VIEW TO DatabaseDeveloper;
-GRANT UPDATE ON ANY VIEW TO DatabaseDeveloper;
-
--- Gán vai trò DatabaseDeveloper cho người dùng db_dev_user
-GRANT DatabaseDeveloper TO db_dev_user;
 
 -- 6. Chuyên viên quản lý sao lưu và khôi phục (Backup & Recovery Specialist)
 -- Nhiệm vụ: Đảm bảo sao lưu và khôi phục dữ liệu khi cần.
@@ -138,8 +125,6 @@ GRANT FLASHBACK ANY TABLE TO BackupRecoverySpecialist;
 GRANT ALTER SYSTEM TO BackupRecoverySpecialist;
 GRANT SYSBACKUP TO BackupRecoverySpecialist;
 
--- Gán vai trò BackupRecoverySpecialist cho người dùng backup_user
-GRANT BackupRecoverySpecialist TO backup_user;
 
 
 -- 7. Chuyên viên tối ưu hóa hiệu suất (Database Performance Tuner)
@@ -155,5 +140,92 @@ GRANT ALTER SESSION TO PerformanceTuner;
 GRANT ANALYZE ANY TO PerformanceTuner;
 GRANT FORCE TRANSACTION TO PerformanceTuner;
 
--- Gán vai trò PerformanceTuner cho người dùng perf_tuner_user
+
+-- 8. Nhà phát triển ứng dụng (Back-end Developer)
+CREATE ROLE BackendDeveloper;
+
+GRANT CREATE SESSION TO BackendDeveloper;
+GRANT CREATE PROCEDURE, ALTER PROCEDURE, EXECUTE ANY PROCEDURE TO BackendDeveloper;
+GRANT CREATE TRIGGER, ALTER TRIGGER TO BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON HoiNhom TO BackendDeveloper;
+GRANT SELECT ON ALL TABLES TO BackendDeveloper;
+
+-- 9. Nhà quản lý nhật ký hoạt động (Log Manager)
+CREATE ROLE LogManager;
+
+GRANT CREATE SESSION TO LogManager;
+GRANT SELECT ON BaoCao TO LogManager;
+GRANT SELECT ON TaiKhoan TO LogManager;
+GRANT SELECT ON TaiKhoan_Gui_BaoCao TO LogManager;
+GRANT SELECT ON TaiKhoan_TuongTac_BaiDang TO LogManager;
+
+GRANT LogManager TO LogManager_user;
+
+-- 10. Kỹ sư dữ liệu (Data Engineer)
+CREATE ROLE DataEngineer;
+
+GRANT CREATE SESSION TO DataEngineer;
+GRANT SELECT ANY TABLE TO DataEngineer;
+GRANT INSERT, UPDATE, DELETE ON BaiDang TO DataEngineer;
+GRANT INSERT, UPDATE, DELETE ON HoiNhom TO DataEngineer;
+GRANT CREATE TABLE, ALTER ANY TABLE TO DataEngineer;
+GRANT CREATE VIEW, DROP VIEW TO DataEngineer;
+
+GRANT  TO backend_developer_user;
+
+-- 11. Nhà phân tích dữ liệu (Data Analyst)
+CREATE ROLE DataAnalyst;
+
+GRANT CREATE SESSION TO DataAnalyst;
+GRANT SELECT ANY TABLE TO DataAnalyst;
+GRANT CREATE VIEW TO DataAnalyst;
+GRANT SELECT ON BaiDang TO DataAnalyst;
+GRANT SELECT ON HoiNhom TO DataAnalyst;
+GRANT SELECT ON TaiKhoan TO DataAnalyst;
+
+-- 12. Nhà phát triển bên thứ ba (Third-party Tool Developer)
+CREATE ROLE ThirdPartyDeveloper;
+
+GRANT CREATE SESSION TO ThirdPartyDeveloper;
+GRANT SELECT ON BaiDang TO ThirdPartyDeveloper;
+GRANT EXECUTE ON ALL PROCEDURES TO ThirdPartyDeveloper;
+GRANT SELECT ON ALL TABLES TO ThirdPartyDeveloper;
+
+-- 13. Quản lý (Moderator)
+CREATE ROLE Moderator;
+
+GRANT CREATE SESSION TO Moderator;
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO Moderator;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO Moderator;
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaoCao TO Moderator;
+GRANT SELECT ON HoiNhom TO Moderator;
+GRANT SELECT ON TaiKhoan_Gui_BaoCao TO Moderator;
+
+-- 14. Người dùng (End-User)
+CREATE ROLE EndUser;
+
+GRANT CREATE SESSION TO EndUser;
+GRANT SELECT ON BaiDang TO EndUser;
+GRANT INSERT ON TaiKhoan_TuongTac_BaiDang TO EndUser;
+GRANT INSERT ON TaiKhoan_BinhLuan_BaiDang TO EndUser;
+GRANT SELECT ON HoiNhom TO EndUser;
+GRANT INSERT ON TaiKhoan_ThamGia_HoiNhom TO EndUser;
+GRANT SELECT ON BaoCao TO EndUser;
+
+-- Gán các vai trò cho người dùng tương ứng
+GRANT Supervisor TO supervisor_user;
+GRANT DB_Admin TO db_admin_user;
+GRANT SysAdmin TO sys_admin_user;
+GRANT DatabaseDeveloper TO db_developer_user;
+GRANT DatabaseSecuritySpecialist TO db_security_user;
+GRANT BackupRecoverySpecialist TO db_backup_user;
 GRANT PerformanceTuner TO perf_tuner_user;
+
+GRANT Backend_Developer TO backend_dev_user;
+GRANT LogManager TO log_manager_user;
+GRANT DataEngineer TO data_engineer_user;
+GRANT DataAnalyst TO data_analyst_user;
+GRANT ThirdPartyDeveloper TO third_party_dev_user;
+GRANT Moderator TO moderator_user;
+GRANT EndUser TO end_user_user;
