@@ -2,35 +2,60 @@
 -- Nhiệm vụ: Theo dõi hoạt động chung của hệ thống, không thực hiện các thay đổi lớn.
 -- Tạo vai trò Giám sát viên
 CREATE ROLE Supervisor;
-
--- Cấp quyền cho Supervisor
+GRANT SELECT ANY TABLE TO Supervisor;
+-- Các quyền cơ bản
 GRANT CREATE SESSION TO Supervisor;
 GRANT RESTRICTED SESSION TO Supervisor;
-GRANT SELECT ANY TABLE TO Supervisor;
-GRANT ALTER SESSION TO Supervisor;
 
+-- Quyền truy cập
+GRANT SELECT ANY TABLE TO Supervisor;
+
+
+-- Quyền phân tích
+GRANT ANALYZE ANY TO Supervisor;
+
+-- Quyền theo dõi phiên
+GRANT MONITOR SESSION TO Supervisor;
 
 -- 2. Quản trị viên cơ sở dữ liệu (DB Admin)
 -- Nhiệm vụ: Quản lý các cơ sở dữ liệu, bao gồm bảo trì và thay đổi cấu trúc.
 -- Tạo vai trò Quản trị viên cơ sở dữ liệu
 CREATE ROLE DB_Admin;
 
--- Cấp quyền cho DB Admin
+-- Các quyền liên quan đến bảng
 GRANT CREATE ANY TABLE TO DB_Admin;
 GRANT ALTER ANY TABLE TO DB_Admin;
 GRANT DELETE ANY TABLE TO DB_Admin;
-GRANT SELECT ANY TABLE TO DB_Admin;
+GRANT SELECT ON schema_name.* TO DB_Admin;
 GRANT UPDATE ANY TABLE TO DB_Admin;
+
+-- Các quyền liên quan đến thủ tục
 GRANT CREATE PROCEDURE TO DB_Admin;
 GRANT ALTER ANY PROCEDURE TO DB_Admin;
 GRANT DROP ANY PROCEDURE TO DB_Admin;
 GRANT EXECUTE ANY PROCEDURE TO DB_Admin;
+
+-- Các quyền liên quan đến chỉ số
+GRANT CREATE ANY INDEX TO DB_Admin;
+GRANT DROP ANY INDEX TO DB_Admin;
+
+-- Các quyền liên quan đến tablespace
 GRANT CREATE TABLESPACE TO DB_Admin;
 GRANT ALTER TABLESPACE TO DB_Admin;
-GRANT CREATE USER TO DB_Admin;
-GRANT ALTER USER TO DB_Admin;
+
+-- Các quyền liên quan đến sao lưu/phục hồi
+GRANT BACKUP ANY TABLE TO DB_Admin;
+GRANT FLASHBACK ANY TABLE TO DB_Admin;
+GRANT ALTER SYSTEM TO DB_Admin;
+
+-- Quyền giám sát
+GRANT ANALYZE ANY TO DB_Admin;
+GRANT MONITOR SESSION TO DB_Admin;
+
+-- Quyền kết nối và quản lý phiên
 GRANT CREATE SESSION TO DB_Admin;
 GRANT ALTER SESSION TO DB_Admin;
+
 
 
 -- 3. Quản trị viên hệ thống (SysAdmin)
@@ -38,51 +63,80 @@ GRANT ALTER SESSION TO DB_Admin;
 -- Tạo vai trò Quản trị viên hệ thống
 CREATE ROLE SysAdmin;
 
--- Cấp quyền cho SysAdmin
+-- Quản lý cơ sở dữ liệu
 GRANT ALTER DATABASE TO SysAdmin;
 GRANT ALTER SYSTEM TO SysAdmin;
 GRANT AUDIT SYSTEM TO SysAdmin;
+
+-- Quản lý vai trò
 GRANT CREATE ROLE TO SysAdmin;
 GRANT ALTER ANY ROLE TO SysAdmin;
 GRANT GRANT ANY ROLE TO SysAdmin;
+
+-- Quản lý tài nguyên
 GRANT MANAGE TABLESPACE TO SysAdmin;
 GRANT UNLIMITED TABLESPACE TO SysAdmin;
 GRANT ALTER RESOURCE COST TO SysAdmin;
+
+-- Quản lý phiên làm việc
 GRANT CREATE SESSION TO SysAdmin;
 GRANT RESTRICTED SESSION TO SysAdmin;
+
+-- Quản lý tài khoản
 GRANT DROP USER TO SysAdmin;
+GRANT SELECT ON dba_users TO SysAdmin;
+GRANT SELECT ON dba_roles TO SysAdmin;
+
+-- Giám sát
+GRANT MONITOR SESSION TO SysAdmin;
+GRANT SELECT ANY DICTIONARY TO SysAdmin;
+GRANT ANALYZE ANY TO SysAdmin;
+
+-- Kích hoạt Audit cho các hành động quan trọng
+AUDIT DROP USER;
+AUDIT ALTER SYSTEM;
 
 -- 4. Nhà phát triển cơ sở dữ liệu (Database Developer)
 -- Nhiệm vụ: Xây dựng, phát triển và thử nghiệm các chức năng mới trong cơ sở dữ liệu.
 -- Tạo vai trò Nhà phát triển cơ sở dữ liệu
 CREATE ROLE DatabaseDeveloper;
 
--- Cấp quyền cho DatabaseDeveloper
-GRANT CREATE TABLE TO DatabaseDeveloper;
-GRANT INSERT ANY TABLE TO DatabaseDeveloper;
-GRANT UPDATE ANY TABLE TO DatabaseDeveloper;
-GRANT DELETE ANY TABLE TO DatabaseDeveloper;
-GRANT CREATE PROCEDURE TO DatabaseDeveloper;
-GRANT EXECUTE ANY PROCEDURE TO DatabaseDeveloper;
-GRANT CREATE TRIGGER TO DatabaseDeveloper;
-GRANT ALTER ANY TRIGGER TO DatabaseDeveloper;
-GRANT SELECT ON ANY VIEW TO DatabaseDeveloper;
-GRANT INSERT ON ANY VIEW TO DatabaseDeveloper;
-GRANT UPDATE ON ANY VIEW TO DatabaseDeveloper;
+-- Quản lý các bảng
+GRANT CREATE TABLE TO DatabaseDeveloper;   -- Tạo bảng mới
+GRANT INSERT ANY TABLE TO DatabaseDeveloper;  -- Chèn dữ liệu vào mọi bảng
+GRANT UPDATE ANY TABLE TO DatabaseDeveloper;  -- Cập nhật dữ liệu trong mọi bảng
+GRANT DELETE ANY TABLE TO DatabaseDeveloper;  -- Xóa dữ liệu từ mọi bảng
 
--- 5. Chuyên viên bảo mật cơ sở dữ liệu (Database Security Specialist)
--- Nhiệm vụ: Quản lý bảo mật và phân quyền truy cập.
--- Tạo vai trò Chuyên viên bảo mật cơ sở dữ liệu
-CREATE ROLE DatabaseSecuritySpecialist;
+-- Quản lý thủ tục
+GRANT CREATE PROCEDURE TO DatabaseDeveloper; -- Tạo thủ tục
+GRANT EXECUTE ANY PROCEDURE TO DatabaseDeveloper; -- Thực thi mọi thủ tục trong cơ sở dữ liệu
+GRANT ALTER ANY PROCEDURE TO DatabaseDeveloper;  -- Thay đổi mọi thủ tục trong cơ sở dữ liệu
 
--- Cấp quyền cho DatabaseSecuritySpecialist
-GRANT CREATE USER TO DatabaseSecuritySpecialist;
-GRANT ALTER USER TO DatabaseSecuritySpecialist;
-GRANT DROP USER TO DatabaseSecuritySpecialist;
-GRANT GRANT ANY ROLE TO DatabaseSecuritySpecialist;
-GRANT SELECT ANY TABLE TO DatabaseSecuritySpecialist;
-GRANT AUDIT SYSTEM TO DatabaseSecuritySpecialist;
-GRANT ANALYZE ANY TO DatabaseSecuritySpecialist;
+-- Quản lý trigger
+GRANT CREATE TRIGGER TO DatabaseDeveloper;  -- Tạo trigger
+GRANT ALTER ANY TRIGGER TO DatabaseDeveloper; -- Thay đổi mọi trigger trong cơ sở dữ liệu
+
+-- Quản lý views
+GRANT SELECT ANY VIEW TO DatabaseDeveloper;  -- Đọc dữ liệu từ mọi view
+GRANT INSERT ANY VIEW TO DatabaseDeveloper;  -- Chèn dữ liệu vào mọi view
+GRANT UPDATE ANY VIEW TO DatabaseDeveloper;  -- Cập nhật dữ liệu vào mọi view
+
+-- Cấp quyền truy cập vào các đối tượng khác nếu cần
+GRANT SELECT ANY TABLE TO DatabaseDeveloper;  -- Đọc dữ liệu từ mọi bảng trong cơ sở dữ liệu
+
+        -- 5. Chuyên viên bảo mật cơ sở dữ liệu (Database Security Specialist)
+        -- Nhiệm vụ: Quản lý bảo mật và phân quyền truy cập.
+        -- Tạo vai trò Chuyên viên bảo mật cơ sở dữ liệu
+        CREATE ROLE DatabaseSecuritySpecialist;
+
+        -- Cấp quyền cho DatabaseSecuritySpecialist
+        GRANT CREATE USER TO DatabaseSecuritySpecialist;
+        GRANT ALTER USER TO DatabaseSecuritySpecialist;
+        GRANT DROP USER TO DatabaseSecuritySpecialist;
+        GRANT GRANT ANY ROLE TO DatabaseSecuritySpecialist;
+        GRANT SELECT ANY TABLE TO DatabaseSecuritySpecialist;
+        GRANT AUDIT SYSTEM TO DatabaseSecuritySpecialist;
+        GRANT ANALYZE ANY TO DatabaseSecuritySpecialist;
 
 
 -- 6. Chuyên viên quản lý sao lưu và khôi phục (Backup & Recovery Specialist)
