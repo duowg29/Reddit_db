@@ -80,11 +80,13 @@ GRANT DBA TO DBAdmin;
 GRANT BACKUP ANY TABLE TO DBAdmin;
 GRANT FLASHBACK ANY TABLE TO DBAdmin;
 
--- 3. Nhà phát triển cơ sở dữ liệu (Database Developer)
+-- 2. Nhà phát triển cơ sở dữ liệu (Database Developer)
 -- Nhiệm vụ: Xây dựng, phát triển và thử nghiệm các chức năng mới trong cơ sở dữ liệu.
 -- Tạo vai trò Nhà phát triển cơ sở dữ liệu
 CREATE ROLE DatabaseDeveloper;
 
+-- Quyền đăng nhập
+GRANT CREATE SESSION TO BackendDeveloper;
 -- Quản lý các bảng
 GRANT CREATE TABLE TO DatabaseDeveloper;   -- Tạo bảng mới
 GRANT INSERT ANY TABLE TO DatabaseDeveloper;  -- Chèn dữ liệu vào mọi bảng
@@ -101,18 +103,19 @@ GRANT CREATE TRIGGER TO DatabaseDeveloper;  -- Tạo trigger
 GRANT ALTER ANY TRIGGER TO DatabaseDeveloper; -- Thay đổi mọi trigger trong cơ sở dữ liệu
 
 -- Quản lý views
-GRANT SELECT ANY VIEW TO DatabaseDeveloper;  -- Đọc dữ liệu từ mọi view
 GRANT INSERT ANY VIEW TO DatabaseDeveloper;  -- Chèn dữ liệu vào mọi view
 GRANT UPDATE ANY VIEW TO DatabaseDeveloper;  -- Cập nhật dữ liệu vào mọi view
 
 -- Cấp quyền truy cập vào các đối tượng khác nếu cần
 GRANT SELECT ANY TABLE TO DatabaseDeveloper;  -- Đọc dữ liệu từ mọi bảng trong cơ sở dữ liệu
 
--- 4. Chuyên viên bảo mật cơ sở dữ liệu (Database Security Specialist)
+-- 3. Chuyên viên bảo mật cơ sở dữ liệu (Database Security Specialist)
 -- Nhiệm vụ: Quản lý bảo mật và phân quyền truy cập.
 -- Tạo vai trò Chuyên viên bảo mật cơ sở dữ liệu
 CREATE ROLE DatabaseSecuritySpecialist;
 
+-- Quyền đăng nhập
+GRANT CREATE SESSION TO BackendDeveloper;
 -- Quản lý tài khoản người dùng
 GRANT CREATE USER TO DatabaseSecuritySpecialist;  -- Cho phép tạo người dùng mới
 GRANT ALTER USER TO DatabaseSecuritySpecialist;   -- Cho phép thay đổi thuộc tính của người dùng
@@ -134,10 +137,13 @@ GRANT SELECT ON dba_roles TO DatabaseSecuritySpecialist;  -- Truy cập vào th�
 GRANT MONITOR SESSION TO DatabaseSecuritySpecialist;  -- Giám sát phiên làm việc của người dùng
 GRANT ALTER SESSION TO DatabaseSecuritySpecialist;    -- Thay đổi các cài đặt của phiên làm việc
 
--- 5. Chuyên viên tối ưu hóa hiệu suất (Database Performance Tuner)
+-- 4. Chuyên viên tối ưu hóa hiệu suất (Database Performance Tuner)
 -- Nhiệm vụ: Tối ưu hóa truy vấn và hiệu suất cơ sở dữ liệu.
 -- Tạo vai trò Chuyên viên tối ưu hóa hiệu suất
 CREATE ROLE PerformanceTuner;
+
+-- Quyền đăng nhập
+GRANT CREATE SESSION TO BackendDeveloper;
 
 -- Quản lý truy vấn và chỉ mục
 GRANT SELECT ANY TABLE TO PerformanceTuner;                      -- Cho phép truy vấn bất kỳ bảng nào để phân tích dữ liệu
@@ -168,7 +174,7 @@ GRANT SELECT ON V_$SESSION TO PerformanceTuner;                  -- Truy vấn t
 GRANT SELECT ON V_$SQL_PLAN TO PerformanceTuner;                 -- Truy vấn kế hoạch thực thi SQL để phân tích các truy vấn chậm
 GRANT SELECT ON V_$SQLSTATS TO PerformanceTuner;                 -- Truy vấn thông tin thống kê về các truy vấn SQL để tối ưu hóa
 
--- 6. Nhà phát triển ứng dụng (Back-end Developer)
+-- 5. Nhà phát triển ứng dụng (Back-end Developer)
 -- Nhiệm vụ: Xây dựng và bảo trì các chức năng phía back-end của hệ thống, bao gồm tạo, sửa đổi và thực thi các thủ tục, trigger; xử lý dữ liệu trong các bảng chính.
 CREATE ROLE BackendDeveloper;
 
@@ -191,7 +197,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON ChienDich TO BackendDeveloper;
 GRANT SELECT, INSERT, UPDATE, DELETE ON MucTieu TO BackendDeveloper;
 GRANT SELECT, INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
 
--- 7. Kỹ sư dữ liệu (Data Engineer)
+-- 6. Kỹ sư dữ liệu (Data Engineer)
 -- Nhiệm vụ: Thiết kế, xây dựng, và duy trì cơ sở dữ liệu; xử lý dữ liệu từ nhiều nguồn.
 CREATE ROLE DataEngineer;
 
@@ -222,7 +228,7 @@ GRANT CREATE INDEX, DROP INDEX TO DataEngineer;
 GRANT EXECUTE ON DBMS_STATS TO DataEngineer;
 
 
--- 8. Nhà phân tích dữ liệu (Data Analyst)
+-- 7. Nhà phân tích dữ liệu (Data Analyst)
 -- Nhiệm vụ: Phân tích và trực quan hóa dữ liệu, tạo view để hỗ trợ báo cáo.
 CREATE ROLE DataAnalyst;
 
@@ -235,7 +241,7 @@ GRANT SELECT ANY TABLE TO DataAnalyst;
 -- Cho phép tạo view
 GRANT CREATE VIEW TO DataAnalyst; 
 
--- 9. Quản lý (Moderator)
+-- 8. Quản lý (Moderator)
 -- Nhiệm vụ: Quản lý nội dung và các hoạt động của người dùng trên hệ thống.
 CREATE ROLE Moderator;
 
@@ -256,7 +262,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON QuangCao TO Moderator; -- Cho phép thao
 GRANT SELECT ON TaiKhoan_Gui_BaoCao TO Moderator; -- Cho phép xem dữ liệu trong bảng TaiKhoan_Gui_BaoCao
 
 
--- 10. Người dùng (End-User)
+-- 9. Người dùng (End-User)
 -- Nhiệm vụ: Sử dụng các tính năng cơ bản của hệ thống như xem và tương tác với dữ liệu.
 CREATE ROLE EndUser;
 GRANT CONNECT TO EndUser;
@@ -273,7 +279,7 @@ GRANT SELECT, INSERT, UPDATE ON ChienDich TO EndUser; -- Cho phép xem và thêm
 GRANT SELECT, INSERT, UPDATE ON MucTieu TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng MucTieu
 GRANT SELECT, INSERT, UPDATE ON QuangCao TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng QuangCao
 
--- 11. Giám sát viên (Supervisor)
+-- 10. Giám sát viên (Supervisor)
 -- Nhiệm vụ: Theo dõi hoạt động chung của hệ thống, không thực hiện các thay đổi lớn.
 -- Tạo vai trò Giám sát viên
 CREATE ROLE Supervisor;
