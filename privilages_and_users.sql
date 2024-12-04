@@ -7,12 +7,6 @@ DEFAULT TABLESPACE user_data
 TEMPORARY TABLESPACE user_temp
 PROFILE db_admin_profile;
 
--- Tạo và gán profile cho Sys Admin
-CREATE USER sys_admin IDENTIFIED BY sysadmin_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
-PROFILE sys_admin_profile;
-
 -- Tạo và gán profile cho Database Developer
 CREATE USER db_developer IDENTIFIED BY dbdeveloper_password
 DEFAULT TABLESPACE user_data
@@ -75,80 +69,16 @@ PROFILE end_user_profile;
 -- Tạo vai trò Quản trị viên cơ sở dữ liệu
 CREATE ROLE DBAdmin;
 GRANT DBA TO DBAdmin;
-
+-- DBA đã bao gồm:
+-- Quyền kết nối và quản lý phiên
 -- Các quyền liên quan đến bảng
-
--- GRANT CREATE ANY TABLE TO DBAdmin;
--- GRANT ALTER ANY TABLE TO DBAdmin;
--- GRANT DELETE ANY TABLE TO DBAdmin;
--- GRANT SELECT ON schema_name.* TO DBAdmin;
--- GRANT UPDATE ANY TABLE TO DBAdmin;
-
--- -- Các quyền liên quan đến thủ tục
--- GRANT CREATE PROCEDURE TO DBAdmin;
--- GRANT ALTER ANY PROCEDURE TO DBAdmin;
--- GRANT DROP ANY PROCEDURE TO DBAdmin;
--- GRANT EXECUTE ANY PROCEDURE TO DBAdmin;
-
--- -- Các quyền liên quan đến chỉ số
--- GRANT CREATE ANY INDEX TO DBAdmin;
--- GRANT DROP ANY INDEX TO DBAdmin;
-
--- -- Các quyền liên quan đến tablespace
--- GRANT CREATE TABLESPACE TO DBAdmin;
--- GRANT ALTER TABLESPACE TO DBAdmin;
+-- Các quyền liên quan đến thủ tục
+-- Các quyền liên quan đến index
+-- Các quyền liên quan đến tablespace
 
 -- Các quyền liên quan đến sao lưu/phục hồi
--- GRANT BACKUP ANY TABLE TO DBAdmin;
--- GRANT FLASHBACK ANY TABLE TO DBAdmin;
--- GRANT ALTER SYSTEM TO DBAdmin;
-
--- Quyền giám sát
--- GRANT ANALYZE ANY TO DBAdmin;
--- GRANT MONITOR SESSION TO DBAdmin;
-
--- Quyền kết nối và quản lý phiên
--- GRANT CREATE SESSION TO DBAdmin;
--- GRANT ALTER SESSION TO DBAdmin;
-
--- 2. Quản trị viên hệ thống (SysAdmin)
--- Nhiệm vụ: Quản lý cấp cao liên quan đến hệ thống, tài nguyên và bảo mật tổng quát.
--- Tạo vai trò Quản trị viên hệ thống
-CREATE ROLE SysAdmin;
-GRANT DBA TO SysAdmin;
-
--- Quản lý cơ sở dữ liệu
--- GRANT ALTER DATABASE TO SysAdmin;
--- GRANT ALTER SYSTEM TO SysAdmin;
--- GRANT AUDIT SYSTEM TO SysAdmin;
-
--- -- Quản lý vai trò
--- GRANT CREATE ROLE TO SysAdmin;
--- GRANT ALTER ANY ROLE TO SysAdmin;
--- GRANT GRANT ANY ROLE TO SysAdmin;
-
--- -- Quản lý tài nguyên
--- GRANT MANAGE TABLESPACE TO SysAdmin;
--- GRANT UNLIMITED TABLESPACE TO SysAdmin;
--- GRANT ALTER RESOURCE COST TO SysAdmin;
-
--- -- Quản lý phiên làm việc
--- GRANT CREATE SESSION TO SysAdmin;
--- GRANT RESTRICTED SESSION TO SysAdmin;
-
--- -- Quản lý tài khoản
--- GRANT DROP USER TO SysAdmin;
--- GRANT SELECT ON dba_users TO SysAdmin;
--- GRANT SELECT ON dba_roles TO SysAdmin;
-
--- -- Giám sát
--- GRANT MONITOR SESSION TO SysAdmin;
--- GRANT SELECT ANY DICTIONARY TO SysAdmin;
--- GRANT ANALYZE ANY TO SysAdmin;
-
--- Kích hoạt Audit cho các hành động quan trọng
-AUDIT DROP USER;
-AUDIT ALTER SYSTEM;
+GRANT BACKUP ANY TABLE TO DBAdmin;
+GRANT FLASHBACK ANY TABLE TO DBAdmin;
 
 -- 3. Nhà phát triển cơ sở dữ liệu (Database Developer)
 -- Nhiệm vụ: Xây dựng, phát triển và thử nghiệm các chức năng mới trong cơ sở dữ liệu.
@@ -186,12 +116,6 @@ CREATE ROLE DatabaseSecuritySpecialist;
 -- Quản lý tài khoản người dùng
 GRANT CREATE USER TO DatabaseSecuritySpecialist;  -- Cho phép tạo người dùng mới
 GRANT ALTER USER TO DatabaseSecuritySpecialist;   -- Cho phép thay đổi thuộc tính của người dùng
-GRANT DROP USER TO DatabaseSecuritySpecialist;    -- Cho phép xóa người dùng
-
--- Quản lý vai trò
-GRANT GRANT ANY ROLE TO DatabaseSecuritySpecialist; -- Cấp quyền cấp vai trò cho người khác
-GRANT CREATE ROLE TO DatabaseSecuritySpecialist;   -- Cấp quyền tạo vai trò mới
-GRANT ALTER ANY ROLE TO DatabaseSecuritySpecialist; -- Cấp quyền thay đổi vai trò của người dùng
 
 -- Quản lý bảo mật và giám sát
 GRANT SELECT ANY TABLE TO DatabaseSecuritySpecialist;  -- Đọc dữ liệu từ mọi bảng (dành cho kiểm tra bảo mật)
@@ -237,7 +161,6 @@ GRANT EXECUTE ON DBMS_SESSION TO PerformanceTuner;               -- Cho phép s�
 GRANT EXECUTE ON DBMS_MONITOR TO PerformanceTuner;               -- Cấp quyền thực thi các thủ tục trong gói DBMS_MONITOR để theo dõi và tối ưu hóa hiệu suất
 
 -- Quản lý tài nguyên và tham số
-GRANT ALTER SYSTEM TO PerformanceTuner;                          -- Cho phép thay đổi tham số hệ thống liên quan đến hiệu suất
 GRANT SELECT ON V_$PARAMETER TO PerformanceTuner;                -- Cấp quyền truy vấn các tham số hệ thống để tối ưu hóa
 
 -- Giám sát và đánh giá hiệu suất
@@ -259,17 +182,14 @@ GRANT CREATE PROCEDURE, ALTER PROCEDURE, EXECUTE ANY PROCEDURE TO BackendDevelop
 GRANT CREATE TRIGGER, ALTER TRIGGER TO BackendDeveloper;
 
 -- Cấp quyền thao tác trên các bảng chính
-GRANT INSERT, UPDATE, DELETE ON TaiKhoan TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON PhongNhanTin TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON BaoCao TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON TaiKhoanQuangCao TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON ChienDich TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON MucTieu TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
-
--- Cấp quyền SELECT trên tất cả các bảng
-GRANT SELECT ANY TABLE TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON PhongNhanTin TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaoCao TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoanQuangCao TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ChienDich TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON MucTieu TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
 
 -- 7. Kỹ sư dữ liệu (Data Engineer)
 -- Nhiệm vụ: Thiết kế, xây dựng, và duy trì cơ sở dữ liệu; xử lý dữ liệu từ nhiều nguồn.
@@ -283,32 +203,37 @@ GRANT SELECT ANY TABLE TO DataEngineer;
 GRANT INSERT, UPDATE, DELETE ANY TABLE TO DataEngineer;
 
 -- Cấp quyền thao tác cấu trúc cơ sở dữ liệu
-GRANT CREATE TABLE, ALTER ANY TABLE TO DataEngineer;
-GRANT CREATE VIEW, DROP VIEW TO DataEngineer;
-GRANT CREATE SEQUENCE, DROP SEQUENCE TO DataEngineer;
+GRANT CREATE TABLE TO DataEngineer;
+GRANT ALTER ANY TABLE TO DataEngineer;
+GRANT CREATE SEQUENCE TO DataEngineer;
+GRANT CREATE VIEW TO DataEngineer;
 
 -- Cấp quyền truy cập bảng hệ thống
 GRANT SELECT ON DBA_TABLES TO DataEngineer;
 GRANT SELECT ON DBA_TAB_COLUMNS TO DataEngineer;
 GRANT SELECT ON DBA_INDEXES TO DataEngineer;
 
--- Cấp quyền tạo thủ tục, hàm, chỉ mục
-GRANT CREATE PROCEDURE, CREATE FUNCTION TO DataEngineer;
+-- Cấp quyền thao tác với thủ tục và chỉ mục
+GRANT CREATE PROCEDURE TO DataEngineer;
+GRANT CREATE FUNCTION TO DataEngineer;
 GRANT CREATE INDEX, DROP INDEX TO DataEngineer;
 
 -- Cấp quyền thực thi thủ tục tối ưu hóa
 GRANT EXECUTE ON DBMS_STATS TO DataEngineer;
 
--- Cấp quyền tạo và thay đổi sequence
-GRANT CREATE SEQUENCE, ALTER SEQUENCE TO DataEngineer;
 
 -- 8. Nhà phân tích dữ liệu (Data Analyst)
 -- Nhiệm vụ: Phân tích và trực quan hóa dữ liệu, tạo view để hỗ trợ báo cáo.
 CREATE ROLE DataAnalyst;
 
-GRANT CREATE SESSION TO DataAnalyst; -- Cho phép đăng nhập vào cơ sở dữ liệu
-GRANT SELECT ANY TABLE TO DataAnalyst; -- Cho phép đọc dữ liệu từ tất cả các bảng
-GRANT CREATE VIEW TO DataAnalyst; -- Cho phép tạo view
+-- Cho phép đăng nhập vào cơ sở dữ liệu
+GRANT CREATE SESSION TO DataAnalyst; 
+
+-- Cho phép đọc dữ liệu từ tất cả các bảng
+GRANT SELECT ANY TABLE TO DataAnalyst;
+
+-- Cho phép tạo view
+GRANT CREATE VIEW TO DataAnalyst; 
 
 -- 9. Quản lý (Moderator)
 -- Nhiệm vụ: Quản lý nội dung và các hoạt động của người dùng trên hệ thống.
@@ -352,7 +277,7 @@ GRANT SELECT, INSERT, UPDATE ON QuangCao TO EndUser; -- Cho phép xem và thêm 
 -- Nhiệm vụ: Theo dõi hoạt động chung của hệ thống, không thực hiện các thay đổi lớn.
 -- Tạo vai trò Giám sát viên
 CREATE ROLE Supervisor;
-GRANT SELECT ANY TABLE TO Supervisor;
+
 -- Các quyền cơ bản
 GRANT CREATE SESSION TO Supervisor;
 GRANT RESTRICTED SESSION TO Supervisor;
@@ -369,7 +294,6 @@ GRANT MONITOR SESSION TO Supervisor;
 -- Gán các vai trò cho người dùng tương ứng
 GRANT Supervisor TO supervisor_user;
 GRANT DBAdmin TO db_admin;
-GRANT SysAdmin TO sys_admin;
 GRANT DatabaseDeveloper TO db_developer;
 GRANT DatabaseSecuritySpecialist TO db_security;
 GRANT PerformanceTuner TO perf_tuner;
