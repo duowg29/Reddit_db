@@ -25,11 +25,6 @@ DEFAULT TABLESPACE user_data
 TEMPORARY TABLESPACE user_temp
 PROFILE user_profile;
 
-CREATE USER backup_recovery IDENTIFIED BY backuprecovery_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
-PROFILE user_profile;
-
 CREATE USER performance_tuner IDENTIFIED BY performancetuner_password
 DEFAULT TABLESPACE user_data
 TEMPORARY TABLESPACE user_temp
@@ -40,22 +35,12 @@ DEFAULT TABLESPACE user_data
 TEMPORARY TABLESPACE user_temp
 PROFILE user_profile;
 
-CREATE USER log_manager IDENTIFIED BY logmanager_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
-PROFILE user_profile;
-
 CREATE USER data_engineer IDENTIFIED BY dataengineer_password
 DEFAULT TABLESPACE user_data
 TEMPORARY TABLESPACE user_temp
 PROFILE user_profile;
 
 CREATE USER data_analyst IDENTIFIED BY dataanalyst_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
-PROFILE user_profile;
-
-CREATE USER third_party_developer IDENTIFIED BY thirdpartydeveloper_password
 DEFAULT TABLESPACE user_data
 TEMPORARY TABLESPACE user_temp
 PROFILE user_profile;
@@ -228,40 +213,7 @@ GRANT SELECT ON dba_roles TO DatabaseSecuritySpecialist;  -- Truy cập vào th�
 GRANT MONITOR SESSION TO DatabaseSecuritySpecialist;  -- Giám sát phiên làm việc của người dùng
 GRANT ALTER SESSION TO DatabaseSecuritySpecialist;    -- Thay đổi các cài đặt của phiên làm việc
 
--- 6. Chuyên viên quản lý sao lưu và khôi phục (Backup & Recovery Specialist) 
--- Nhiệm vụ: Đảm bảo sao lưu và khôi phục dữ liệu khi cần.
--- Tạo vai trò Chuyên viên quản lý sao lưu và khôi phục
-CREATE ROLE BackupRecoverySpecialist;
-
--- Quản lý sao lưu và khôi phục
-GRANT BACKUP ANY TABLE TO BackupRecoverySpecialist;           -- Cho phép sao lưu bất kỳ bảng nào trong cơ sở dữ liệu
-GRANT FLASHBACK ANY TABLE TO BackupRecoverySpecialist;        -- Cho phép sử dụng tính năng Flashback để khôi phục dữ liệu
-GRANT SYSBACKUP TO BackupRecoverySpecialist;                  -- Quyền truy cập vào các lệnh sao lưu và khôi phục của hệ thống
-
--- Quản lý hệ thống sao lưu và khôi phục
-GRANT ALTER SYSTEM TO BackupRecoverySpecialist;              -- Cho phép thay đổi các cài đặt của hệ thống liên quan đến sao lưu và khôi phục
-
--- Quản lý quản lý tài nguyên sao lưu
-GRANT CREATE TABLESPACE TO BackupRecoverySpecialist;          -- Cho phép tạo và quản lý các không gian bảng (tablespace) cho sao lưu và khôi phục
-GRANT ALTER TABLESPACE TO BackupRecoverySpecialist;           -- Cấp quyền thay đổi không gian bảng (tablespace) cho sao lưu và khôi phục
-
--- Quản lý lịch sử sao lưu và khôi phục
-GRANT SELECT ON DBA_BACKUP_SET TO BackupRecoverySpecialist;   -- Cho phép truy vấn thông tin sao lưu từ bảng DBA_BACKUP_SET
-GRANT SELECT ON DBA_RECOVERY_FILE_DEST TO BackupRecoverySpecialist; -- Cho phép truy vấn thông tin về thư mục khôi phục
-GRANT SELECT ON V_$BACKUP_REDOLOG TO BackupRecoverySpecialist; -- Truy vấn thông tin sao lưu các redo log
-
--- Quản lý các nhiệm vụ sao lưu và khôi phục
-GRANT EXECUTE ON DBMS_BACKUP_RESTORE TO BackupRecoverySpecialist; -- Cấp quyền thực thi các thủ tục trong gói DBMS_BACKUP_RESTORE
-GRANT EXECUTE ON DBMS_FLASHBACK TO BackupRecoverySpecialist;      -- Cấp quyền thực thi các thủ tục trong gói DBMS_FLASHBACK
-
--- Quản lý kiểm tra tính toàn vẹn sao lưu
-GRANT SELECT ON DBA_BACKUP_ARCHIVE_DEST TO BackupRecoverySpecialist; -- Truy vấn thông tin về sao lưu lưu trữ
-GRANT SELECT ON DBA_DATA_FILES TO BackupRecoverySpecialist;         -- Truy vấn thông tin về các file dữ liệu đã sao lưu
-
--- Giám sát sao lưu và khôi phục
-GRANT MONITOR BACKUP TO BackupRecoverySpecialist;                -- Giám sát các quá trình sao lưu và khôi phục
-GRANT AUDIT BACKUP TO BackupRecoverySpecialist;                  -- Giám sát và ghi nhận các sự kiện liên quan đến sao lưu và khôi phục
--- 7. Chuyên viên tối ưu hóa hiệu suất (Database Performance Tuner)
+-- 6. Chuyên viên tối ưu hóa hiệu suất (Database Performance Tuner)
 -- Nhiệm vụ: Tối ưu hóa truy vấn và hiệu suất cơ sở dữ liệu.
 -- Tạo vai trò Chuyên viên tối ưu hóa hiệu suất
 CREATE ROLE PerformanceTuner;
@@ -296,7 +248,7 @@ GRANT SELECT ON V_$SESSION TO PerformanceTuner;                  -- Truy vấn t
 GRANT SELECT ON V_$SQL_PLAN TO PerformanceTuner;                 -- Truy vấn kế hoạch thực thi SQL để phân tích các truy vấn chậm
 GRANT SELECT ON V_$SQLSTATS TO PerformanceTuner;                 -- Truy vấn thông tin thống kê về các truy vấn SQL để tối ưu hóa
 
--- 8. Nhà phát triển ứng dụng (Back-end Developer)
+-- 7. Nhà phát triển ứng dụng (Back-end Developer)
 -- Nhiệm vụ: Xây dựng và bảo trì các chức năng phía back-end của hệ thống, bao gồm tạo, sửa đổi và thực thi các thủ tục, trigger; xử lý dữ liệu trong các bảng chính.
 CREATE ROLE BackendDeveloper;
 
@@ -322,17 +274,7 @@ GRANT INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
 -- Cấp quyền SELECT trên tất cả các bảng
 GRANT SELECT ANY TABLE TO BackendDeveloper;
 
--- Cấp quyền đăng nhập
-GRANT CREATE SESSION TO LogManager;
-
--- Cấp quyền truy vấn các bảng nhật ký hệ thống
-GRANT SELECT ANY TABLE TO LogManager;  -- Có thể thay bằng các quyền cụ thể
-GRANT SELECT ON DBA_AUDIT_TRAIL TO LogManager;
-GRANT SELECT ON V_$LOG TO LogManager;
-GRANT SELECT ON V_$LOGFILE TO LogManager;
-GRANT SELECT ON DBA_LOGS TO LogManager;
-
--- 10. Kỹ sư dữ liệu (Data Engineer)
+-- 8. Kỹ sư dữ liệu (Data Engineer)
 -- Nhiệm vụ: Thiết kế, xây dựng, và duy trì cơ sở dữ liệu; xử lý dữ liệu từ nhiều nguồn.
 CREATE ROLE DataEngineer;
 
@@ -363,7 +305,7 @@ GRANT EXECUTE ON DBMS_STATS TO DataEngineer;
 -- Cấp quyền tạo và thay đổi sequence
 GRANT CREATE SEQUENCE, ALTER SEQUENCE TO DataEngineer;
 
--- 11. Nhà phân tích dữ liệu (Data Analyst)
+-- 9. Nhà phân tích dữ liệu (Data Analyst)
 -- Nhiệm vụ: Phân tích và trực quan hóa dữ liệu, tạo view để hỗ trợ báo cáo.
 CREATE ROLE DataAnalyst;
 
@@ -374,20 +316,7 @@ GRANT SELECT ON BaiDang TO DataAnalyst; -- Cho phép xem dữ liệu trong bản
 GRANT SELECT ON HoiNhom TO DataAnalyst; -- Cho phép xem dữ liệu trong bảng HoiNhom
 GRANT SELECT ON TaiKhoan TO DataAnalyst; -- Cho phép xem dữ liệu trong bảng TaiKhoan
 
--- 12. Nhà phát triển bên thứ ba (Third-party Tool Developer)
--- Nhiệm vụ: Tích hợp công cụ bên thứ ba với hệ thống cơ sở dữ liệu.
-CREATE ROLE ThirdPartyDeveloper;
-
--- Cấp quyền đăng nhập
-GRANT CREATE SESSION TO ThirdPartyDeveloper;
-
--- Cấp quyền SELECT
-GRANT SELECT ON ANY TABLES TO ThirdPartyDeveloper;
-
--- Cấp quyền thực thi cho các thủ tục cần thiết (nếu có)
-GRANT EXECUTE ON procedure_name TO ThirdPartyDeveloper;
-
--- 13. Quản lý (Moderator)
+-- 10. Quản lý (Moderator)
 -- Nhiệm vụ: Quản lý nội dung và các hoạt động của người dùng trên hệ thống.
 CREATE ROLE Moderator;
 
@@ -408,7 +337,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON QuangCao TO Moderator; -- Cho phép thao
 GRANT SELECT ON TaiKhoan_Gui_BaoCao TO Moderator; -- Cho phép xem dữ liệu trong bảng TaiKhoan_Gui_BaoCao
 
 
--- 14. Người dùng (End-User)
+-- 11. Người dùng (End-User)
 -- Nhiệm vụ: Sử dụng các tính năng cơ bản của hệ thống như xem và tương tác với dữ liệu.
 CREATE ROLE EndUser;
 
@@ -430,13 +359,10 @@ GRANT DBAdmin TO db_admin;
 GRANT SysAdmin TO sys_admin;
 GRANT DatabaseDeveloper TO db_developer;
 GRANT DatabaseSecuritySpecialist TO db_security;
-GRANT BackupRecoverySpecialist TO db_backup_recovery_specialist;
 GRANT PerformanceTuner TO perf_tuner;
 
 GRANT BackendDeveloper TO backend_developer;
-GRANT LogManager TO log_manager;
 GRANT DataEngineer TO data_engineer;
 GRANT DataAnalyst TO data_analyst;
-GRANT ThirdPartyDeveloper TO third_party_developer;
 GRANT Moderator TO moderator_user;
 GRANT EndUser TO end_user;

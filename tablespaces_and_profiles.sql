@@ -97,3 +97,127 @@ CREATE PROFILE temp_profile LIMIT
     CONNECT_TIME 30
     IDLE_TIME 10
     PASSWORD_LIFE_TIME 7;
+
+*/
+
+-- Tạo profile cho supervisor
+CREATE PROFILE supervisor_profile LIMIT
+  SESSIONS_PER_USER        5
+  CPU_PER_SESSION          20000
+  CPU_PER_CALL             2000
+  CONNECT_TIME             240
+  IDLE_TIME                60
+  FAILED_LOGIN_ATTEMPTS    3
+  PASSWORD_LIFE_TIME       60
+  PASSWORD_REUSE_TIME      365
+  PASSWORD_REUSE_MAX       10;
+
+-- Tạo profile cho db_admin
+CREATE PROFILE db_admin_profile LIMIT
+  SESSIONS_PER_USER        UNLIMITED
+  CPU_PER_SESSION          UNLIMITED
+  CONNECT_TIME             UNLIMITED
+  IDLE_TIME                120
+  FAILED_LOGIN_ATTEMPTS    5
+  PASSWORD_LIFE_TIME       90
+  PASSWORD_REUSE_TIME      365
+  PASSWORD_REUSE_MAX       5;
+
+-- Tạo profile cho sys_admin
+  CREATE PROFILE sys_admin_profile LIMIT
+  SESSIONS_PER_USER        3
+  CPU_PER_SESSION          UNLIMITED
+  CONNECT_TIME             UNLIMITED
+  IDLE_TIME                180
+  FAILED_LOGIN_ATTEMPTS    5
+  PASSWORD_LIFE_TIME       180
+  PASSWORD_REUSE_TIME      180
+  PASSWORD_REUSE_MAX       10;
+
+-- Tạo profile cho db_developer
+CREATE PROFILE db_developer_profile LIMIT
+  SESSIONS_PER_USER        3
+  CPU_PER_SESSION          10000
+  CONNECT_TIME             180
+  IDLE_TIME                60
+  FAILED_LOGIN_ATTEMPTS    5
+  PASSWORD_LIFE_TIME       90
+  PASSWORD_REUSE_TIME      180
+  PASSWORD_REUSE_MAX       5;
+
+-- Tạo profile cho db_security
+CREATE PROFILE db_security_profile LIMIT
+  SESSIONS_PER_USER        2
+  CPU_PER_SESSION          UNLIMITED
+  CONNECT_TIME             120
+  IDLE_TIME                30
+  FAILED_LOGIN_ATTEMPTS    3
+  PASSWORD_LIFE_TIME       30
+  PASSWORD_REUSE_TIME      365
+  PASSWORD_REUSE_MAX       10;
+
+-- Tạo profile cho performance_tuner
+CREATE PROFILE performance_tuner_profile LIMIT
+  SESSIONS_PER_USER        3
+  CPU_PER_SESSION          20000
+  CONNECT_TIME             300
+  IDLE_TIME                120
+  FAILED_LOGIN_ATTEMPTS    5
+  PASSWORD_LIFE_TIME       120
+  PASSWORD_REUSE_TIME      180
+  PASSWORD_REUSE_MAX       10;
+
+-- Tạo profile cho backend_developer
+CREATE PROFILE backend_developer_profile LIMIT
+  SESSIONS_PER_USER        3
+  CPU_PER_SESSION          10000
+  CONNECT_TIME             180
+  IDLE_TIME                60
+  FAILED_LOGIN_ATTEMPTS    5
+  PASSWORD_LIFE_TIME       90
+  PASSWORD_REUSE_TIME      180
+  PASSWORD_REUSE_MAX       5;
+
+-- Tạo profile cho data_engineer
+CREATE PROFILE data_engineer_profile LIMIT
+  SESSIONS_PER_USER        4
+  CPU_PER_SESSION          20000
+  CONNECT_TIME             240
+  IDLE_TIME                60
+  FAILED_LOGIN_ATTEMPTS    5
+  PASSWORD_LIFE_TIME       90
+  PASSWORD_REUSE_TIME      180
+  PASSWORD_REUSE_MAX       5;
+
+-- Tạo profile cho data_analyst
+CREATE PROFILE data_analyst_profile LIMIT
+  SESSIONS_PER_USER        3
+  CPU_PER_SESSION          10000
+  CONNECT_TIME             180
+  IDLE_TIME                60
+  FAILED_LOGIN_ATTEMPTS    5
+  PASSWORD_LIFE_TIME       90
+  PASSWORD_REUSE_TIME      180
+  PASSWORD_REUSE_MAX       5;
+
+-- Tạo profile cho moderator
+CREATE PROFILE moderator_profile LIMIT
+  SESSIONS_PER_USER        2
+  CPU_PER_SESSION          8000
+  CONNECT_TIME             120
+  IDLE_TIME                60
+  FAILED_LOGIN_ATTEMPTS    5
+  PASSWORD_LIFE_TIME       90
+  PASSWORD_REUSE_TIME      180
+  PASSWORD_REUSE_MAX       5;
+
+-- Tạo profile cho end_user
+CREATE PROFILE end_user_profile LIMIT
+  SESSIONS_PER_USER        1
+  CPU_PER_SESSION          5000
+  CONNECT_TIME             60
+  IDLE_TIME                15
+  FAILED_LOGIN_ATTEMPTS    3
+  PASSWORD_LIFE_TIME       60
+  PASSWORD_REUSE_TIME      90
+  PASSWORD_REUSE_MAX       3;
