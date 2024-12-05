@@ -1,16 +1,18 @@
 -- Tạo Tablespace chính
 -- Lưu ý: vị trí datafile tự tạo nhé :)
 CREATE TABLESPACE tb_internal
-DATAFILE 'C:/BA/Year 3 Semester 1/6 He quan tri co so du lieu/Bai tap lon/reddit_dbms_github/Reddit_db/tablespace/tb_internal_datafile.dbf' 
+DATAFILE 'C:/BA/Year 3 Semester 1/6 He quan tri co so du lieu/Bai tap lon/reddit_dbms_github/tablespace/tb_internal_datafile.dbf' 
 SIZE 100M 
 AUTOEXTEND ON 
 NEXT 10M 
 MAXSIZE UNLIMITED;
 
+
+
 -- Tạo Tablespace index
 -- Lưu ý: vị trí datafile tự tạo nhé :)
 CREATE TABLESPACE tb_index
-DATAFILE 'C:/BA/Year 3 Semester 1/6 He quan tri co so du lieu/Bai tap lon/reddit_dbms_github/Reddit_db/tablespace/tb_index.dbf' 
+DATAFILE 'C:/BA/Year 3 Semester 1/6 He quan tri co so du lieu/Bai tap lon/tb_index_datafile.dbf' 
 SIZE 100M 
 AUTOEXTEND ON 
 NEXT 10M 
@@ -19,7 +21,7 @@ MAXSIZE UNLIMITED;
 -- Tạo Temporary Tablespace
 -- Lưu ý: vị trí datafile tự tạo nhé :)
 CREATE TEMPORARY TABLESPACE tb_user_temp 
-TEMPFILE 'C:/BA/Year 3 Semester 1/6 He quan tri co so du lieu/Bai tap lon/reddit_dbms_github/Reddit_db/tablespace/tb_temp.dbf' 
+TEMPFILE 'C:/BA/Year 3 Semester 1/6 He quan tri co so du lieu/Bai tap lon/tb_user_temp_datafile.dbf' 
 SIZE 50M 
 AUTOEXTEND ON 
 NEXT 5M 
@@ -27,16 +29,20 @@ MAXSIZE UNLIMITED;
 
 -- Tạo Profile
 
+-- Kiểm tra các tài nguyên được hỗ trợ 
+SELECT * FROM DBA_PROFILES;
+
+
 -- Tạo profile cho db_admin
 CREATE PROFILE C##db_admin_profile LIMIT
   SESSIONS_PER_USER        UNLIMITED
-  CPU_PER_SESSION          UNLIMITED
   CONNECT_TIME             UNLIMITED
   IDLE_TIME                120
   FAILED_LOGIN_ATTEMPTS    5
   PASSWORD_LIFE_TIME       90
   PASSWORD_REUSE_TIME      365
   PASSWORD_REUSE_MAX       5;
+
 
 -- Tạo profile cho db_developer
 CREATE PROFILE C##db_developer_profile LIMIT
