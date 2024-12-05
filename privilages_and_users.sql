@@ -2,53 +2,54 @@
 -- Tạo các user với tablespace và profile
 
 -- Tạo và gán profile cho DB Admin
-CREATE USER db_admin IDENTIFIED BY dbadmin_password
+CREATE USER C##db_admin IDENTIFIED BY dbadmin_password
 DEFAULT TABLESPACE tb_internal
 TEMPORARY TABLESPACE tb_user_temp;
 
-ALTER USER db_admin PROFILE C##db_admin_profile;
+ALTER USER C##db_admin PROFILE C##db_admin_profile;
 
 -- Tạo và gán profile cho Database Developer
-CREATE USER db_developer IDENTIFIED BY dbdeveloper_password
+CREATE USER C##db_developer IDENTIFIED BY dbdeveloper_password
 DEFAULT TABLESPACE tb_internal
 TEMPORARY TABLESPACE tb_user_temp;
 
-ALTER USER db_developer PROFILE C##db_developer_profile;
+ALTER USER C##db_developer PROFILE C##db_developer_profile;
 
 -- Tạo và gán profile cho Back-end Developer
-CREATE USER backend_developer IDENTIFIED BY backenddeveloper_password
-DEFAULT TABLESPACE tb_user_data 
-TEMPORARY TABLESPACE tb_user_temp;
-
-ALTER USER backend_developer PROFILE C##backend_developer_profile;
-
--- Tạo và gán profile cho Data Engineer
-CREATE USER data_engineer IDENTIFIED BY dataengineer_password
+CREATE USER C##backend_developer IDENTIFIED BY backenddeveloper_password
 DEFAULT TABLESPACE tb_user_data
 TEMPORARY TABLESPACE tb_user_temp;
 
-ALTER USER data_engineer PROFILE C##data_engineer_profile;
+ALTER USER C##backend_developer PROFILE C##backend_developer_profile;
+
+-- Tạo và gán profile cho Data Engineer
+CREATE USER C##data_engineer IDENTIFIED BY dataengineer_password
+DEFAULT TABLESPACE tb_user_data
+TEMPORARY TABLESPACE tb_user_temp;
+
+ALTER USER C##data_engineer PROFILE C##data_engineer_profile;
 
 -- Tạo và gán profile cho Data Analyst
-CREATE USER data_analyst IDENTIFIED BY dataanalyst_password
-DEFAULT TABLESPACE tb_user_data 
+CREATE USER C##data_analyst IDENTIFIED BY dataanalyst_password
+DEFAULT TABLESPACE tb_user_data
 TEMPORARY TABLESPACE tb_user_temp;
 
-ALTER USER data_analyst PROFILE C##data_analyst_profile;
+ALTER USER C##data_analyst PROFILE C##data_analyst_profile;
 
 -- Tạo và gán profile cho Supervisor
-CREATE USER supervisor_user IDENTIFIED BY supervisor_password
-DEFAULT TABLESPACE tb_internal 
+CREATE USER C##supervisor_user IDENTIFIED BY supervisor_password
+DEFAULT TABLESPACE tb_internal
 TEMPORARY TABLESPACE tb_user_temp;
 
-ALTER USER supervisor_user PROFILE C##supervisor_profile;
+ALTER USER C##supervisor_user PROFILE C##supervisor_profile;
 
 -- Tạo và gán profile cho End User
-CREATE USER end_user IDENTIFIED BY enduser_password
-DEFAULT TABLESPACE tb_user_data 
+CREATE USER C##end_user IDENTIFIED BY enduser_password
+DEFAULT TABLESPACE tb_user_data
 TEMPORARY TABLESPACE tb_user_temp;
 
-ALTER USER end_user PROFILE C##end_user_profile;
+ALTER USER C##end_user PROFILE C##end_user_profile;
+
 
 
 
