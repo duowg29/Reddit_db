@@ -75,3 +75,5 @@ DROP TRIGGER trg_TaiKhoan_Dang_BaiDang_ThoiGianDangBai;
 DROP TRIGGER trg_TaiKhoan_TuongTac_BaiDang_ThoiGianTuongTac;
 DROP TRIGGER trg_TaiKhoan_BinhLuan_BaiDang_ThoiGianBinhLuan;
 DROP TRIGGER trg_TaiKhoan_NhanTin_PhongNhanTin_ThoiGianNhanTin;
+
+DELETE FROM TaiKhoan
