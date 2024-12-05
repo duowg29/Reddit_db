@@ -3,62 +3,62 @@
 
 -- Tạo và gán profile cho DB Admin
 CREATE USER db_admin IDENTIFIED BY dbadmin_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
+DEFAULT TABLESPACE tb_internal
+TEMPORARY TABLESPACE tb_user_temp;
 PROFILE db_admin_profile;
 
 -- Tạo và gán profile cho Database Developer
 CREATE USER db_developer IDENTIFIED BY dbdeveloper_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
+DEFAULT TABLESPACE tb_user_data 
+TEMPORARY TABLESPACE tb_user_temp;
 PROFILE db_developer_profile;
 
 -- Tạo và gán profile cho Database Security Specialist
 CREATE USER db_security IDENTIFIED BY dbsecurity_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
+DEFAULT TABLESPACE tb_internal 
+TEMPORARY TABLESPACE tb_user_temp;
 PROFILE db_security_profile;
 
 -- Tạo và gán profile cho Database Performance Tuner
 CREATE USER performance_tuner IDENTIFIED BY performancetuner_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
+DEFAULT TABLESPACE tb_index 
+TEMPORARY TABLESPACE tb_user_temp;
 PROFILE performance_tuner_profile;
 
 -- Tạo và gán profile cho Back-end Developer
 CREATE USER backend_developer IDENTIFIED BY backenddeveloper_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
+DEFAULT TABLESPACE tb_user_data 
+TEMPORARY TABLESPACE tb_user_temp;
 PROFILE backend_developer_profile;
 
 -- Tạo và gán profile cho Data Engineer
 CREATE USER data_engineer IDENTIFIED BY dataengineer_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
+DEFAULT TABLESPACE tb_user_data 
+TEMPORARY TABLESPACE tb_user_temp;
 PROFILE data_engineer_profile;
 
 -- Tạo và gán profile cho Data Analyst
 CREATE USER data_analyst IDENTIFIED BY dataanalyst_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
+DEFAULT TABLESPACE tb_user_data 
+TEMPORARY TABLESPACE tb_user_temp;
 PROFILE data_analyst_profile;
 
 -- Tạo và gán profile cho Supervisor
 CREATE USER supervisor_user IDENTIFIED BY supervisor_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
+DEFAULT TABLESPACE tb_internal 
+TEMPORARY TABLESPACE tb_user_temp;
 PROFILE supervisor_profile;
 
 -- Tạo và gán profile cho Moderator
 CREATE USER moderator_user IDENTIFIED BY moderator_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
+DEFAULT TABLESPACE tb_user_data 
+TEMPORARY TABLESPACE tb_user_temp;
 PROFILE moderator_profile;
 
 -- Tạo và gán profile cho End User
 CREATE USER end_user IDENTIFIED BY enduser_password
-DEFAULT TABLESPACE user_data
-TEMPORARY TABLESPACE user_temp
+DEFAULT TABLESPACE tb_user_data 
+TEMPORARY TABLESPACE tb_user_temp;
 PROFILE end_user_profile;
 
 
