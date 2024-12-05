@@ -1,5 +1,5 @@
 --QUAN LY TAI KHOAN
-1. Cap nhat mat khau cua tai khoan theo ma tai khoan nhap vao
+--1. Cap nhat mat khau cua tai khoan theo ma tai khoan nhap vao
 SET SERVEROUTPUT ON
 DECLARE 
     p_MaTaiKhoan NUMBER;
@@ -11,19 +11,28 @@ BEGIN
     SET MatKhau = p_MatKhauMoi
     WHERE MaTaiKhoan = p_MaTaiKhoan;
     
-    DBMS_OUTPUT.PUT_LINE('Doi mat khau thanh cong cho tai khoan co ma: ' || p_MaTaiKhoan);
+    DBMS_OUTPUT.PUT_LINE('Cap nhat mat khau thanh cong cho tai khoan co ma: ' || p_MaTaiKhoan);
 END;
-2. Dua ra danh sach tai khoan theo chuc vu
+
+--2. Dua ra danh sach tai khoan theo chuc vu
 SET SERVEROUTPUT ON
 DECLARE
     p_ChucVu VARCHAR2(10) :='&p_ChucVu';
+    v_count NUMBER;
 BEGIN
-    FOR rec IN ( SELECT MaTaiKhoan, TenTaiKhoan, Email
+    SELECT COUNT(*) INTO v_count
+    FROM TaiKhoan
+    WHERE ChucVu=p_ChucVu;
+    IF v_count=0 THEN
+        DBMS_OUTPUT.PUT_LINE('Khong co chuc vu nay trong CSDL');
+    ELSE
+        FOR rec IN ( SELECT MaTaiKhoan, TenTaiKhoan, Email
                  FROM TaiKhoan
                  WHERE ChucVu=p_ChucVu)
-    LOOP
-       DBMS_OUTPUT.PUT_LINE(rec.MaTaiKhoan|| rec.TenTaiKhoan|| rec.Email);
-    END LOOP;
+        LOOP
+           DBMS_OUTPUT.PUT_LINE(rec.MaTaiKhoan||' |'|| rec.TenTaiKhoan||' |'|| rec.Email);
+        END LOOP;
+    END IF;
 END;
 
 3. So luong tai khoan su dung Reddit theo nam
@@ -41,19 +50,28 @@ END;
 EXEC sum_tk(&v_year);
 
 
---QU?N LÝ BÀI ??NG
-1. Tong so bai dang cua theo tai khoan 
+--QUAN LY BAI DANG
+--1. Tong so bai dang cua theo tai khoan 
 SET SERVEROUTPUT ON
 DECLARE
-    p_MaTaiKhoan NUMBER;
+    p_MaTaiKhoan NUMBER :=&p_MaTaiKhoan;
     sum_MaBaiDang NUMBER;
+    v_count NUMBER;
 BEGIN
-    p_MaTaiKhoan :=&p_MaTaiKhoan;
-    SELECT sum(MaBaiDang) INTO sum_MaBaiDang
-    FROM BaiDang
+    SELECT COUNT(*) INTO v_count
+    FROM TaiKhoan
     WHERE MaTaiKhoan=p_MaTaiKhoan;
-    DBMS_OUTPUT.PUT_LINE('Tai khoan'||' '||p_MaTaiKhoan||' '||'co'||' '||sum_MaBaiDang||' bai dang');
+    IF v_count=0 THEN
+        DBMS_OUTPUT.PUT_LINE('Khong co ma tai khoan vua nhap vao');
+    ELSE
+        SELECT COUNT(MaBaiDang) INTO sum_MaBaiDang
+        FROM BaiDang
+        WHERE MaTaiKhoan=p_MaTaiKhoan;
+        
+        DBMS_OUTPUT.PUT_LINE('So bai dang cua tai khoan '||p_MaTaiKhoan||': '||sum_MaBaiDang);
+    END IF;
 END;
+
 2. Xoa bai dang
 SET SERVEROUTPUT ON
 DECLARE
@@ -65,15 +83,14 @@ BEGIN
 END;
 
 --QUAN LY HOI NHOM
-1. Lay danh sach cac thanh vien theo hoi nhom
+--1. Lay danh sach cac thanh vien theo hoi nhom
 SET SERVEROUTPUT ON
 DECLARE
-    p_MaHoiNhom NUMBER;
+    p_MaHoiNhom NUMBER := &p_MaHoiNhom;
     v_count NUMBER;
 BEGIN
-    p_MaHoiNhom := &p_MaHoiNhom;
     SELECT COUNT(*) INTO v_count
-    FROM TaiKhoan_ThamGia_HoiNhom
+    FROM HoiNhom
     WHERE MaHoiNhom= p_MaHoiNhom;
     IF v_count =0 THEN
         DBMS_OUTPUT.PUT_LINE('Khong co hoi nhom co ma'||' '||p_MaHoiNhom);
@@ -86,7 +103,8 @@ BEGIN
         END LOOP;
     END IF;
 END;
-2. Them tai khoan vao hoi nhom
+
+--2. Them tai khoan vao hoi nhom
 SET SERVEROUTPUT ON
 DECLARE
     p_MaTaiKhoan NUMBER;
@@ -109,7 +127,7 @@ BEGIN
 END;
 
 --QUAN LY PHONG TIN NHAN
-1. Lay danh sach phong tin nhan ma 1 tai khoan da tham gia.
+--1. Lay danh sach phong tin nhan ma 1 tai khoan da tham gia.
 SET SERVEROUTPUT ON
 DECLARE
     v_MaTaiKhoan NUMBER := &v_MaTaiKhoan;
@@ -135,6 +153,7 @@ BEGIN
         END IF;
     END IF;
 END;
+
 2. Gui tin nhan vào phong
 SET SERVEROUTPUT ON
 DECLARE
@@ -180,7 +199,7 @@ BEGIN
     END IF;      
 END;
     
-2. Cap nhat thong tin chien dich
+--2. Cap nhat thong tin chien dich
 BEGIN
     UPDATE ChienDich
     SET TieuDe = 'Chien dich He 2024',
@@ -194,7 +213,7 @@ BEGIN
     END IF;
 END;
 
-3. Kiem tra tai khoan co tham gia dang ky quang cao cua 1 chien dich nao do hay khong?
+--3. Kiem tra tai khoan co tham gia dang ky quang cao cua 1 chien dich nao do hay khong?
 CREATE OR REPLACE FUNCTION 
 KiemTraTaiKhoanQuangCao(v_MaTaiKhoan NUMBER, v_MaChienDich NUMBER)
 RETURN VARCHAR2
