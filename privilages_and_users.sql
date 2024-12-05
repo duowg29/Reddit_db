@@ -67,6 +67,9 @@ ALTER USER end_user PROFILE end_user_profile;
 -- Tạo vai trò Quản trị viên cơ sở dữ liệu
 CREATE ROLE DBAdmin;
 GRANT DBA TO DBAdmin;
+
+-- Trao quyen ket noi
+GRANT CREATE SESSION TO DBAdmin;
 -- DBA đã bao gồm:
 -- Quy�?n kết nối và quản lý phiên
 -- Các quy�?n liên quan đến bảng
@@ -84,7 +87,7 @@ GRANT FLASHBACK ANY TABLE TO DBAdmin;
 CREATE ROLE DatabaseDeveloper;
 
 -- Quy�?n đăng nhập
-GRANT CREATE SESSION TO BackendDeveloper;
+GRANT CREATE SESSION TO DatabaseDeveloper;
 
 -- Trao quyen tren mot so view chi dinh
 --GRANT SELECT ON view_name TO BackendDeveloper;
