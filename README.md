@@ -2,22 +2,24 @@
 
 # Hướng dẫn sử dụng:
 
-**Bước 0**: Kết nối tới CSDL bằng tài khoản SYSTEM
+**Bước 1**: Kết nối tới CSDL bằng tài khoản SYSTEM
 
-**Bước 1**: Tạo Tablespace (tệp `tablespaces_and_profiles.sql`)
+**Bước 2**: Chuyển Session hiện tại sang PDB: REDDITDBPDB1 (tệp `tablespaces_and_profiles.sql`)
 
-**Bước 2**: Tạo Profile (tệp `tablespaces_and_profiles.sql`)
+**Bước 3**: Tạo Tablespace (tệp `tablespaces_and_profiles.sql`)
 
-**Bước 3**: Tạo User (tệp `privilages_and_users.sql`)
+**Bước 4**: Tạo Profile (tệp `tablespaces_and_profiles.sql`)
 
-**Bước 4**: Tạo Role (tệp `privilages_and_users.sql`)
+**Bước 5**: Tạo User (tệp `privilages_and_users.sql`)
 
-**Bước 5**: Gán Role cho User (tệp `privilages_and_users.sql`)
+**Bước 6**: Tạo Role (tệp `privilages_and_users.sql`)
 
-**Bước 6**: Tạo bảng:
+**Bước 7**: Gán Role cho User (tệp `privilages_and_users.sql`)
 
-- **Bước 6.1**: Đăng nhập với tài khoản (là thông tin của User).
-- **Bước 6.2**: Chạy lệnh tạo bảng (tương ứng với Tablespace của User).
+**Bước 8**: Tạo bảng:
+
+- **Bước 8.1**: Đăng nhập với tài khoản (là thông tin của User).
+- **Bước 8.2**: Chạy lệnh tạo bảng (tương ứng với Tablespace của User).
 
   **VD**: Đăng nhập bằng tài khoản `db_admin`, sau đó thực hiện tạo bảng ứng với tablespace `tb_internal`.
 
@@ -54,6 +56,6 @@
 
 - **tb_user_temp**: Không cần gán.
 
-**Bước 7**: Insert dữ liệu (Nhớ kéo hết phần `SELECT * FROM dual;`).
+**Bước 9**: Insert dữ liệu (Nhớ kéo hết phần `SELECT * FROM dual;`).
 
-**Bước 8**: Thực hiện các thao tác khác.
+**Bước 10**: Thực hiện các thao tác khác.

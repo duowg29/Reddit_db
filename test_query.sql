@@ -1,15 +1,19 @@
+-- Li�n quan ??n CDB v� PDB (?�y l� c�c l?nh ? b??c 2 trong instruction)
+ALTER SESSION SET CONTAINER = CDB$ROOT; -- v? l?i cdb n?u c?n
+ALTER SESSION SET CONTAINER = REDDITDBPDB1; -- chuy?n sang pdb
+
 -- Liên quan đến Tablespace
 SELECT tablespace_name 
 FROM pdb_tablespaces;
 SELECT tablespace_name
 FROM cdb_tablespaces;
 
--- SET TABLESPACE về OFFLINE
+-- SET TABLESPACE v�? OFFLINE
 ALTER TABLESPACE tb_internal OFFLINE;
 ALTER TABLESPACE tb_index OFFLINE;
 ALTER TABLESPACE tb_user_temp OFFLINE;
 
--- Trường hợp không drop được TABLESPACE do địa chỉ thì chỉnh địa chỉ của chúng về OFFLINE rồi DROP
+-- Trư�?ng hợp không drop được TABLESPACE do địa chỉ thì chỉnh địa chỉ của chúng v�? OFFLINE rồi DROP
 ALTER DATABASE DATAFILE 'C:\BA\YEAR 3 SEMESTER 1\6 HE QUAN TRI CO SO DU LIEU\BAI TAP LON\REDDIT_DBMS_GITHUB\REDDIT_DB\TABLESPACE\TB_INTERNAL_DATAFILE.DBF' OFFLINE;
 ALTER DATABASE DATAFILE 'C:\BA\YEAR 3 SEMESTER 1\6 HE QUAN TRI CO SO DU LIEU\BAI TAP LON\REDDIT_DBMS_GITHUB\REDDIT_DB\TABLESPACE\TB_INTERNAL_DATAFILE.DBF' OFFLINE;
 ALTER DATABASE DATAFILE 'C:\BA\YEAR 3 SEMESTER 1\6 HE QUAN TRI CO SO DU LIEU\BAI TAP LON\REDDIT_DBMS_GITHUB\REDDIT_DB\TABLESPACE\TB_INTERNAL_DATAFILE.DBF' OFFLINE;
@@ -18,6 +22,29 @@ ALTER DATABASE DATAFILE 'C:\BA\YEAR 3 SEMESTER 1\6 HE QUAN TRI CO SO DU LIEU\BAI
 DROP TABLESPACE tb_internal INCLUDING CONTENTS AND DATAFILES;
 DROP TABLESPACE tb_index INCLUDING CONTENTS AND DATAFILES;
 DROP TABLESPACE tb_user_temp INCLUDING CONTENTS AND DATAFILES;
+
+-- Lien quan den Profile
+-- X�a profile db_admin_profile
+DROP PROFILE db_admin_profile;
+
+-- X�a profile db_developer_profile
+DROP PROFILE db_developer_profile;
+
+-- X�a profile backend_developer_profile
+DROP PROFILE backend_developer_profile;
+
+-- X�a profile data_engineer_profile
+DROP PROFILE data_engineer_profile;
+
+-- X�a profile data_analyst_profile
+DROP PROFILE data_analyst_profile;
+
+-- X�a profile supervisor_profile
+DROP PROFILE supervisor_profile;
+
+-- X�a profile end_user_profile
+DROP PROFILE end_user_profile;
+
 
 -- Liên quan đến tạo bảng
 SELECT * FROM TaiKhoan;
