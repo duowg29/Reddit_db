@@ -236,7 +236,7 @@ END;
 SELECT KiemTraTaiKhoanQuangCao(&v_MaTaiKhoan, &v_MaChienDich) FROM DUAL;
 
 -- BAO CAO VA THONG KE
-1. Bai dang co luot upvote cao nhat
+--1. Bai dang co luot upvote cao nhat
 CREATE OR REPLACE PROCEDURE BaiDangUpvoteCaoNhat 
 AS
     v_MaBaiDang    BaiDang.MaBaiDang%TYPE;
@@ -267,7 +267,7 @@ EXCEPTION
 END;
 EXEC BaiDangUpvoteCaoNhat
 
-2. Thong ke TOP 5 chien dich có chi phi quang cao cao nhat
+--2. Thong ke TOP 5 chien dich có chi phi quang cao cao nhat
 CREATE OR REPLACE PROCEDURE TOP5_EXPENSIVE_CAMPAIGNS 
 AS
 BEGIN
