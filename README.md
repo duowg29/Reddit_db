@@ -6,11 +6,15 @@
 
 **Bước 2**: Chuyển Session hiện tại sang PDB: REDDITDBPDB1 (tệp `tablespaces_and_profiles.sql`)
 
+- **Lưu ý**: Có thể bôi đen hết Tablespaces hoặc Profiles để chạy nhưng không thể bôi đen cả file
+
 **Bước 3**: Tạo Tablespace (tệp `tablespaces_and_profiles.sql`)
 
 **Bước 4**: Tạo Profile (tệp `tablespaces_and_profiles.sql`)
 
 **Bước 5**: Tạo User (tệp `privilages_and_users.sql`)
+
+- **Lưu ý**: Bắt buộc chạy từng user và lệnh alter user
 
 **Bước 6**: Tạo Role (tệp `privilages_and_users.sql`)
 
