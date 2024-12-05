@@ -2,6 +2,8 @@
 
 # Hướng dẫn sử dụng:
 
+**Bước 0**: Kết nối tới CSDL bằng tài khoản SYSTEM
+
 **Bước 1**: Tạo Tablespace (tệp `tablespaces_and_profiles.sql`)
 
 **Bước 2**: Tạo Profile (tệp `tablespaces_and_profiles.sql`)
