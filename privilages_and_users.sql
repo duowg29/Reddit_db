@@ -23,7 +23,7 @@ ALTER USER backend_developer PROFILE backend_developer_profile;
 
 -- Tao va gan profile cho Data Engineer
 CREATE USER data_engineer IDENTIFIED BY dataengineer_password
-DEFAULT TABLESPACE tb_internal
+DEFAULT TABLESPACE tb_index
 TEMPORARY TABLESPACE tb_user_temp;
 
 ALTER USER data_engineer PROFILE data_engineer_profile;
