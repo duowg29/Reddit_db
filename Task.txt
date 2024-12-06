@@ -1,0 +1,26 @@
+Task:
+1.Cấu hình Database (2 người) (1 máy chính, 1 máy backup) (Làm xong sẽ nhận thêm 4. 5.) Hưng Phú Đẹp trai
+2.Phân quyền (Tạo profile và user nhỏ hơn trong đó, tạo Tablespace riêng cho một số nghiệp vụ (Chỉ truy vấn vấn đề A, B,...) (2 người) Hưng Dương
+3.Thủ tục, Trigger, Index, View (3 người) Dương Lan Đạt
+4.Các lệnh truy vấn bằng SQL và PLSQL (10 câu SQL, 10 câu PLSQL) (2 người) Lan Đạt
+5.Backup (1 người) Phú Đẹp Trai
+
+Deadline: t3 03/12 23:59
+
+Xây dựng báo cáo (Hưng)
+PP (Dương, Đạt)
+
+User:
+
+Quản trị viên cơ sở dữ liệu (DB Admin)
+Quản trị viên hệ thống (SysAdmin)
+Nhà phát triển cơ sở dữ liệu (Database Developer)
+Chuyên viên bảo mật cơ sở dữ liệu (Database Security Specialist)
+Chuyên viên tối ưu hóa hiệu suất (Database Performance Tuner)
+Nhà phát triển ứng dụng (Back-end Developer)
+Kỹ sư dữ liệu (Data Engineer)
+Nhà phân tích dữ liệu (Data Analyst)
+
+Giám sát viên (Supervisor)
+Quản lý (Moderator)
+Người dùng (End-User)
