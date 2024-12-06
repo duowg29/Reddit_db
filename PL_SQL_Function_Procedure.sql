@@ -72,20 +72,20 @@ BEGIN
     END IF;
 END;
 
---5. Cap nhat trang thai tai khoan thanh locked
+--5. Cap nhat trang thai bai dang thanh locked
 SET SERVEROUTPUT ON
 DECLARE
     p_MaBaiDang NUMBER;
 BEGIN
     p_MaBaiDang := &p_MaBaiDang;
 
-    -- Cap nhat trang thai tai khoan
-    UPDATE TaiKhoan
+    -- Cap nhat trang thai bai đang thanh locked
+    UPDATE BaiDang
     SET TrangThai = 'locked'
-    WHERE MaTaiKhoan = (SELECT MaTaiKhoan FROM BaiDang WHERE MaBaiDang = p_MaBaiDang);
+    WHERE MaBaiDang = p_MaBaiDang;
 
-    -- Thong bao thanh cong
-    DBMS_OUTPUT.PUT_LINE('Tai khoan da bi khoa');
+    -- Thông báo thành công
+    DBMS_OUTPUT.PUT_LINE('Bai dang da bi khoa');
 END;
 /
 
