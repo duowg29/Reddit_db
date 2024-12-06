@@ -218,7 +218,20 @@ BEGIN
     END IF;
 END;
 
---11. Kiem tra tai khoan co tham gia dang ky quang cao cua 1 chien dich nao do hay khong?
+--11. Đua ra so luong tai khoan dang ky tai khoan quang cao
+CREATE OR REPLACE FUNCTION
+SoluongTKQC
+RETURN NUMBER
+AS Soluong NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO Soluong
+    FROM TaiKhoan_Lap_TaiKhoanQuangCao
+
+    RETURN Soluong;
+END;
+SELECT SoluongTKQC FROM DUAL;
+
+--12. Kiem tra tai khoan co tham gia dang ky quang cao cua 1 chien dich nao do hay khong?
 CREATE OR REPLACE FUNCTION 
 KiemTraTaiKhoanQuangCao(v_MaTaiKhoan NUMBER, v_MaChienDich NUMBER)
 RETURN VARCHAR2
@@ -241,7 +254,7 @@ END;
 SELECT KiemTraTaiKhoanQuangCao(&v_MaTaiKhoan, &v_MaChienDich) FROM DUAL;
 
 -- BAO CAO VA THONG KE
---12. Bai dang co luot upvote cao nhat
+--13. Bai dang co luot upvote cao nhat
 CREATE OR REPLACE PROCEDURE BaiDangUpvoteCaoNhat 
 AS
     v_MaBaiDang    BaiDang.MaBaiDang%TYPE;
@@ -275,7 +288,7 @@ EXCEPTION
 END;
 EXEC BaiDangUpvoteCaoNhat
 
---13. Thong ke TOP 5 chien dich có chi phi quang cao cao nhat
+--14. Thong ke TOP 5 chien dich có chi phi quang cao cao nhat
 CREATE OR REPLACE PROCEDURE TOP5_EXPENSIVE_CAMPAIGNS 
 AS
 BEGIN
