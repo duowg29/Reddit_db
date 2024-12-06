@@ -1,4 +1,4 @@
--- Liên quan ??n CDB và PDB (?ây là các l?nh ? b??c 2 trong instruction)
+-- Liï¿½n quan ??n CDB vï¿½ PDB (?ï¿½y lï¿½ cï¿½c l?nh ? b??c 2 trong instruction)
 ALTER SESSION SET CONTAINER = CDB$ROOT; -- v? l?i cdb n?u c?n
 ALTER SESSION SET CONTAINER = REDDITDBPDB1; -- chuy?n sang pdb
 
@@ -16,12 +16,12 @@ FROM pdb_tablespaces;
 SELECT tablespace_name
 FROM cdb_tablespaces;
 
--- SET TABLESPACE vá»? OFFLINE
+-- SET TABLESPACE vï¿½? OFFLINE
 ALTER TABLESPACE tb_internal OFFLINE;
 ALTER TABLESPACE tb_index OFFLINE;
 ALTER TABLESPACE tb_user_temp OFFLINE;
 
--- TrÆ°á»?ng há»£p khÃ´ng drop Ä‘Æ°á»£c TABLESPACE do Ä‘á»‹a chá»‰ thÃ¬ chá»‰nh Ä‘á»‹a chá»‰ cá»§a chÃºng vá»? OFFLINE rá»“i DROP
+-- TrÆ°ï¿½?ng há»£p khÃ´ng drop Ä‘Æ°á»£c TABLESPACE do Ä‘á»‹a chá»‰ thÃ¬ chá»‰nh Ä‘á»‹a chá»‰ cá»§a chÃºng vï¿½? OFFLINE rá»“i DROP
 ALTER DATABASE DATAFILE 'C:\BA\YEAR 3 SEMESTER 1\6 HE QUAN TRI CO SO DU LIEU\BAI TAP LON\REDDIT_DBMS_GITHUB\REDDIT_DB\TABLESPACE\TB_INTERNAL_DATAFILE.DBF' OFFLINE;
 ALTER DATABASE DATAFILE 'C:\BA\YEAR 3 SEMESTER 1\6 HE QUAN TRI CO SO DU LIEU\BAI TAP LON\REDDIT_DBMS_GITHUB\REDDIT_DB\TABLESPACE\TB_INTERNAL_DATAFILE.DBF' OFFLINE;
 ALTER DATABASE DATAFILE 'C:\BA\YEAR 3 SEMESTER 1\6 HE QUAN TRI CO SO DU LIEU\BAI TAP LON\REDDIT_DBMS_GITHUB\REDDIT_DB\TABLESPACE\TB_INTERNAL_DATAFILE.DBF' OFFLINE;
@@ -37,25 +37,25 @@ DROP TABLESPACE tb_user_temp INCLUDING CONTENTS AND DATAFILES;
 SELECT * 
 FROM dba_profiles
 
--- Xóa profile db_admin_profile
+-- Xï¿½a profile db_admin_profile
 DROP PROFILE db_admin_profile;
 
--- Xóa profile db_developer_profile
+-- Xï¿½a profile db_developer_profile
 DROP PROFILE db_developer_profile;
 
--- Xóa profile backend_developer_profile
+-- Xï¿½a profile backend_developer_profile
 DROP PROFILE backend_developer_profile;
 
--- Xóa profile data_engineer_profile
+-- Xï¿½a profile data_engineer_profile
 DROP PROFILE data_engineer_profile;
 
--- Xóa profile data_analyst_profile
+-- Xï¿½a profile data_analyst_profile
 DROP PROFILE data_analyst_profile;
 
--- Xóa profile supervisor_profile
+-- Xï¿½a profile supervisor_profile
 DROP PROFILE supervisor_profile;
 
--- Xóa profile end_user_profile
+-- Xï¿½a profile end_user_profile
 DROP PROFILE end_user_profile;
 
 -- Lien quan den User
@@ -64,26 +64,48 @@ SELECT USERNAME
 FROM ALL_USERS 
 ORDER BY USERNAME;
 
--- Xóa user db_admin
+-- Xï¿½a user db_admin
 DROP USER db_admin CASCADE;
 
--- Xóa user db_developer
+-- Xï¿½a user db_developer
 DROP USER db_developer CASCADE;
 
--- Xóa user backend_developer
+-- Xï¿½a user backend_developer
 DROP USER backend_developer CASCADE;
 
--- Xóa user data_engineer
+-- Xï¿½a user data_engineer
 DROP USER data_engineer CASCADE;
 
--- Xóa user data_analyst
+-- Xï¿½a user data_analyst
 DROP USER data_analyst CASCADE;
 
--- Xóa user supervisor_user
+-- Xï¿½a user supervisor_user
 DROP USER supervisor_user CASCADE;
 
--- Xóa user end_user
+-- Xï¿½a user end_user
 DROP USER end_user CASCADE;
+
+-- Lien quan den ROLE
+-- Xï¿½a vai trï¿½ DBAdmin
+DROP ROLE DBAdmin;
+
+-- Xï¿½a vai trï¿½ DatabaseDeveloper
+DROP ROLE DatabaseDeveloper;
+
+-- Xï¿½a vai trï¿½ BackendDeveloper
+DROP ROLE BackendDeveloper;
+
+-- Xï¿½a vai trï¿½ DataEngineer
+DROP ROLE DataEngineer;
+
+-- Xï¿½a vai trï¿½ DataAnalyst
+DROP ROLE DataAnalyst;
+
+-- Xï¿½a vai trï¿½ Supervisor
+DROP ROLE Supervisor;
+
+-- Xï¿½a vai trï¿½ EndUser
+DROP ROLE EndUser;
 
 
 -- LiÃªn quan Ä‘áº¿n táº¡o báº£ng

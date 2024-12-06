@@ -139,6 +139,16 @@ CREATE ROLE DataEngineer;
 -- Cap quyen dang nhap
 GRANT CREATE SESSION TO DataEngineer;
 
+
+-- Cap quyen thao tac cau truc co so du lieu
+GRANT CREATE TABLE TO DataEngineer;
+GRANT ALTER ANY TABLE TO DataEngineer;
+GRANT CREATE SEQUENCE TO DataEngineer;
+GRANT CREATE VIEW TO DataEngineer;
+
+-- Cap quyen thao tac voi thu tuc va chi muc
+GRANT CREATE PROCEDURE TO DataEngineer;
+
 -- Cap quyen thao tac tren du lieu (Can tao bang truoc)
 GRANT SELECT ANY TABLE TO DataEngineer;
 GRANT INSERT, UPDATE, DELETE ON TaiKhoan TO BackendDeveloper;
@@ -150,19 +160,10 @@ GRANT INSERT, UPDATE, DELETE ON ChienDich TO BackendDeveloper;
 GRANT INSERT, UPDATE, DELETE ON MucTieu TO BackendDeveloper;
 GRANT INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
 
--- Cap quyen thao tac cau truc co so du lieu
-GRANT CREATE TABLE TO DataEngineer;
-GRANT ALTER ANY TABLE TO DataEngineer;
-GRANT CREATE SEQUENCE TO DataEngineer;
-GRANT CREATE VIEW TO DataEngineer;
-
 -- Cap quyen truy cap bang he thong (can DBA trao quyen)
 GRANT SELECT ON DBA_TABLES TO DataEngineer;
 GRANT SELECT ON DBA_TAB_COLUMNS TO DataEngineer;
 GRANT SELECT ON DBA_INDEXES TO DataEngineer;
-
--- Cap quyen thao tac voi thu tuc va chi muc
-GRANT CREATE PROCEDURE TO DataEngineer;
 
 -- Trao quyen exec proc, func, package (can chi dinh)
 --GRANT EXECUTE ON <FUNCTION_NAME> TO <USER>;

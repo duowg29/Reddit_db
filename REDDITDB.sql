@@ -279,7 +279,7 @@ END;
 CREATE TABLE TaiKhoan_Dang_BaiDang (
     MaTaiKhoan NUMBER NOT NULL,
     MaBaiDang NUMBER NOT NULL,
-    ThoiGianDangBai DATE NOT NULL,
+    ThoiGianDangBai TIMESTAMP NOT NULL,
     PRIMARY KEY (MaTaiKhoan, MaBaiDang),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaBaiDang) REFERENCES BaiDang(MaBaiDang)
@@ -301,7 +301,7 @@ CREATE TABLE TaiKhoan_TuongTac_BaiDang (
     MaBaiDang NUMBER NOT NULL,
     Upvote NUMBER DEFAULT 0,
 	Downvote NUMBER DEFAULT 0,
-    ThoiGianTuongTac DATE NOT NULL,
+    ThoiGianTuongTac TIMESTAMP NOT NULL,
     PRIMARY KEY (MaTaiKhoan, MaBaiDang),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaBaiDang) REFERENCES BaiDang(MaBaiDang)
@@ -321,7 +321,7 @@ END;
 CREATE TABLE TaiKhoan_BinhLuan_BaiDang (
     MaTaiKhoan NUMBER NOT NULL,
     MaBaiDang NUMBER NOT NULL,
-    ThoiGianBinhLuan DATE NOT NULL,
+    ThoiGianBinhLuan TIMESTAMP NOT NULL,
     NoiDungBinhLuan NCLOB NOT NULL,
     TepDinhKem VARCHAR2(100),
     TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private')),
@@ -403,7 +403,7 @@ END;
 CREATE TABLE TaiKhoan_NapTien_TaiKhoan (
     MaGiaoDich NUMBER NOT NULL,
 	MaTaiKhoan NUMBER NOT NULL,
-    ThoiDiemThanhToan DATE NOT NULL,
+    ThoiDiemThanhToan TIMESTAMP NOT NULL,
     PhuongThucThanhToan NVARCHAR2(50) NOT NULL,
     SoTien NUMBER NOT NULL,
     SoVangNhanDuoc NUMBER NOT NULL,
@@ -425,7 +425,7 @@ CREATE TABLE TaiKhoanQuangCao_DangKy_ChienDich (
     MaTaiKhoanQuangCao NUMBER NOT NULL,
     MaChienDich NUMBER NOT NULL,
     MaGiaoDich NUMBER NOT NULL,
-    ThoiDiemThanhToan DATE NOT NULL,
+    ThoiDiemThanhToan TIMESTAMP NOT NULL,
     PhuongThucThanhToan NVARCHAR2(50) NOT NULL,
     SoTien NUMBER DEFAULT 0 NOT NULL,
     PRIMARY KEY (MaTaiKhoanQuangCao, MaChienDich, MaGiaoDich),
