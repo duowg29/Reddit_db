@@ -24,6 +24,11 @@ DROP TABLESPACE tb_index INCLUDING CONTENTS AND DATAFILES;
 DROP TABLESPACE tb_user_temp INCLUDING CONTENTS AND DATAFILES;
 
 -- Lien quan den Profile
+
+-- Liet ke Profile
+SELECT * 
+FROM dba_profiles
+
 -- Xóa profile db_admin_profile
 DROP PROFILE db_admin_profile;
 
@@ -44,6 +49,28 @@ DROP PROFILE supervisor_profile;
 
 -- Xóa profile end_user_profile
 DROP PROFILE end_user_profile;
+
+-- Lien quan den User
+-- Xóa user db_admin
+DROP USER db_admin CASCADE;
+
+-- Xóa user db_developer
+DROP USER db_developer CASCADE;
+
+-- Xóa user backend_developer
+DROP USER backend_developer CASCADE;
+
+-- Xóa user data_engineer
+DROP USER data_engineer CASCADE;
+
+-- Xóa user data_analyst
+DROP USER data_analyst CASCADE;
+
+-- Xóa user supervisor_user
+DROP USER supervisor_user CASCADE;
+
+-- Xóa user end_user
+DROP USER end_user CASCADE;
 
 
 -- LiÃªn quan Ä‘áº¿n táº¡o báº£ng
