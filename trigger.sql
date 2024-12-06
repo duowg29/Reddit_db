@@ -1,4 +1,4 @@
--- 1. Tao Trigger phat hien noi dung nhay cam hoac khong phu hop
+--1. Tao Trigger phat hien noi dung nhay cam hoac khong phu hop
 CREATE OR REPLACE TRIGGER trg_detect_sensitive_content
 AFTER INSERT OR UPDATE ON BaiDang
 FOR EACH ROW
@@ -18,7 +18,7 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Error detecting sensitive content: ' || SQLERRM);
 END;
 /
--- 2. Cap nhat trang thai bai dang khi cap nhat trang thai tai khoan thanh khoa
+--2. Cap nhat trang thai bai dang khi cap nhat trang thai tai khoan thanh khoa
 CREATE OR REPLACE TRIGGER trg_update_BaiDang_TrangThai
 AFTER UPDATE OF TrangThai ON TaiKhoan
 FOR EACH ROW
@@ -40,12 +40,11 @@ BEGIN
     END IF;
 END;
 /
---3.Cap nhap trang thai binh luan neu cap nhap trang thai tai khoan thanh khoa
+--3. Cap nhap trang thai binh luan neu cap nhap trang thai tai khoan thanh khoa
 CREATE OR REPLACE TRIGGER trg_update_comment_status_on_account_locked
 AFTER UPDATE OF TrangThai ON TaiKhoan
 FOR EACH ROW
 BEGIN
-    -- Nếu trạng thái tài khoản được cập nhật thành 'Locked', cập nhật trạng thái bình luận liên quan
     IF :NEW.TrangThai = 'Locked' THEN
         UPDATE TaiKhoan_BinhLuan_BaiDang
         SET TrangThai = 'Private'
@@ -61,7 +60,6 @@ AFTER UPDATE OF TrangThai ON BaiDang
 FOR EACH ROW
 BEGIN
     IF :NEW.TrangThai = 'Locked' THEN
-        -- Cập nhật trạng thái bình luận liên quan thành 'Private' nếu bài viết bị khóa
         UPDATE TaiKhoan_BinhLuan_BaiDang
         SET TrangThai = 'Private'
         WHERE MaBaiDang = :OLD.MaBaiDang;
@@ -88,7 +86,7 @@ BEGIN
 END;
 /
 
---6.. Gioi han so luot tuong tac lien tuc cua mot tai khoan trong mot thoi gian ngan
+--6. Gioi han so luot tuong tac lien tuc cua mot tai khoan trong mot thoi gian ngan
 CREATE OR REPLACE TRIGGER trg_limit_interactions
 BEFORE INSERT ON TaiKhoan_TuongTac_BaiDang
 FOR EACH ROW

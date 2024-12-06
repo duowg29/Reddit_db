@@ -1,5 +1,5 @@
 -- VIEW
--- thong ke so luong bai viet theo tung tai khoan
+--1. Thong ke so luong bai viet theo tung tai khoan
 CREATE OR REPLACE VIEW View_ThongKeBaiDang AS
 SELECT TaiKhoan.MaTaiKhoan, TaiKhoan.TenTaiKhoan, COUNT(BaiDang.MaBaiDang) AS SoLuongBaiDang
 FROM TaiKhoan
@@ -7,14 +7,14 @@ LEFT JOIN BaiDang ON TaiKhoan.MaTaiKhoan = BaiDang.MaTaiKhoan
 GROUP BY TaiKhoan.MaTaiKhoan, TaiKhoan.TenTaiKhoan
 ORDER BY SoLuongBaiDang DESC;
 SELECT * FROM View_ThongKeBaiDang
--- Top 10 tai khoan co diem dong gop cao nhat
+--2. Top 10 tai khoan co diem dong gop cao nhat
 CREATE OR REPLACE VIEW View_Top10TaiKhoan_DiemDongGop AS
 SELECT MaTaiKhoan, TenTaiKhoan, Email, DiemDongGop
 FROM TaiKhoan
 ORDER BY DiemDongGop DESC
 FETCH FIRST 10 ROWS ONLY;
 SELECT * FROM View_Top10TaiKhoan_DiemDongGop
--- 10 bai dang co luot tuong tac cao nhat
+--3. 10 bai dang co luot tuong tac cao nhat
 CREATE OR REPLACE VIEW View_Top10Posts_ByInteractions AS
 SELECT b.MaBaiDang, b.TieuDe, TO_CHAR(b.NoiDung) AS NoiDung, b.LuotXem, 
        SUM(CASE WHEN t.Upvote = 1 THEN 1 ELSE 0 END) AS SoUpvote,
@@ -27,7 +27,7 @@ ORDER BY (SUM(CASE WHEN t.Upvote = 1 THEN 1 ELSE 0 END) -
 FETCH FIRST 10 ROWS ONLY;
 SELECT * FROM View_Top10Posts_ByInteractions
 
--- cac chien dich quang cao co chi phi cao nhat
+--4. cac chien dich quang cao co chi phi cao nhat
 CREATE OR REPLACE VIEW View_Top10ChienDich_ByChiPhi AS
 SELECT c.MaChienDich, c.TieuDe, SUM(m.ChiPhi) AS TongChiPhi
 FROM ChienDich c
@@ -38,7 +38,7 @@ FETCH FIRST 10 ROWS ONLY;
 SELECT * FROM View_Top10ChienDich_ByChiPhi
 
 
--- nguoi dung co tong so tien nap cao nhat
+--5. nguoi dung co tong so tien nap cao nhat
 CREATE OR REPLACE VIEW View_Top10TaiKhoan_ByNapTien AS
 SELECT MaTaiKhoan, SUM(SoTien) AS TongTienNap
 FROM TaiKhoan_NapTien_TaiKhoan
@@ -47,7 +47,7 @@ ORDER BY TongTienNap DESC
 FETCH FIRST 10 ROWS ONLY;
 SELECT * FROM View_Top10TaiKhoan_ByNapTien
 
--- Tai khoan khong hoat dong trong 30 ngay
+--6.Tai khoan khong hoat dong trong 30 ngay
 CREATE OR REPLACE VIEW View_TaiKhoan_Inactive AS
 SELECT tk.MaTaiKhoan, tk.TenTaiKhoan, tk.Email, tk.NgayThamGia
 FROM TaiKhoan tk
@@ -76,7 +76,7 @@ AND NOT EXISTS (
     AND tn.ThoiGianNhanTin >= TRUNC(SYSDATE) - 30
 );
 
---Cac tai khoan bi khoa bai dang va binh luan nhieu lan
+--7. Cac tai khoan bi khoa bai dang va binh luan nhieu lan
 CREATE OR REPLACE VIEW View_TaiKhoan_BiKhoaNhieuLan_Thang AS
 SELECT u.MaNguoiDung,
        u.TenNguoiDung,

@@ -24,7 +24,13 @@ db_admin
 dbadmin_password
 
 Hưng: privilages_and_users.sql
-Dương: tablespaces_and_profiles.sql
-Phú đẹp trai:
-Lan:
+Dương: tablespaces_and_profiles.sql, trigger, index, view
+Phú đẹp trai: 
+Lan: PL_SQL_Function_Procedure.sql
 Đạt:
+
+Report Code:
+Trigger: 2,5,6
+View: 5,6,7
+PL_SQL: 
+SQL: 

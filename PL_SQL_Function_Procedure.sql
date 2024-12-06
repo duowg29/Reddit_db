@@ -51,7 +51,7 @@ EXEC sum_tk(&v_year);
 
 
 --QUAN LY BAI DANG
---1. Tong so bai dang cua theo tai khoan 
+--4. Tong so bai dang cua theo tai khoan 
 SET SERVEROUTPUT ON
 DECLARE
     p_MaTaiKhoan NUMBER :=&p_MaTaiKhoan;
@@ -72,7 +72,7 @@ BEGIN
     END IF;
 END;
 
---2. Cap nhat trang thai tai khoan thanh locked
+--5. Cap nhat trang thai tai khoan thanh locked
 SET SERVEROUTPUT ON
 DECLARE
     p_MaBaiDang NUMBER;
@@ -90,7 +90,7 @@ END;
 /
 
 --QUAN LY HOI NHOM
---1. Lay danh sach cac thanh vien theo hoi nhom
+--6. Lay danh sach cac thanh vien theo hoi nhom
 SET SERVEROUTPUT ON
 DECLARE
     p_MaHoiNhom NUMBER := &p_MaHoiNhom;
@@ -111,7 +111,7 @@ BEGIN
     END IF;
 END;
 
---2. Them tai khoan vao hoi nhom
+--7. Them tai khoan vao hoi nhom
 SET SERVEROUTPUT ON
 DECLARE
     p_MaTaiKhoan NUMBER;
@@ -134,7 +134,7 @@ BEGIN
 END;
 
 --QUAN LY PHONG TIN NHAN
---1. Lay danh sach phong tin nhan ma 1 tai khoan da tham gia.
+--8. Lay danh sach phong tin nhan ma 1 tai khoan da tham gia.
 SET SERVEROUTPUT ON
 DECLARE
     v_MaTaiKhoan NUMBER := &v_MaTaiKhoan;
@@ -161,7 +161,7 @@ BEGIN
     END IF;
 END;
 
--- 2. Gui tin nhan vào phong
+-- 9. Gui tin nhan vào phong
 SET SERVEROUTPUT ON;
 DECLARE
     v_MaTaiKhoan NUMBER := &v_MaTaiKhoan;
@@ -204,7 +204,7 @@ END;
 /
 
 --QUAN LY CHIEN DICH QUANG CAO
---1. Cap nhat thong tin chien dich
+--10. Cap nhat thong tin chien dich
 BEGIN
     UPDATE ChienDich
     SET TieuDe = 'Chien dich He 2024',
@@ -218,7 +218,7 @@ BEGIN
     END IF;
 END;
 
---2. Kiem tra tai khoan co tham gia dang ky quang cao cua 1 chien dich nao do hay khong?
+--11. Kiem tra tai khoan co tham gia dang ky quang cao cua 1 chien dich nao do hay khong?
 CREATE OR REPLACE FUNCTION 
 KiemTraTaiKhoanQuangCao(v_MaTaiKhoan NUMBER, v_MaChienDich NUMBER)
 RETURN VARCHAR2
@@ -241,7 +241,7 @@ END;
 SELECT KiemTraTaiKhoanQuangCao(&v_MaTaiKhoan, &v_MaChienDich) FROM DUAL;
 
 -- BAO CAO VA THONG KE
---1. Bai dang co luot upvote cao nhat
+--12. Bai dang co luot upvote cao nhat
 CREATE OR REPLACE PROCEDURE BaiDangUpvoteCaoNhat 
 AS
     v_MaBaiDang    BaiDang.MaBaiDang%TYPE;
@@ -275,7 +275,7 @@ EXCEPTION
 END;
 EXEC BaiDangUpvoteCaoNhat
 
---2. Thong ke TOP 5 chien dich có chi phi quang cao cao nhat
+--13. Thong ke TOP 5 chien dich có chi phi quang cao cao nhat
 CREATE OR REPLACE PROCEDURE TOP5_EXPENSIVE_CAMPAIGNS 
 AS
 BEGIN
