@@ -72,7 +72,7 @@ BEGIN
     END IF;
 END;
 
-2. Xoa bai dang
+/*--2. Xoa bai dang
 SET SERVEROUTPUT ON
 DECLARE
     p_MaBaiDang NUMBER;
@@ -80,7 +80,7 @@ BEGIN
     p_MaBaiDang := &p_MaBaiDang;
     DELETE FROM BaiDang
     WHERE MaBaiDang=p_MaBaiDang;
-END;
+END;*/
 
 --QUAN LY HOI NHOM
 --1. Lay danh sach cac thanh vien theo hoi nhom

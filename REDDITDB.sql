@@ -10,6 +10,7 @@ CREATE TABLE TaiKhoan (
     DiemDongGop NUMBER DEFAULT 0,
     Vang NUMBER DEFAULT 0,
     HangTaiKhoan NUMBER DEFAULT 0,
+    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private', 'Locked')),
     ChucVu VARCHAR2(10) DEFAULT 'User' CHECK (ChucVu IN ('Admin', 'Moderator', 'User'))
 ) TABLESPACE tb_internal;
 
@@ -323,6 +324,7 @@ CREATE TABLE TaiKhoan_BinhLuan_BaiDang (
     ThoiGianBinhLuan DATE NOT NULL,
     NoiDungBinhLuan NCLOB NOT NULL,
     TepDinhKem VARCHAR2(100),
+    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private')),
     PRIMARY KEY (MaTaiKhoan, MaBaiDang, ThoiGianBinhLuan),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaBaiDang) REFERENCES BaiDang(MaBaiDang)
