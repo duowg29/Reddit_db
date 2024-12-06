@@ -9,8 +9,8 @@ CREATE TABLE TaiKhoan (
     QuocGia VARCHAR2(50),
     DiemDongGop NUMBER DEFAULT 0,
     Vang NUMBER DEFAULT 0,
-    HangTaiKhoan NUMBER DEFAULT 0,
-    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private', 'Locked')),
+    HangTaiKhoan NUMBER DEFAULT 0,DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private', 'Locked'))
+    TrangThai VARCHAR2(10) ,
     ChucVu VARCHAR2(10) DEFAULT 'User' CHECK (ChucVu IN ('Admin', 'Moderator', 'User'))
 ) TABLESPACE tb_internal;
 

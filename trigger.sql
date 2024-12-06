@@ -19,7 +19,7 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Error detecting sensitive content: ' || SQLERRM);
 END;
 /
---2.  Cap nhat trang thai bai dang khi cap nhat trang thai tai khoan
+--2.  Cap nhat trang thai bai dang va binh luan khi cap nhat trang thai tai khoan
 CREATE OR REPLACE TRIGGER trg_update_BaiDang_TrangThai
 AFTER UPDATE OF TrangThai ON TaiKhoan
 FOR EACH ROW
@@ -41,6 +41,8 @@ BEGIN
     END IF;
 END;
 /
+--Cap nhap trang thai binh luan khi cap nhap trang thai bai
+
 -- Giới hạn số bài đăng hàng ngày
 CREATE OR REPLACE TRIGGER trg_limit_daily_posts
 BEFORE INSERT ON BaiDang
