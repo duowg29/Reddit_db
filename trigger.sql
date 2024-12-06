@@ -1,12 +1,12 @@
--- 1. Tạo Trigger phát hiện nội dung nhạy cảm hoặc không phù hợp
+-- 1. Tao Trigger phat hien noi dung nhay cam hoac khong phu hop
 CREATE OR REPLACE TRIGGER trg_detect_sensitive_content
 AFTER INSERT OR UPDATE ON BaiDang
 FOR EACH ROW
 DECLARE
-    -- Danh sách từ khóa nhạy cảm
-    v_sensitive_keywords VARCHAR2(4000) := 'xúc phạm|bạo lực|nsfw';
+    -- Danh sach tu khoa nhay cam
+    v_sensitive_keywords VARCHAR2(4000) := 'xuc pham|bao luc|nsfw';
 BEGIN
-    -- Kiểm tra từ khóa nhạy cảm trong nội dung bài viết
+    -- Kiem tra tu khoa nhay cam trong noi dung bai viet
     IF REGEXP_LIKE(:NEW.NoiDung, v_sensitive_keywords, 'i') THEN
         UPDATE BaiDang
         SET Tag = '[Trigger Warning]',
@@ -15,11 +15,10 @@ BEGIN
     END IF;
 EXCEPTION
     WHEN OTHERS THEN
-        -- Log lỗi (nếu cần) hoặc xử lý sự cố
         DBMS_OUTPUT.PUT_LINE('Error detecting sensitive content: ' || SQLERRM);
 END;
 /
---2.  Cap nhat trang thai bai dang va binh luan khi cap nhat trang thai tai khoan
+-- 2. Cap nhat trang thai bai dang khi cap nhat trang thai tai khoan thanh khoa
 CREATE OR REPLACE TRIGGER trg_update_BaiDang_TrangThai
 AFTER UPDATE OF TrangThai ON TaiKhoan
 FOR EACH ROW
@@ -41,9 +40,36 @@ BEGIN
     END IF;
 END;
 /
---Cap nhap trang thai binh luan khi cap nhap trang thai bai
+--3.Cap nhap trang thai binh luan neu cap nhap trang thai tai khoan thanh khoa
+CREATE OR REPLACE TRIGGER trg_update_comment_status_on_account_locked
+AFTER UPDATE OF TrangThai ON TaiKhoan
+FOR EACH ROW
+BEGIN
+    -- Nếu trạng thái tài khoản được cập nhật thành 'Locked', cập nhật trạng thái bình luận liên quan
+    IF :NEW.TrangThai = 'Locked' THEN
+        UPDATE TaiKhoan_BinhLuan_BaiDang
+        SET TrangThai = 'Private'
+        WHERE MaTaiKhoan = :OLD.MaTaiKhoan;
+    END IF;
+END;
+/
 
--- Giới hạn số bài đăng hàng ngày
+
+--4. Cap nhat trang thai binh luan khi cap nhat trang thai bai viet thanh khoa
+CREATE OR REPLACE TRIGGER trg_update_comment_status_on_post_locked
+AFTER UPDATE OF TrangThai ON BaiDang
+FOR EACH ROW
+BEGIN
+    IF :NEW.TrangThai = 'Locked' THEN
+        -- Cập nhật trạng thái bình luận liên quan thành 'Private' nếu bài viết bị khóa
+        UPDATE TaiKhoan_BinhLuan_BaiDang
+        SET TrangThai = 'Private'
+        WHERE MaBaiDang = :OLD.MaBaiDang;
+    END IF;
+END;
+/
+
+--5. Gioi han so bai dang hang ngay
 CREATE OR REPLACE TRIGGER trg_limit_daily_posts
 BEFORE INSERT ON BaiDang
 FOR EACH ROW
@@ -56,21 +82,13 @@ BEGIN
     WHERE MaTaiKhoan = :NEW.MaTaiKhoan
       AND TRUNC(NgayDang) = TRUNC(SYSDATE);
 
-    IF v_count >= 10 THEN
-        RAISE_APPLICATION_ERROR(-20002, 'Tài khoản này đã đạt giới hạn 10 bài đăng trong ngày!');
+    IF v_count >= 20 THEN
+        RAISE_APPLICATION_ERROR(-20002, 'Tai khoan nay da dat gioi han 20 bai dang trong ngay!');
     END IF;
 END;
 /
-/*--Tự động xóa bình luận nếu tài khoản bị xóa
-CREATE OR REPLACE TRIGGER trg_cascade_delete_comments
-AFTER DELETE ON TaiKhoan
-FOR EACH ROW
-BEGIN
-    DELETE FROM BinhLuan
-    WHERE MaTaiKhoan = :OLD.MaTaiKhoan;
-END;
-*/
---Giới hạn số lượt tương tác liên tục của một tài khoản trong một thời gian ngắn
+
+--6.. Gioi han so luot tuong tac lien tuc cua mot tai khoan trong mot thoi gian ngan
 CREATE OR REPLACE TRIGGER trg_limit_interactions
 BEFORE INSERT ON TaiKhoan_TuongTac_BaiDang
 FOR EACH ROW
@@ -85,10 +103,7 @@ BEGIN
       AND ThoiGianTuongTac > SYSDATE - INTERVAL '1' MINUTE;
 
     IF v_recent_interactions >= 50 THEN
-        RAISE_APPLICATION_ERROR(-20006, 'Bạn không thể tương tác quá 50 lần trên cùng một bài viết trong vòng 1 phút!');
+        RAISE_APPLICATION_ERROR(-20006, 'Ban khong the tuong tac qua 50 lan tren cung mot bai viet trong vong 1 phut!');
     END IF;
 END;
 /
-
-
-
