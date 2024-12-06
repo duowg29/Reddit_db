@@ -4,18 +4,16 @@ ALTER SESSION SET CONTAINER = REDDITDBPDB1;
 -- Táº¡o Tablespace chÃ­nh
 -- LÆ°u Ã½: vá»‹ trÃ­ datafile tá»± táº¡o nhÃ© :)
 CREATE TABLESPACE tb_internal
-DATAFILE 'E:/HQTCSDL/BTL/tablespace/tb_internal_datafile.dbf' 
+DATAFILE 'E:/Subjects/HQTCSDL/BTL/tablespace/tb_internal_datafile.dbf' 
 SIZE 100M 
 AUTOEXTEND ON 
 NEXT 10M 
 MAXSIZE UNLIMITED;
 
-
-
 -- T?o Tablespace index
 -- L?u ý: v? trí datafile t? t?o nhé :)
 CREATE TABLESPACE tb_index
-DATAFILE 'E:/HQTCSDL/BTL/tablespace/tb_index_datafile.dbf' 
+DATAFILE 'E:/Subjects/HQTCSDL/BTL/tablespace/tb_index_datafile.dbf' 
 SIZE 100M 
 AUTOEXTEND ON 
 NEXT 10M 
@@ -24,7 +22,7 @@ MAXSIZE UNLIMITED;
 -- T?o Temporary Tablespace
 -- L?u ý: v? trí datafile t? t?o nhé :)
 CREATE TEMPORARY TABLESPACE tb_user_temp 
-TEMPFILE 'E:/HQTCSDL/BTL/tablespace/tb_user_temp_datafile.dbf' 
+TEMPFILE 'E:/Subjects/HQTCSDL/BTL/tablespace/tb_user_temp_datafile.dbf' 
 SIZE 50M 
 AUTOEXTEND ON 
 NEXT 5M 
