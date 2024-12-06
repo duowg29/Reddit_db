@@ -56,10 +56,15 @@ ALTER USER end_user PROFILE end_user_profile;
 -- Nhiem vu: Quan ly cac co so du lieu, bao gom bao tri va thay doi cau truc.
 -- Tao vai tro Quan tri vien co so du lieu
 CREATE ROLE DBAdmin;
-GRANT DBA TO DBAdmin;
 
 -- Trao quyen ket noi
 GRANT CREATE SESSION TO DBAdmin;
+
+-- Trao quyen quan ly DB va BACKUP RECOVERY
+GRANT SYSDBA TO DBAdmin;
+GRANT SYSBACKUP TO DBAdmin_user;
+
+
 
 -- C?p quy?n SELECT, INSERT, UPDATE, DELETE cho DBAdmin tr�n c�c b?ng ch�nh
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO DBAdmin;
@@ -95,10 +100,6 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_Gui_BaoCao TO DBAdmin;
 -- Cac quyen lien quan den thu tuc
 -- Cac quyen lien quan den index
 -- Cac quyen lien quan den tablespace
-
--- Cac quyen lien quan den sao luu/phuc hoi
-GRANT BACKUP ANY TABLE TO DBAdmin;
-GRANT FLASHBACK ANY TABLE TO DBAdmin;
 
 -- 2. Nha phat trien co so du lieu (Database Developer)
 -- Nhiem vu: Xay dung, phat trien va thu nghiem cac chuc nang moi trong co so du lieu.
