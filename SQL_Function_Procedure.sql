@@ -26,7 +26,7 @@ ORDER BY
 
 
 
---3. Danh sách bài đăng chứa các từ khóa cụ thể trong tiêu đ�? (ví dụ: 'database', 'reddit')
+--3. Danh sách bài đăng chứa các từ khóa cụ thể trong tiêu đ�? (ví dụ: 'database', 'reddit')
 SELECT 
     MaBaiDang,
     TieuDe,
@@ -68,7 +68,7 @@ WHERE
 
 
 
---6. Danh sách 5 tài khoản có bài đăng nhi�?u nhất và số lượng bài của h�?
+--6. Danh sách 5 tài khoản có bài đăng nhi�?u nhất và số lượng bài của h�?
 
 SELECT 
     t.TenTaiKhoan,
@@ -84,7 +84,7 @@ ORDER BY
 FETCH FIRST 5 ROWS ONLY;
 
 
---7. Tìm top 10 bài đăng có nhi�?u lượt upvote nhất
+--7. Tìm top 10 bài đăng có nhi�?u lượt upvote nhất
 SELECT 
     MaBaiDang,
     Upvote

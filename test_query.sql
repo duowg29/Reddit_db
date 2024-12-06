@@ -64,7 +64,7 @@ SELECT USERNAME
 FROM ALL_USERS 
 ORDER BY USERNAME;
 
-SELECT * FROM user_tab_privs;      -- Quy?n trên các ??i t??ng
+SELECT * FROM user_tab_privs;      -- Quy?n trï¿½n cï¿½c ??i t??ng
 SELECT * FROM user_role_privs;     -- Quy?n c?a roles
 SELECT * FROM user_sys_privs;      -- Quy?n h? th?ng
 

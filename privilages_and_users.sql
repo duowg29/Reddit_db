@@ -61,7 +61,7 @@ GRANT DBA TO DBAdmin;
 -- Trao quyen ket noi
 GRANT CREATE SESSION TO DBAdmin;
 
--- C?p quy?n SELECT, INSERT, UPDATE, DELETE cho DBAdmin trên các b?ng chính
+-- C?p quy?n SELECT, INSERT, UPDATE, DELETE cho DBAdmin trï¿½n cï¿½c b?ng chï¿½nh
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO DBAdmin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO DBAdmin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON HoiNhom TO DBAdmin;
@@ -72,7 +72,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON ChienDich TO DBAdmin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON MucTieu TO DBAdmin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON QuangCao TO DBAdmin;
 
--- C?p quy?n trên các b?ng quan h? (join tables)
+-- C?p quy?n trï¿½n cï¿½c b?ng quan h? (join tables)
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_Dang_BaiDang TO DBAdmin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_TuongTac_BaiDang TO DBAdmin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_BinhLuan_BaiDang TO DBAdmin;
@@ -238,7 +238,7 @@ GRANT CONNECT TO EndUser;
 
 GRANT CREATE SESSION TO EndUser; -- Cho phep dang nhap vao co so du lieu
 
--- C?p quy?n SELECT, INSERT, UPDATE cho EndUser trên các b?ng chính
+-- C?p quy?n SELECT, INSERT, UPDATE cho EndUser trï¿½n cï¿½c b?ng chï¿½nh
 GRANT SELECT, INSERT, UPDATE ON TaiKhoan TO EndUser;
 GRANT SELECT, INSERT, UPDATE ON BaiDang TO EndUser;
 GRANT SELECT, INSERT, UPDATE ON HoiNhom TO EndUser;
@@ -249,7 +249,7 @@ GRANT SELECT, INSERT, UPDATE ON ChienDich TO EndUser;
 GRANT SELECT, INSERT, UPDATE ON MucTieu TO EndUser;
 GRANT SELECT, INSERT, UPDATE ON QuangCao TO EndUser;
 
--- C?p quy?n trên các b?ng quan h? (join tables)
+-- C?p quy?n trï¿½n cï¿½c b?ng quan h? (join tables)
 GRANT SELECT, INSERT, UPDATE ON TaiKhoan_Dang_BaiDang TO EndUser;
 GRANT SELECT, INSERT, UPDATE ON TaiKhoan_TuongTac_BaiDang TO EndUser;
 GRANT SELECT, INSERT, UPDATE ON TaiKhoan_BinhLuan_BaiDang TO EndUser;
