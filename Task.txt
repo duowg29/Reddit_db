@@ -19,3 +19,6 @@ Kỹ sư dữ liệu (Data Engineer)
 Nhà phân tích dữ liệu (Data Analyst)
 Giám sát viên (Supervisor)
 Người dùng (End-User)
+
+db_admin
+dbadmin_password
