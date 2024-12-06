@@ -25,6 +25,8 @@
 - **Bước 8.1**: Đăng nhập với tài khoản (là thông tin của User).
 - **Bước 8.2**: Chạy lệnh tạo bảng (tương ứng với Tablespace của User).
 
+  **Lưu ý**: Mỗi User đều có bảng riêng nên khi đăng nhập phải tự tạo bảng cho User đó
+
   **VD**: Đăng nhập bằng tài khoản `db_admin`, sau đó thực hiện tạo bảng ứng với tablespace `tb_internal`.
 
 **Cụ thể các bảng gắn với tablespace:**
