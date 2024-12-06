@@ -50,6 +50,7 @@ CREATE TABLE BaiDang (
     TepDinhKem VARCHAR2(100),
     The VARCHAR2(50),
     LuotXem NUMBER DEFAULT 0,
+    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private', 'Locked')),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan)
 ) TABLESPACE tb_internal;
 
