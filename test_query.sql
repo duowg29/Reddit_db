@@ -64,6 +64,11 @@ SELECT USERNAME
 FROM ALL_USERS 
 ORDER BY USERNAME;
 
+SELECT * FROM user_tab_privs;      -- Quy?n trên các ??i t??ng
+SELECT * FROM user_role_privs;     -- Quy?n c?a roles
+SELECT * FROM user_sys_privs;      -- Quy?n h? th?ng
+
+
 -- Xï¿½a user db_admin
 DROP USER db_admin CASCADE;
 
@@ -86,6 +91,11 @@ DROP USER supervisor_user CASCADE;
 DROP USER end_user CASCADE;
 
 -- Lien quan den ROLE
+
+-- Liet ke tat ca cac quyen cua cac user
+SELECT * 
+FROM dba_tab_privs WHERE Grantee = 'db_admin';
+
 -- Xï¿½a vai trï¿½ DBAdmin
 DROP ROLE DBAdmin;
 
