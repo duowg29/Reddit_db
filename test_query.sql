@@ -2,6 +2,14 @@
 ALTER SESSION SET CONTAINER = CDB$ROOT; -- v? l?i cdb n?u c?n
 ALTER SESSION SET CONTAINER = REDDITDBPDB1; -- chuy?n sang pdb
 
+-- Kiem tra Container hien tai la PDB hay CDB
+SELECT SYS_CONTEXT('USERENV', 'CON_NAME') AS CURRENT_CONTAINER FROM DUAL;
+
+-- Liet ke cac PDB hien tai (neu khogn tao duoc user thi kiem tra xem minh dang ket noi toi PDB nao)
+SELECT name, open_mode, con_id
+FROM v$pdbs;
+SELECT * FROM DBA_PDBS;
+
 -- Liên quan đến Tablespace
 SELECT tablespace_name 
 FROM pdb_tablespaces;

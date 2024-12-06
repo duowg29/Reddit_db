@@ -42,7 +42,7 @@ CREATE PROFILE db_admin_profile LIMIT
 
 -- Tao profile cho db_developer
 CREATE PROFILE db_developer_profile LIMIT
-  SESSIONS_PER_USER        3
+  SESSIONS_PER_USER        5
   CONNECT_TIME             180
   IDLE_TIME                60
   FAILED_LOGIN_ATTEMPTS    5
@@ -62,7 +62,7 @@ CREATE PROFILE backend_developer_profile LIMIT
 
 -- Tao profile cho data_engineer
 CREATE PROFILE data_engineer_profile LIMIT
-  SESSIONS_PER_USER        4
+  SESSIONS_PER_USER        5
   CONNECT_TIME             240
   IDLE_TIME                60
   FAILED_LOGIN_ATTEMPTS    5

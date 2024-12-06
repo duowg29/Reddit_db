@@ -4,7 +4,7 @@
 
 **Bước 1**: Kết nối tới CSDL bằng tài khoản SYSTEM
 
-**Bước 2**: Chuyển Session hiện tại sang PDB: REDDITDBPDB1 (tệp `tablespaces_and_profiles.sql`)
+**Bước 2**: Chuyển Session hiện tại sang PDB: REDDITDBPDB1 (tệp `tablespaces_and_profiles.sql`) (Không cần nữa, bỏ qua bước này)
 
 - **Lưu ý**: Có thể bôi đen hết Tablespaces hoặc Profiles để chạy nhưng không thể bôi đen cả file
 

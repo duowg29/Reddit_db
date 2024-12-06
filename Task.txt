@@ -13,14 +13,9 @@ PP (Dương, Đạt)
 User:
 
 Quản trị viên cơ sở dữ liệu (DB Admin)
-Quản trị viên hệ thống (SysAdmin)
 Nhà phát triển cơ sở dữ liệu (Database Developer)
-Chuyên viên bảo mật cơ sở dữ liệu (Database Security Specialist)
-Chuyên viên tối ưu hóa hiệu suất (Database Performance Tuner)
 Nhà phát triển ứng dụng (Back-end Developer)
 Kỹ sư dữ liệu (Data Engineer)
 Nhà phân tích dữ liệu (Data Analyst)
-
 Giám sát viên (Supervisor)
-Quản lý (Moderator)
 Người dùng (End-User)
