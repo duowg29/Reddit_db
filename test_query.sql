@@ -182,6 +182,7 @@ DROP SEQUENCE seq_MucTieu_Id;
 DROP SEQUENCE seq_QuangCao_Id;
 
 DROP TRIGGER trg_TaiKhoan_Id;
+DROP TRIGGER check_NgayThamGia;
 DROP TRIGGER trg_BaiDang_Id;
 DROP TRIGGER trg_HoiNhom_Id;
 DROP TRIGGER trg_HoiNhom_NgayThanhLap;

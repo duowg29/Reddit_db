@@ -60,6 +60,35 @@ GRANT DBA TO DBAdmin;
 
 -- Trao quyen ket noi
 GRANT CREATE SESSION TO DBAdmin;
+
+-- C?p quy?n SELECT, INSERT, UPDATE, DELETE cho DBAdmin trên các b?ng chính
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON HoiNhom TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON PhongNhanTin TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaoCao TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoanQuangCao TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ChienDich TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON MucTieu TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON QuangCao TO DBAdmin;
+
+-- C?p quy?n trên các b?ng quan h? (join tables)
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_Dang_BaiDang TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_TuongTac_BaiDang TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_BinhLuan_BaiDang TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_QuanLy_BaiDang TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_Lap_HoiNhom TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_ThamGia_HoiNhom TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_Lap_PhongNhanTin TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_NhanTin_PhongNhanTin TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_NapTien_TaiKhoan TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_Lap_TaiKhoanQuangCao TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoanQuangCao_DangKy_ChienDich TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ChienDich_Co_MucTieu TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ChienDich_Co_QuangCao TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang_Thuoc_HoiNhom TO DBAdmin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan_Gui_BaoCao TO DBAdmin;
+
 -- DBA da bao gom:
 -- Quyen ket noi va quan ly phien
 -- Cac quyen lien quan den bang
@@ -209,15 +238,34 @@ GRANT CONNECT TO EndUser;
 
 GRANT CREATE SESSION TO EndUser; -- Cho phep dang nhap vao co so du lieu
 
--- Cap quyen xem va them du lieu tren cac bang (can tao bang truoc)
-GRANT SELECT, INSERT, UPDATE ON TaiKhoan TO EndUser; -- Cho phep xem va them du lieu trong bang TaiKhoan
-GRANT SELECT, INSERT, UPDATE ON BaiDang TO EndUser; -- Cho phep xem va them du lieu trong bang BaiDang
-GRANT SELECT, INSERT, UPDATE ON PhongNhanTin TO EndUser; -- Cho phep xem va them du lieu trong bang PhongNhanTin
-GRANT SELECT, INSERT, UPDATE ON BaoCao TO EndUser; -- Cho phep xem va them du lieu trong bang BaoCao
-GRANT SELECT, INSERT, UPDATE ON TaiKhoanQuangCao TO EndUser; -- Cho phep xem va them du lieu trong bang TaiKhoanQuangCao
-GRANT SELECT, INSERT, UPDATE ON ChienDich TO EndUser; -- Cho phep xem va them du lieu trong bang ChienDich
-GRANT SELECT, INSERT, UPDATE ON MucTieu TO EndUser; -- Cho phep xem va them du lieu trong bang MucTieu
-GRANT SELECT, INSERT, UPDATE ON QuangCao TO EndUser; -- Cho phep xem va them du lieu trong bang QuangCao
+-- C?p quy?n SELECT, INSERT, UPDATE cho EndUser trên các b?ng chính
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON BaiDang TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON HoiNhom TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON PhongNhanTin TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON BaoCao TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoanQuangCao TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON ChienDich TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON MucTieu TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON QuangCao TO EndUser;
+
+-- C?p quy?n trên các b?ng quan h? (join tables)
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_Dang_BaiDang TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_TuongTac_BaiDang TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_BinhLuan_BaiDang TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_QuanLy_BaiDang TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_Lap_HoiNhom TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_ThamGia_HoiNhom TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_Lap_PhongNhanTin TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_NhanTin_PhongNhanTin TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_NapTien_TaiKhoan TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_Lap_TaiKhoanQuangCao TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoanQuangCao_DangKy_ChienDich TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON ChienDich_Co_MucTieu TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON ChienDich_Co_QuangCao TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON BaiDang_Thuoc_HoiNhom TO EndUser;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_Gui_BaoCao TO EndUser;
+
 
 -- Gan cac vai tro cho nguoi dung tuong ung
 GRANT Supervisor TO supervisor_user;

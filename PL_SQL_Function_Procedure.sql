@@ -154,50 +154,51 @@ BEGIN
     END IF;
 END;
 
-2. Gui tin nhan vào phong
-SET SERVEROUTPUT ON
-DECLARE
-    v_MaTaiKhoan NUMBER;
-    v_MaPhongNhanTin NUMBER;
-    v_NoiDungNhanTin NCLOB;
-    v_TepDinhKem VARCHAR2(100);
-BEGIN
-    v_MaTaiKhoan := &v_MaTaiKhoan;
-    v_MaPhongNhanTin := &v_MaPhongNhanTin;
-    v_NoiDungNhanTin := '&v_NoiDungNhanTin';
-    v_TepDinhKem := '&v_TepDinhKem';
-    INSERT INTO TaiKhoan_NhanTin_PhongNhanTin(MaTaiKhoan, MaPhongNhanTin, NoiDungNhanTin, TepDinhKem) 
-    VALUES(v_MaTaiKhoan, v_MaPhongNhanTin, v_NoiDungNhanTin, v_TepDinhKem);
-    DBMS_OUTPUT.PUT_LINE('Gui tin nhan thanh cong.');
-END;
+-- 2. Gui tin nhan vào phong
+--SET SERVEROUTPUT ON
+--DECLARE
+--    v_MaTaiKhoan NUMBER;
+--    v_MaPhongNhanTin NUMBER;
+--    v_NoiDungNhanTin NCLOB;
+--    v_TepDinhKem VARCHAR2(100);
+--BEGIN
+--    v_MaTaiKhoan := &v_MaTaiKhoan;
+--    v_MaPhongNhanTin := &v_MaPhongNhanTin;
+--    v_NoiDungNhanTin := '&v_NoiDungNhanTin';
+--    v_TepDinhKem := '&v_TepDinhKem';
+--    INSERT INTO TaiKhoan_NhanTin_PhongNhanTin(MaTaiKhoan, MaPhongNhanTin, NoiDungNhanTin, TepDinhKem) 
+--    VALUES(v_MaTaiKhoan, v_MaPhongNhanTin, v_NoiDungNhanTin, v_TepDinhKem);
+--    DBMS_OUTPUT.PUT_LINE('Gui tin nhan thanh cong.');
+--END;
 
 --QUAN LY CHIEN DICH QUANG CAO
-1. Dua ra danh sach cac tai khoan quang cao dang ky chien dich theo ma chien dich 
-DECLARE
-    v_MaChienDich NUMBER := &v_MaChienDich;
-    v_count NUMBER;
-    count_rows NUMBER:=0;
-BEGIN
-    SELECT COUNT(*) INTO v_count
-    FROM ChienDich
-    WHERE MaChienDich=v_MaChienDich;
-    IF v_count =0 THEN
-        DBMS_OUTPUT.PUT_LINE('Khong co ma chien dich da nhap');
-    ELSE
-        FOR rec IN ( SELECT tq.MaTaiKhoanQuangCao, tk.TenDoanhNghiep, tk.LinhVuc
-                     FROM TaiKhoanQuangCao_DangKy_ChienDich tq JOIN TaiKhoanQuangCao tk 
-                     ON tq.MaTaiKhoanQuangCao = tk.MaTaiKhoanQuangCao
-                     WHERE tq.MaChienDich = v_MaChienDich)
-        LOOP
-        count_rows:=count_rows+1;
-        DBMS_OUTPUT.PUT_LINE('Ma Tai Khoan: ' || rec.MaTaiKhoanQuangCao || ' | Ten Doanh Nghiep: ' || rec.TenDoanhNghiep || 
-                             ' | Linh vuc: ' || rec.LinhVuc);
-        END LOOP;
-        IF count_rows=0 then
-        dbms_output.put_line('Khong co tai khoan nao dang ky chien dich nay.');
-        END IF;
-    END IF;      
-END;
+--1. Dua ra danh sach cac tai khoan quang cao dang ky chien dich theo ma chien dich 
+-- Sai nghiep vu roi lan dep trai
+--DECLARE
+--    v_MaChienDich NUMBER := &v_MaChienDich;
+--    v_count NUMBER;
+--    count_rows NUMBER:=0;
+--BEGIN
+--    SELECT COUNT(*) INTO v_count
+--    FROM ChienDich
+--    WHERE MaChienDich=v_MaChienDich;
+--    IF v_count =0 THEN
+--        DBMS_OUTPUT.PUT_LINE('Khong co ma chien dich da nhap');
+--    ELSE
+--        FOR rec IN ( SELECT tq.MaTaiKhoanQuangCao, tk.TenDoanhNghiep, tk.LinhVuc
+--                     FROM TaiKhoanQuangCao_DangKy_ChienDich tq JOIN TaiKhoanQuangCao tk 
+--                     ON tq.MaTaiKhoanQuangCao = tk.MaTaiKhoanQuangCao
+--                     WHERE tq.MaChienDich = v_MaChienDich)
+--        LOOP
+--        count_rows:=count_rows+1;
+--        DBMS_OUTPUT.PUT_LINE('Ma Tai Khoan: ' || rec.MaTaiKhoanQuangCao || ' | Ten Doanh Nghiep: ' || rec.TenDoanhNghiep || 
+--                             ' | Linh vuc: ' || rec.LinhVuc);
+--        END LOOP;
+--        IF count_rows=0 then
+--        dbms_output.put_line('Khong co tai khoan nao dang ky chien dich nay.');
+--        END IF;
+--    END IF;      
+--END;
     
 --2. Cap nhat thong tin chien dich
 BEGIN
@@ -237,35 +238,35 @@ SELECT KiemTraTaiKhoanQuangCao(&v_MaTaiKhoan, &v_MaChienDich) FROM DUAL;
 
 -- BAO CAO VA THONG KE
 --1. Bai dang co luot upvote cao nhat
-CREATE OR REPLACE PROCEDURE BaiDangUpvoteCaoNhat 
-AS
-    v_MaBaiDang    BaiDang.MaBaiDang%TYPE;
-    v_TieuDe       BaiDang.TieuDe%TYPE;
-    v_NoiDung      BaiDang.NoiDung%TYPE;
-    v_SoUpvote     NUMBER;
-
-BEGIN
-    SELECT bd.MaBaiDang, bd.TieuDe, bd.NoiDung, MAX(tt.Upvote)
-    INTO v_MaBaiDang, v_TieuDe, v_NoiDung, v_SoUpvote
-    FROM BaiDang bd JOIN TaiKhoan_TuongTac_BaiDang tt
-    ON bd.MaBaiDang = tt.MaBaiDang
-    GROUP BY bd.MaBaiDang, bd.TieuDe, bd.NoiDung
-    ORDER BY MAX(tt.Upvote) DESC
-    FETCH FIRST 1 ROWS ONLY;
-
-    DBMS_OUTPUT.PUT_LINE('Bai dang co luong upvote cao nhat:');
-    DBMS_OUTPUT.PUT_LINE('Ma bai dang: ' || v_MaBaiDang);
-    DBMS_OUTPUT.PUT_LINE('Tieu de: ' || v_TieuDe);
-    DBMS_OUTPUT.PUT_LINE('Noi dung: ' || v_NoiDung);
-    DBMS_OUTPUT.PUT_LINE('So luong upvote: ' || v_SoUpvote);
-
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('Khong co bai dang nao trong he thong.');
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Loi xay ra: ');
-END;
-EXEC BaiDangUpvoteCaoNhat
+--CREATE OR REPLACE PROCEDURE BaiDangUpvoteCaoNhat 
+--AS
+--    v_MaBaiDang    BaiDang.MaBaiDang%TYPE;
+--    v_TieuDe       BaiDang.TieuDe%TYPE;
+--    v_NoiDung      BaiDang.NoiDung%TYPE;
+--    v_SoUpvote     NUMBER;
+--
+--BEGIN
+--    SELECT bd.MaBaiDang, bd.TieuDe, bd.NoiDung, MAX(tt.Upvote)
+--    INTO v_MaBaiDang, v_TieuDe, v_NoiDung, v_SoUpvote
+--    FROM BaiDang bd JOIN TaiKhoan_TuongTac_BaiDang tt
+--    ON bd.MaBaiDang = tt.MaBaiDang
+--    GROUP BY bd.MaBaiDang, bd.TieuDe, bd.NoiDung
+--    ORDER BY MAX(tt.Upvote) DESC
+--    FETCH FIRST 1 ROWS ONLY;
+--
+--    DBMS_OUTPUT.PUT_LINE('Bai dang co luong upvote cao nhat:');
+--    DBMS_OUTPUT.PUT_LINE('Ma bai dang: ' || v_MaBaiDang);
+--    DBMS_OUTPUT.PUT_LINE('Tieu de: ' || v_TieuDe);
+--    DBMS_OUTPUT.PUT_LINE('Noi dung: ' || v_NoiDung);
+--    DBMS_OUTPUT.PUT_LINE('So luong upvote: ' || v_SoUpvote);
+--
+--EXCEPTION
+--    WHEN NO_DATA_FOUND THEN
+--        DBMS_OUTPUT.PUT_LINE('Khong co bai dang nao trong he thong.');
+--    WHEN OTHERS THEN
+--        DBMS_OUTPUT.PUT_LINE('Loi xay ra: ');
+--END;
+--EXEC BaiDangUpvoteCaoNhat
 
 --2. Thong ke TOP 5 chien dich có chi phi quang cao cao nhat
 CREATE OR REPLACE PROCEDURE TOP5_EXPENSIVE_CAMPAIGNS 

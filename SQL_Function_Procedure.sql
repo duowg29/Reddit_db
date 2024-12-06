@@ -26,7 +26,7 @@ ORDER BY
 
 
 
---3. Danh sách bài đăng chứa các từ khóa cụ thể trong tiêu đề (ví dụ: 'database', 'reddit')
+--3. Danh sách bài đăng chứa các từ khóa cụ thể trong tiêu đ�? (ví dụ: 'database', 'reddit')
 SELECT 
     MaBaiDang,
     TieuDe,
@@ -37,38 +37,38 @@ WHERE
     LOWER(TieuDe) LIKE '%database%' 
     OR LOWER(TieuDe) LIKE '%reddit%';
 
-
---4. Danh sách các hội nhóm có số lượng bài đăng trên 100
-SELECT 
-    h.MaHoiNhom,
-    h.TenHoiNhom,
-    COUNT(b.MaBaiDang) AS SoLuongBaiDang
-FROM 
-    HoiNhom h
-JOIN 
-    BaiDang b ON h.MaHoiNhom = b.MaHoiNhom
-GROUP BY 
-    h.MaHoiNhom, h.TenHoiNhom
-HAVING 
-    COUNT(b.MaBaiDang) > 100
-ORDER BY 
-    SoLuongBaiDang DESC;
-
-
-
---5. Danh sách các hội nhóm có tên chứa từ khóa "Database"
-SELECT 
-    MaHoiNhom,
-    TenNhom,
-    MoTa
-FROM 
-    HoiNhom
-WHERE 
-    LOWER(TenNhom) LIKE '%database%';
+--
+----4. Danh sách các hội nhóm có số lượng bài đăng trên 100
+--SELECT 
+--    h.MaHoiNhom,
+--    h.TenHoiNhom,
+--    COUNT(b.MaBaiDang) AS SoLuongBaiDang
+--FROM 
+--    HoiNhom h
+--JOIN 
+--    BaiDang b ON h.MaHoiNhom = b.MaHoiNhom
+--GROUP BY 
+--    h.MaHoiNhom, h.TenHoiNhom
+--HAVING 
+--    COUNT(b.MaBaiDang) > 100
+--ORDER BY 
+--    SoLuongBaiDang DESC;
 
 
 
---6. Danh sách 5 tài khoản có bài đăng nhiều nhất và số lượng bài của họ
+----5. Danh sách các hội nhóm có tên chứa từ khóa "Database"
+--SELECT 
+--    MaHoiNhom,
+--    TenNhom,
+--    MoTa
+--FROM 
+--    HoiNhom
+--WHERE 
+--    LOWER(TenNhom) LIKE '%database%';
+
+
+
+--6. Danh sách 5 tài khoản có bài đăng nhi�?u nhất và số lượng bài của h�?
 
 SELECT 
     t.TenTaiKhoan,
@@ -84,7 +84,7 @@ ORDER BY
 FETCH FIRST 5 ROWS ONLY;
 
 
---7. Tìm top 10 bài đăng có nhiều lượt upvote nhất
+--7. Tìm top 10 bài đăng có nhi�?u lượt upvote nhất
 SELECT 
     MaBaiDang,
     Upvote
