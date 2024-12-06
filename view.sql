@@ -1,6 +1,5 @@
-
 -- VIEW
--- thống kê số lượng bài viết theo từng tài khoản
+-- thong ke so luong bai viet theo tung tai khoan
 CREATE OR REPLACE VIEW View_ThongKeBaiDang AS
 SELECT TaiKhoan.MaTaiKhoan, TaiKhoan.TenTaiKhoan, COUNT(BaiDang.MaBaiDang) AS SoLuongBaiDang
 FROM TaiKhoan
@@ -8,14 +7,14 @@ LEFT JOIN BaiDang ON TaiKhoan.MaTaiKhoan = BaiDang.MaTaiKhoan
 GROUP BY TaiKhoan.MaTaiKhoan, TaiKhoan.TenTaiKhoan
 ORDER BY SoLuongBaiDang DESC;
 SELECT * FROM View_ThongKeBaiDang
--- Top 10 tài khoản có điểm đóng góp cao nhất
+-- Top 10 tai khoan co diem dong gop cao nhat
 CREATE OR REPLACE VIEW View_Top10TaiKhoan_DiemDongGop AS
 SELECT MaTaiKhoan, TenTaiKhoan, Email, DiemDongGop
 FROM TaiKhoan
 ORDER BY DiemDongGop DESC
 FETCH FIRST 10 ROWS ONLY;
 SELECT * FROM View_Top10TaiKhoan_DiemDongGop
--- 10 bài đăng có lượt tương tác cao nhất
+-- 10 bai dang co luot tuong tac cao nhat
 CREATE OR REPLACE VIEW View_Top10Posts_ByInteractions AS
 SELECT b.MaBaiDang, b.TieuDe, TO_CHAR(b.NoiDung) AS NoiDung, b.LuotXem, 
        SUM(CASE WHEN t.Upvote = 1 THEN 1 ELSE 0 END) AS SoUpvote,
@@ -28,15 +27,7 @@ ORDER BY (SUM(CASE WHEN t.Upvote = 1 THEN 1 ELSE 0 END) -
 FETCH FIRST 10 ROWS ONLY;
 SELECT * FROM View_Top10Posts_ByInteractions
 
--- các báo cáo được gửi theo chủ đ�?
-CREATE OR REPLACE VIEW View_BaoCao_ByChuDe AS
-SELECT ChuDe, COUNT(MaBaoCao) AS SoLuongBaoCao
-FROM BaoCao
-GROUP BY ChuDe
-ORDER BY SoLuongBaoCao DESC;
-SELECT * FROM View_BaoCao_ByChuDe
-
--- các chiến dịch quảng cáo có chi phí cao nhất
+-- cac chien dich quang cao co chi phi cao nhat
 CREATE OR REPLACE VIEW View_Top10ChienDich_ByChiPhi AS
 SELECT c.MaChienDich, c.TieuDe, SUM(m.ChiPhi) AS TongChiPhi
 FROM ChienDich c
@@ -47,7 +38,7 @@ FETCH FIRST 10 ROWS ONLY;
 SELECT * FROM View_Top10ChienDich_ByChiPhi
 
 
--- ngư�?i dùng có tổng số ti�?n nạp cao nhất
+-- nguoi dung co tong so tien nap cao nhat
 CREATE OR REPLACE VIEW View_Top10TaiKhoan_ByNapTien AS
 SELECT MaTaiKhoan, SUM(SoTien) AS TongTienNap
 FROM TaiKhoan_NapTien_TaiKhoan
@@ -55,7 +46,8 @@ GROUP BY MaTaiKhoan
 ORDER BY TongTienNap DESC
 FETCH FIRST 10 ROWS ONLY;
 SELECT * FROM View_Top10TaiKhoan_ByNapTien
--- Tài khoản không hoạt động trong 30 ngày
+
+-- Tai khoan khong hoat dong trong 30 ngay
 CREATE OR REPLACE VIEW View_TaiKhoan_Inactive AS
 SELECT tk.MaTaiKhoan, tk.TenTaiKhoan, tk.Email, tk.NgayThamGia
 FROM TaiKhoan tk
@@ -84,4 +76,21 @@ AND NOT EXISTS (
     AND tn.ThoiGianNhanTin >= TRUNC(SYSDATE) - 30
 );
 
-SELECT * FROM View_TaiKhoan_Inactive
+--Cac tai khoan bi khoa bai dang va binh luan nhieu lan
+CREATE OR REPLACE VIEW View_TaiKhoan_BiKhoaNhieuLan_Thang AS
+SELECT u.MaNguoiDung,
+       u.TenNguoiDung,
+       COUNT(DISTINCT p.MaBaiDang) AS SoLanKhoaBaiDang,
+       COUNT(DISTINCT c.MaBinhLuan) AS SoLanKhoaBinhLuan,
+       COUNT(DISTINCT p.MaBaiDang) + COUNT(DISTINCT c.MaBinhLuan) AS TongSoLanKhoa
+FROM NguoiDung u
+LEFT JOIN BaiDang p ON u.MaNguoiDung = p.MaNguoiDung 
+    AND p.TrangThai = 'Locked'
+    AND TRUNC(p.NgayTao, 'MM') = TRUNC(SYSDATE, 'MM')  -- Dieu kien loc bai dang trong thang nay
+LEFT JOIN BinhLuan c ON u.MaNguoiDung = c.MaNguoiDung 
+    AND c.TrangThai = 'Locked'
+    AND TRUNC(c.NgayTao, 'MM') = TRUNC(SYSDATE, 'MM')  -- Dieu kien loc binh luan trong thang nay
+GROUP BY u.MaNguoiDung, u.TenNguoiDung
+HAVING COUNT(DISTINCT p.MaBaiDang) > 10 OR COUNT(DISTINCT c.MaBinhLuan) > 20
+ORDER BY TongSoLanKhoa DESC;
+
