@@ -63,11 +63,11 @@ ALTER USER C##end_user PROFILE end_user_profile;
 -- 1. Quan tri vien co so du lieu (DB Admin)
 -- Nhiem vu: Quan ly cac co so du lieu, bao gom bao tri va thay doi cau truc.
 -- Tao vai tro Quan tri vien co so du lieu
-CREATE ROLE DBAdmin;
-GRANT DBA TO DBAdmin;
+CREATE ROLE C##DBAdmin;
+GRANT DBA TO C##DBAdmin;
 
 -- Trao quyen ket noi
-GRANT CREATE SESSION TO DBAdmin;
+GRANT CREATE SESSION TO C##DBAdmin;
 -- DBA da bao gom:
 -- Quyen ket noi va quan ly phien
 -- Cac quyen lien quan den bang
@@ -76,161 +76,161 @@ GRANT CREATE SESSION TO DBAdmin;
 -- Cac quyen lien quan den tablespace
 
 -- Cac quyen lien quan den sao luu/phuc hoi
-GRANT BACKUP ANY TABLE TO DBAdmin;
-GRANT FLASHBACK ANY TABLE TO DBAdmin;
+GRANT BACKUP ANY TABLE TO C##DBAdmin;
+GRANT FLASHBACK ANY TABLE TO C##DBAdmin;
 
 -- 2. Nha phat trien co so du lieu (Database Developer)
 -- Nhiem vu: Xay dung, phat trien va thu nghiem cac chuc nang moi trong co so du lieu.
 -- Tao vai tro Nha phat trien co so du lieu
-CREATE ROLE DatabaseDeveloper;
+CREATE ROLE C##DatabaseDeveloper;
 
 -- Quyen dang nhap
-GRANT CREATE SESSION TO DatabaseDeveloper;
+GRANT CREATE SESSION TO C##DatabaseDeveloper;
 
 -- Trao quyen tren mot so view chi dinh
---GRANT SELECT ON view_name TO BackendDeveloper;
+--GRANT SELECT ON view_name TO C##BackendDeveloper;
 
 ---- Cap quyen INSERT cho tat ca cac view trong schema
---GRANT INSERT ON view_name TO DatabaseDeveloper;
+--GRANT INSERT ON view_name TO C##DatabaseDeveloper;
 -- 
 ---- Cap quyen UPDATE cho tat ca cac view trong schema
---GRANT UPDATE ON view_name TO DatabaseDeveloper;
+--GRANT UPDATE ON view_name TO C##DatabaseDeveloper;
 
 -- Quan ly cac bang
-GRANT CREATE TABLE TO DatabaseDeveloper; -- Tao bang moi
-GRANT INSERT ANY TABLE TO DatabaseDeveloper; -- Chen du lieu vao moi bang
-GRANT UPDATE ANY TABLE TO DatabaseDeveloper; -- Cap nhat du lieu trong moi bang
-GRANT DELETE ANY TABLE TO DatabaseDeveloper; -- Xoa du lieu tu moi bang
+GRANT CREATE TABLE TO C##DatabaseDeveloper; -- Tao bang moi
+GRANT INSERT ANY TABLE TO C##DatabaseDeveloper; -- Chen du lieu vao moi bang
+GRANT UPDATE ANY TABLE TO C##DatabaseDeveloper; -- Cap nhat du lieu trong moi bang
+GRANT DELETE ANY TABLE TO C##DatabaseDeveloper; -- Xoa du lieu tu moi bang
 
 -- Quan ly thu tuc
-GRANT CREATE PROCEDURE TO DatabaseDeveloper; -- Tao thu tuc
-GRANT EXECUTE ANY PROCEDURE TO DatabaseDeveloper; -- Thuc thi moi thu tuc trong co so du lieu
-GRANT ALTER ANY PROCEDURE TO DatabaseDeveloper; -- Thay doi moi thu tuc trong co so du lieu
+GRANT CREATE PROCEDURE TO C##DatabaseDeveloper; -- Tao thu tuc
+GRANT EXECUTE ANY PROCEDURE TO C##DatabaseDeveloper; -- Thuc thi moi thu tuc trong co so du lieu
+GRANT ALTER ANY PROCEDURE TO C##DatabaseDeveloper; -- Thay doi moi thu tuc trong co so du lieu
 
 -- Quan ly trigger
-GRANT CREATE TRIGGER TO DatabaseDeveloper; -- Tao trigger
-GRANT ALTER ANY TRIGGER TO DatabaseDeveloper; -- Thay doi moi trigger trong co so du lieu
+GRANT CREATE TRIGGER TO C##DatabaseDeveloper; -- Tao trigger
+GRANT ALTER ANY TRIGGER TO C##DatabaseDeveloper; -- Thay doi moi trigger trong co so du lieu
 
 -- Cap quyen truy cap vao cac doi tuong khac neu can
-GRANT SELECT ANY TABLE TO DatabaseDeveloper; -- Doc du lieu tu moi bang trong co so du lieu
+GRANT SELECT ANY TABLE TO C##DatabaseDeveloper; -- Doc du lieu tu moi bang trong co so du lieu
 
 -- 3. Nha phat trien ung dung (Back-end Developer)
 -- Nhiem vu: Xay dung va bao tri cac chuc nang phia back-end cua he thong, bao gom tao, sua doi va thuc thi cac thu tuc, trigger; xu ly du lieu trong cac bang chinh.
-CREATE ROLE BackendDeveloper;
+CREATE ROLE C##BackendDeveloper;
 
 -- Cap quyen dang nhap
-GRANT CREATE SESSION TO BackendDeveloper;
+GRANT CREATE SESSION TO C##BackendDeveloper;
 
 -- Cap quyen thao tac thu tuc
-GRANT CREATE PROCEDURE TO BackendDeveloper; -- Cap quyen tao thu tuc
-GRANT ALTER ANY PROCEDURE TO BackendDeveloper; -- Cap quyen thay doi bat ky thu tuc nao
-GRANT EXECUTE ANY PROCEDURE TO BackendDeveloper; -- Cap quyen thuc thi thu tuc trong tat ca cac schema
+GRANT CREATE PROCEDURE TO C##BackendDeveloper; -- Cap quyen tao thu tuc
+GRANT ALTER ANY PROCEDURE TO C##BackendDeveloper; -- Cap quyen thay doi bat ky thu tuc nao
+GRANT EXECUTE ANY PROCEDURE TO C##BackendDeveloper; -- Cap quyen thuc thi thu tuc trong tat ca cac schema
 
 -- Cap quyen thao tac trigger
-GRANT CREATE TRIGGER TO BackendDeveloper; -- Cap quyen tao trigger
-GRANT ALTER ANY TRIGGER TO BackendDeveloper; -- Cap quyen thay doi bat ky trigger nao trong he thong
+GRANT CREATE TRIGGER TO C##BackendDeveloper; -- Cap quyen tao trigger
+GRANT ALTER ANY TRIGGER TO C##BackendDeveloper; -- Cap quyen thay doi bat ky trigger nao trong he thong
 
 -- Cap quyen thao tac tren cac bang chinh (CAN TAO BANG TRUOC KHI CHAY)
-GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON PhongNhanTin TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON BaoCao TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoanQuangCao TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ChienDich TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON MucTieu TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO C##BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO C##BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON PhongNhanTin TO C##BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON BaoCao TO C##BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoanQuangCao TO C##BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ChienDich TO C##BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON MucTieu TO C##BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE, DELETE ON QuangCao TO C##BackendDeveloper;
 
 -- 4. Ky su du lieu (Data Engineer)
 -- Nhiem vu: Thiet ke, xay dung, va duy tri co so du lieu; xu ly du lieu tu nhieu nguon.
-CREATE ROLE DataEngineer;
+CREATE ROLE C##DataEngineer;
 
 -- Cap quyen dang nhap
-GRANT CREATE SESSION TO DataEngineer;
+GRANT CREATE SESSION TO C##DataEngineer;
 
 -- Cap quyen thao tac tren du lieu (Can tao bang truoc)
-GRANT SELECT ANY TABLE TO DataEngineer;
-GRANT INSERT, UPDATE, DELETE ON TaiKhoan TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON PhongNhanTin TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON BaoCao TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON TaiKhoanQuangCao TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON ChienDich TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON MucTieu TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
+GRANT SELECT ANY TABLE TO C##DataEngineer;
+GRANT INSERT, UPDATE, DELETE ON TaiKhoan TO C##BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON BaiDang TO C##BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON PhongNhanTin TO C##BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON BaoCao TO C##BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON TaiKhoanQuangCao TO C##BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON ChienDich TO C##BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON MucTieu TO C##BackendDeveloper;
+GRANT INSERT, UPDATE, DELETE ON QuangCao TO C##BackendDeveloper;
 
 -- Cap quyen thao tac cau truc co so du lieu
-GRANT CREATE TABLE TO DataEngineer;
-GRANT ALTER ANY TABLE TO DataEngineer;
-GRANT CREATE SEQUENCE TO DataEngineer;
-GRANT CREATE VIEW TO DataEngineer;
+GRANT CREATE TABLE TO C##DataEngineer;
+GRANT ALTER ANY TABLE TO C##DataEngineer;
+GRANT CREATE SEQUENCE TO C##DataEngineer;
+GRANT CREATE VIEW TO C##DataEngineer;
 
 -- Cap quyen truy cap bang he thong (can DBA trao quyen)
-GRANT SELECT ON DBA_TABLES TO DataEngineer;
-GRANT SELECT ON DBA_TAB_COLUMNS TO DataEngineer;
-GRANT SELECT ON DBA_INDEXES TO DataEngineer;
+GRANT SELECT ON DBA_TABLES TO C##DataEngineer;
+GRANT SELECT ON DBA_TAB_COLUMNS TO C##DataEngineer;
+GRANT SELECT ON DBA_INDEXES TO C##DataEngineer;
 
 -- Cap quyen thao tac voi thu tuc va chi muc
-GRANT CREATE PROCEDURE TO DataEngineer;
+GRANT CREATE PROCEDURE TO C##DataEngineer;
 
 -- Trao quyen exec proc, func, package (can chi dinh)
 --GRANT EXECUTE ON <FUNCTION_NAME> TO <USER>;
 
 -- Trao quyen tao va huy index (can dba trao quyen)
-GRANT CREATE ANY INDEX, DROP ANY INDEX TO DataEngineer;
+GRANT CREATE ANY INDEX, DROP ANY INDEX TO C##DataEngineer;
 
 -- Cap quyen thuc thi thu tuc toi uu hoa (Can DBA trao quyen)
-GRANT EXECUTE ON DBMS_STATS TO DataEngineer;
+GRANT EXECUTE ON DBMS_STATS TO C##DataEngineer;
 
 -- 5. Nha phan tich du lieu (Data Analyst)
 -- Nhiem vu: Phan tich va truc quan hoa du lieu, tao view de ho tro bao cao.
-CREATE ROLE DataAnalyst;
+CREATE ROLE C##DataAnalyst;
 
 -- Cho phep dang nhap vao co so du lieu
-GRANT CREATE SESSION TO DataAnalyst; 
+GRANT CREATE SESSION TO C##DataAnalyst; 
 
 -- Cho phep doc du lieu tu tat ca cac bang
-GRANT SELECT ANY TABLE TO DataAnalyst;
+GRANT SELECT ANY TABLE TO C##DataAnalyst;
 
 -- Cho phep tao view
-GRANT CREATE VIEW TO DataAnalyst; 
+GRANT CREATE VIEW TO C##DataAnalyst; 
 
 -- 6. Giam sat vien (Supervisor)
 -- Nhiem vu: Theo doi hoat dong chung cua he thong, khong thuc hien cac thay doi lon.
 -- Tao vai tro Giam sat vien
-CREATE ROLE Supervisor;
+CREATE ROLE C##Supervisor;
 
 -- Cac quyen co ban
-GRANT CREATE SESSION TO Supervisor;
-GRANT RESTRICTED SESSION TO Supervisor;
+GRANT CREATE SESSION TO C##Supervisor;
+GRANT RESTRICTED SESSION TO C##Supervisor;
 
 -- Quyen truy cap
-GRANT SELECT ANY TABLE TO Supervisor;
+GRANT SELECT ANY TABLE TO C##Supervisor;
 
 -- Quyen phan tich
-GRANT ANALYZE ANY TO Supervisor;
+GRANT ANALYZE ANY TO C##Supervisor;
 
 -- 7. Nguoi dung (End-User)
 -- Nhiem vu: Su dung cac tinh nang co ban cua he thong nhu xem va tuong tac voi du lieu.
-CREATE ROLE EndUser;
-GRANT CONNECT TO EndUser;
+CREATE ROLE C##EndUser;
+GRANT CONNECT TO C##EndUser;
 
-GRANT CREATE SESSION TO EndUser; -- Cho phep dang nhap vao co so du lieu
+GRANT CREATE SESSION TO C##EndUser; -- Cho phep dang nhap vao co so du lieu
 
 -- Cap quyen xem va them du lieu tren cac bang (can tao bang truoc)
-GRANT SELECT, INSERT, UPDATE ON TaiKhoan TO EndUser; -- Cho phep xem va them du lieu trong bang TaiKhoan
-GRANT SELECT, INSERT, UPDATE ON BaiDang TO EndUser; -- Cho phep xem va them du lieu trong bang BaiDang
-GRANT SELECT, INSERT, UPDATE ON PhongNhanTin TO EndUser; -- Cho phep xem va them du lieu trong bang PhongNhanTin
-GRANT SELECT, INSERT, UPDATE ON BaoCao TO EndUser; -- Cho phep xem va them du lieu trong bang BaoCao
-GRANT SELECT, INSERT, UPDATE ON TaiKhoanQuangCao TO EndUser; -- Cho phep xem va them du lieu trong bang TaiKhoanQuangCao
-GRANT SELECT, INSERT, UPDATE ON ChienDich TO EndUser; -- Cho phep xem va them du lieu trong bang ChienDich
-GRANT SELECT, INSERT, UPDATE ON MucTieu TO EndUser; -- Cho phep xem va them du lieu trong bang MucTieu
-GRANT SELECT, INSERT, UPDATE ON QuangCao TO EndUser; -- Cho phep xem va them du lieu trong bang QuangCao
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan TO C##EndUser; -- Cho phep xem va them du lieu trong bang TaiKhoan
+GRANT SELECT, INSERT, UPDATE ON BaiDang TO C##EndUser; -- Cho phep xem va them du lieu trong bang BaiDang
+GRANT SELECT, INSERT, UPDATE ON PhongNhanTin TO C##EndUser; -- Cho phep xem va them du lieu trong bang PhongNhanTin
+GRANT SELECT, INSERT, UPDATE ON BaoCao TO C##EndUser; -- Cho phep xem va them du lieu trong bang BaoCao
+GRANT SELECT, INSERT, UPDATE ON TaiKhoanQuangCao TO C##EndUser; -- Cho phep xem va them du lieu trong bang TaiKhoanQuangCao
+GRANT SELECT, INSERT, UPDATE ON ChienDich TO C##EndUser; -- Cho phep xem va them du lieu trong bang ChienDich
+GRANT SELECT, INSERT, UPDATE ON MucTieu TO C##EndUser; -- Cho phep xem va them du lieu trong bang MucTieu
+GRANT SELECT, INSERT, UPDATE ON QuangCao TO C##EndUser; -- Cho phep xem va them du lieu trong bang QuangCao
 
 -- Gan cac vai tro cho nguoi dung tuong ung
-GRANT Supervisor TO supervisor_user;
-GRANT DBAdmin TO db_admin;
-GRANT DatabaseDeveloper TO db_developer;
-GRANT BackendDeveloper TO backend_developer;
-GRANT DataEngineer TO data_engineer;
-GRANT DataAnalyst TO data_analyst;
-GRANT EndUser TO end_user;
+GRANT C##Supervisor TO supervisor_user;
+GRANT C##DBAdmin TO db_admin;
+GRANT C##DatabaseDeveloper TO db_developer;
+GRANT C##BackendDeveloper TO backend_developer;
+GRANT C##DataEngineer TO data_engineer;
+GRANT C##DataAnalyst TO data_analyst;
+GRANT C##EndUser TO end_user;

@@ -51,6 +51,11 @@ DROP PROFILE supervisor_profile;
 DROP PROFILE end_user_profile;
 
 -- Lien quan den User
+--Liet ke cac user
+SELECT USERNAME 
+FROM ALL_USERS 
+ORDER BY USERNAME;
+
 -- Xóa user db_admin
 DROP USER db_admin CASCADE;
 
