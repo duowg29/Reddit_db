@@ -22,3 +22,9 @@ Người dùng (End-User)
 
 db_admin
 dbadmin_password
+
+Hưng: privilages_and_users.sql
+Dương: tablespaces_and_profiles.sql
+Phú đẹp trai:
+Lan:
+Đạt:
