@@ -60,9 +60,12 @@ CREATE ROLE DBAdmin;
 -- Trao quyen ket noi
 GRANT CREATE SESSION TO DBAdmin;
 
--- Trao quyen quan ly DB va BACKUP RECOVERY
-GRANT SYSDBA TO DBAdmin;
-GRANT SYSBACKUP TO DBAdmin_user;
+-- Trao quyen quan ly DB
+GRANT DBA TO DBAdmin;
+
+-- Cac quyen lien quan den sao luu/phuc hoi
+GRANT BACKUP ANY TABLE TO DBAdmin;
+GRANT FLASHBACK ANY TABLE TO DBAdmin;
 
 
 
