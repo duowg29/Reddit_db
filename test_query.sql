@@ -1,6 +1,6 @@
--- Liï¿½n quan ??n CDB vï¿½ PDB (?ï¿½y lï¿½ cï¿½c l?nh ? b??c 2 trong instruction)
-ALTER SESSION SET CONTAINER = CDB$ROOT; -- v? l?i cdb n?u c?n
-ALTER SESSION SET CONTAINER = REDDITDBPDB1; -- chuy?n sang pdb
+-- -- Liï¿½n quan ??n CDB vï¿½ PDB (?ï¿½y lï¿½ cï¿½c l?nh ? b??c 2 trong instruction)
+-- ALTER SESSION SET CONTAINER = CDB$ROOT; -- v? l?i cdb n?u c?n
+-- ALTER SESSION SET CONTAINER = REDDITDBPDB1; -- chuy?n sang pdb
 
 -- Kiem tra Container hien tai la PDB hay CDB
 SELECT SYS_CONTEXT('USERENV', 'CON_NAME') AS CURRENT_CONTAINER FROM DUAL;
@@ -64,7 +64,7 @@ SELECT USERNAME
 FROM ALL_USERS 
 ORDER BY USERNAME;
 
-SELECT * FROM user_tab_privs;      -- Quy?n trên các ??i t??ng
+SELECT * FROM user_tab_privs;      -- Quy?n trï¿½n cï¿½c ??i t??ng
 SELECT * FROM user_role_privs;     -- Quy?n c?a roles
 SELECT * FROM user_sys_privs;      -- Quy?n h? th?ng
 
