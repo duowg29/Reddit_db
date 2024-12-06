@@ -58,82 +58,79 @@ TEMPORARY TABLESPACE tb_user_temp;
 ALTER USER C##end_user PROFILE end_user_profile;
 
 
-
-
 -- ROLE CREATION
 
--- 1. Quản trị viên cơ sở dữ liệu (DB Admin)
--- Nhiệm vụ: Quản lý các cơ sở dữ liệu, bao gồm bảo trì và thay đổi cấu trúc.
--- Tạo vai trò Quản trị viên cơ sở dữ liệu
+-- 1. Quan tri vien co so du lieu (DB Admin)
+-- Nhiem vu: Quan ly cac co so du lieu, bao gom bao tri va thay doi cau truc.
+-- Tao vai tro Quan tri vien co so du lieu
 CREATE ROLE DBAdmin;
 GRANT DBA TO DBAdmin;
 
 -- Trao quyen ket noi
 GRANT CREATE SESSION TO DBAdmin;
--- DBA đã bao gồm:
--- Quy�?n kết nối và quản lý phiên
--- Các quy�?n liên quan đến bảng
--- Các quy�?n liên quan đến thủ tục
--- Các quy�?n liên quan đến index
--- Các quy�?n liên quan đến tablespace
+-- DBA da bao gom:
+-- Quyen ket noi va quan ly phien
+-- Cac quyen lien quan den bang
+-- Cac quyen lien quan den thu tuc
+-- Cac quyen lien quan den index
+-- Cac quyen lien quan den tablespace
 
--- Các quy�?n liên quan đến sao lưu/phục hồi
+-- Cac quyen lien quan den sao luu/phuc hoi
 GRANT BACKUP ANY TABLE TO DBAdmin;
 GRANT FLASHBACK ANY TABLE TO DBAdmin;
 
--- 2. Nhà phát triển cơ sở dữ liệu (Database Developer)
--- Nhiệm vụ: Xây dựng, phát triển và thử nghiệm các chức năng mới trong cơ sở dữ liệu.
--- Tạo vai trò Nhà phát triển cơ sở dữ liệu
+-- 2. Nha phat trien co so du lieu (Database Developer)
+-- Nhiem vu: Xay dung, phat trien va thu nghiem cac chuc nang moi trong co so du lieu.
+-- Tao vai tro Nha phat trien co so du lieu
 CREATE ROLE DatabaseDeveloper;
 
--- Quy�?n đăng nhập
+-- Quyen dang nhap
 GRANT CREATE SESSION TO DatabaseDeveloper;
 
 -- Trao quyen tren mot so view chi dinh
 --GRANT SELECT ON view_name TO BackendDeveloper;
 
----- C?p quy?n INSERT cho t?t c? c�c view trong schema
+---- Cap quyen INSERT cho tat ca cac view trong schema
 --GRANT INSERT ON view_name TO DatabaseDeveloper;
---
----- C?p quy?n UPDATE cho t?t c? c�c view trong schema
+-- 
+---- Cap quyen UPDATE cho tat ca cac view trong schema
 --GRANT UPDATE ON view_name TO DatabaseDeveloper;
 
+-- Quan ly cac bang
+GRANT CREATE TABLE TO DatabaseDeveloper; -- Tao bang moi
+GRANT INSERT ANY TABLE TO DatabaseDeveloper; -- Chen du lieu vao moi bang
+GRANT UPDATE ANY TABLE TO DatabaseDeveloper; -- Cap nhat du lieu trong moi bang
+GRANT DELETE ANY TABLE TO DatabaseDeveloper; -- Xoa du lieu tu moi bang
 
--- Quản lý các bảng
-GRANT CREATE TABLE TO DatabaseDeveloper;   -- Tạo bảng mới
-GRANT INSERT ANY TABLE TO DatabaseDeveloper;  -- Chèn dữ liệu vào m�?i bảng
-GRANT UPDATE ANY TABLE TO DatabaseDeveloper;  -- Cập nhật dữ liệu trong m�?i bảng
-GRANT DELETE ANY TABLE TO DatabaseDeveloper;  -- Xóa dữ liệu từ m�?i bảng
+-- Quan ly thu tuc
+GRANT CREATE PROCEDURE TO DatabaseDeveloper; -- Tao thu tuc
+GRANT EXECUTE ANY PROCEDURE TO DatabaseDeveloper; -- Thuc thi moi thu tuc trong co so du lieu
+GRANT ALTER ANY PROCEDURE TO DatabaseDeveloper; -- Thay doi moi thu tuc trong co so du lieu
 
--- Quản lý thủ tục
-GRANT CREATE PROCEDURE TO DatabaseDeveloper; -- Tạo thủ tục
-GRANT EXECUTE ANY PROCEDURE TO DatabaseDeveloper; -- Thực thi m�?i thủ tục trong cơ sở dữ liệu
-GRANT ALTER ANY PROCEDURE TO DatabaseDeveloper;  -- Thay đổi m�?i thủ tục trong cơ sở dữ liệu
+-- Quan ly trigger
+GRANT CREATE TRIGGER TO DatabaseDeveloper; -- Tao trigger
+GRANT ALTER ANY TRIGGER TO DatabaseDeveloper; -- Thay doi moi trigger trong co so du lieu
 
--- Quản lý trigger
-GRANT CREATE TRIGGER TO DatabaseDeveloper;  -- Tạo trigger
-GRANT ALTER ANY TRIGGER TO DatabaseDeveloper; -- Thay đổi m�?i trigger trong cơ sở dữ liệu
+-- Cap quyen truy cap vao cac doi tuong khac neu can
+GRANT SELECT ANY TABLE TO DatabaseDeveloper; -- Doc du lieu tu moi bang trong co so du lieu
 
--- Cấp quy�?n truy cập vào các đối tượng khác nếu cần
-GRANT SELECT ANY TABLE TO DatabaseDeveloper;  -- �?�?c dữ liệu từ m�?i bảng trong cơ sở dữ liệu
-
--- 3. Nhà phát triển ứng dụng (Back-end Developer)
--- Nhiệm vụ: Xây dựng và bảo trì các chức năng phía back-end của hệ thống, bao gồm tạo, sửa đổi và thực thi các thủ tục, trigger; xử lý dữ liệu trong các bảng chính.
+-- 3. Nha phat trien ung dung (Back-end Developer)
+-- Nhiem vu: Xay dung va bao tri cac chuc nang phia back-end cua he thong, bao gom tao, sua doi va thuc thi cac thu tuc, trigger; xu ly du lieu trong cac bang chinh.
 CREATE ROLE BackendDeveloper;
 
--- Cấp quy�?n đăng nhập
+-- Cap quyen dang nhap
 GRANT CREATE SESSION TO BackendDeveloper;
 
--- Cấp quy�?n thao tác thủ tục
-GRANT CREATE PROCEDURE TO BackendDeveloper;  -- C?p quy?n t?o th? t?c
-GRANT ALTER ANY PROCEDURE TO BackendDeveloper;  -- C?p quy?n thay ??i b?t k? th? t?c n�o
-GRANT EXECUTE ANY PROCEDURE TO BackendDeveloper;  -- C?p quy?n th?c thi th? t?c trong t?t c? c�c schema
+-- Cap quyen thao tac thu tuc
+GRANT CREATE PROCEDURE TO BackendDeveloper; -- Cap quyen tao thu tuc
+GRANT ALTER ANY PROCEDURE TO BackendDeveloper; -- Cap quyen thay doi bat ky thu tuc nao
+GRANT EXECUTE ANY PROCEDURE TO BackendDeveloper; -- Cap quyen thuc thi thu tuc trong tat ca cac schema
 
--- Cấp quy�?n thao tác trigger
-GRANT CREATE TRIGGER TO BackendDeveloper;  -- C?p quy?n t?o trigger
-GRANT ALTER ANY TRIGGER TO BackendDeveloper;  -- C?p quy?n thay ??i b?t k? trigger n�o trong h? th?ng
+-- Cap quyen thao tac trigger
+GRANT CREATE TRIGGER TO BackendDeveloper; -- Cap quyen tao trigger
+GRANT ALTER ANY TRIGGER TO BackendDeveloper; -- Cap quyen thay doi bat ky trigger nao trong he thong
 
--- Cấp quy�?n thao tác trên các bảng chính (CAN TAO BANG TRUOC KHI CHAY)
+-- Cap quyen thao tac tren cac bang chinh (CAN TAO BANG TRUOC KHI CHAY)
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO BackendDeveloper;
 GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper;
 GRANT SELECT, INSERT, UPDATE, DELETE ON PhongNhanTin TO BackendDeveloper;
@@ -143,14 +140,14 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON ChienDich TO BackendDeveloper;
 GRANT SELECT, INSERT, UPDATE, DELETE ON MucTieu TO BackendDeveloper;
 GRANT SELECT, INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
 
--- 4. Kỹ sư dữ liệu (Data Engineer)
--- Nhiệm vụ: Thiết kế, xây dựng, và duy trì cơ sở dữ liệu; xử lý dữ liệu từ nhi�?u nguồn.
+-- 4. Ky su du lieu (Data Engineer)
+-- Nhiem vu: Thiet ke, xay dung, va duy tri co so du lieu; xu ly du lieu tu nhieu nguon.
 CREATE ROLE DataEngineer;
 
--- Cấp quy�?n đăng nhập
+-- Cap quyen dang nhap
 GRANT CREATE SESSION TO DataEngineer;
 
--- Cấp quy�?n thao tác trên dữ liệu (Can tao bang truoc)
+-- Cap quyen thao tac tren du lieu (Can tao bang truoc)
 GRANT SELECT ANY TABLE TO DataEngineer;
 GRANT INSERT, UPDATE, DELETE ON TaiKhoan TO BackendDeveloper;
 GRANT INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper;
@@ -161,18 +158,18 @@ GRANT INSERT, UPDATE, DELETE ON ChienDich TO BackendDeveloper;
 GRANT INSERT, UPDATE, DELETE ON MucTieu TO BackendDeveloper;
 GRANT INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
 
--- Cấp quy�?n thao tác cấu trúc cơ sở dữ liệu
+-- Cap quyen thao tac cau truc co so du lieu
 GRANT CREATE TABLE TO DataEngineer;
 GRANT ALTER ANY TABLE TO DataEngineer;
 GRANT CREATE SEQUENCE TO DataEngineer;
 GRANT CREATE VIEW TO DataEngineer;
 
--- Cấp quy�?n truy cập bảng hệ thống (can DBA trao quyen)
+-- Cap quyen truy cap bang he thong (can DBA trao quyen)
 GRANT SELECT ON DBA_TABLES TO DataEngineer;
 GRANT SELECT ON DBA_TAB_COLUMNS TO DataEngineer;
 GRANT SELECT ON DBA_INDEXES TO DataEngineer;
 
--- Cấp quy�?n thao tác với thủ tục và chỉ mục
+-- Cap quyen thao tac voi thu tuc va chi muc
 GRANT CREATE PROCEDURE TO DataEngineer;
 
 -- Trao quyen exec proc, func, package (can chi dinh)
@@ -181,58 +178,55 @@ GRANT CREATE PROCEDURE TO DataEngineer;
 -- Trao quyen tao va huy index (can dba trao quyen)
 GRANT CREATE ANY INDEX, DROP ANY INDEX TO DataEngineer;
 
-
--- Cấp quy�?n thực thi thủ tục tối ưu hóa (Can DBA trao quyen)
+-- Cap quyen thuc thi thu tuc toi uu hoa (Can DBA trao quyen)
 GRANT EXECUTE ON DBMS_STATS TO DataEngineer;
 
-
--- 5. Nhà phân tích dữ liệu (Data Analyst)
--- Nhiệm vụ: Phân tích và trực quan hóa dữ liệu, tạo view để hỗ trợ báo cáo.
+-- 5. Nha phan tich du lieu (Data Analyst)
+-- Nhiem vu: Phan tich va truc quan hoa du lieu, tao view de ho tro bao cao.
 CREATE ROLE DataAnalyst;
 
--- Cho phép đăng nhập vào cơ sở dữ liệu
+-- Cho phep dang nhap vao co so du lieu
 GRANT CREATE SESSION TO DataAnalyst; 
 
--- Cho phép đ�?c dữ liệu từ tất cả các bảng
+-- Cho phep doc du lieu tu tat ca cac bang
 GRANT SELECT ANY TABLE TO DataAnalyst;
 
--- Cho phép tạo view
+-- Cho phep tao view
 GRANT CREATE VIEW TO DataAnalyst; 
 
--- 6. Giám sát viên (Supervisor)
--- Nhiệm vụ: Theo dõi hoạt động chung của hệ thống, không thực hiện các thay đổi lớn.
--- Tạo vai trò Giám sát viên
+-- 6. Giam sat vien (Supervisor)
+-- Nhiem vu: Theo doi hoat dong chung cua he thong, khong thuc hien cac thay doi lon.
+-- Tao vai tro Giam sat vien
 CREATE ROLE Supervisor;
 
--- Các quy�?n cơ bản
+-- Cac quyen co ban
 GRANT CREATE SESSION TO Supervisor;
 GRANT RESTRICTED SESSION TO Supervisor;
 
--- Quy�?n truy cập
+-- Quyen truy cap
 GRANT SELECT ANY TABLE TO Supervisor;
 
--- Quy�?n phân tích
+-- Quyen phan tich
 GRANT ANALYZE ANY TO Supervisor;
 
--- 7. Ngư�?i dùng (End-User)
--- Nhiệm vụ: Sử dụng các tính năng cơ bản của hệ thống như xem và tương tác với dữ liệu.
+-- 7. Nguoi dung (End-User)
+-- Nhiem vu: Su dung cac tinh nang co ban cua he thong nhu xem va tuong tac voi du lieu.
 CREATE ROLE EndUser;
 GRANT CONNECT TO EndUser;
 
-GRANT CREATE SESSION TO EndUser; -- Cho phép đăng nhập vào cơ sở dữ liệu
+GRANT CREATE SESSION TO EndUser; -- Cho phep dang nhap vao co so du lieu
 
--- Cấp quy�?n xem và thêm dữ liệu trên các bảng (can tao bang truoc)
-GRANT SELECT, INSERT, UPDATE ON TaiKhoan TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng TaiKhoan
-GRANT SELECT, INSERT, UPDATE ON BaiDang TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng BaiDang
-GRANT SELECT, INSERT, UPDATE ON PhongNhanTin TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng PhongNhanTin
-GRANT SELECT, INSERT, UPDATE ON BaoCao TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng BaoCao
-GRANT SELECT, INSERT, UPDATE ON TaiKhoanQuangCao TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng TaiKhoanQuangCao
-GRANT SELECT, INSERT, UPDATE ON ChienDich TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng ChienDich
-GRANT SELECT, INSERT, UPDATE ON MucTieu TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng MucTieu
-GRANT SELECT, INSERT, UPDATE ON QuangCao TO EndUser; -- Cho phép xem và thêm dữ liệu trong bảng QuangCao
+-- Cap quyen xem va them du lieu tren cac bang (can tao bang truoc)
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan TO EndUser; -- Cho phep xem va them du lieu trong bang TaiKhoan
+GRANT SELECT, INSERT, UPDATE ON BaiDang TO EndUser; -- Cho phep xem va them du lieu trong bang BaiDang
+GRANT SELECT, INSERT, UPDATE ON PhongNhanTin TO EndUser; -- Cho phep xem va them du lieu trong bang PhongNhanTin
+GRANT SELECT, INSERT, UPDATE ON BaoCao TO EndUser; -- Cho phep xem va them du lieu trong bang BaoCao
+GRANT SELECT, INSERT, UPDATE ON TaiKhoanQuangCao TO EndUser; -- Cho phep xem va them du lieu trong bang TaiKhoanQuangCao
+GRANT SELECT, INSERT, UPDATE ON ChienDich TO EndUser; -- Cho phep xem va them du lieu trong bang ChienDich
+GRANT SELECT, INSERT, UPDATE ON MucTieu TO EndUser; -- Cho phep xem va them du lieu trong bang MucTieu
+GRANT SELECT, INSERT, UPDATE ON QuangCao TO EndUser; -- Cho phep xem va them du lieu trong bang QuangCao
 
-
--- Gán các vai trò cho ngư�?i dùng tương ứng
+-- Gan cac vai tro cho nguoi dung tuong ung
 GRANT Supervisor TO supervisor_user;
 GRANT DBAdmin TO db_admin;
 GRANT DatabaseDeveloper TO db_developer;
