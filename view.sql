@@ -76,6 +76,8 @@ AND NOT EXISTS (
     AND tn.ThoiGianNhanTin >= TRUNC(SYSDATE) - 30
 );
 
+SELECT * FROM View_TaiKhoan_Inactive;
+
 --7. Cac tai khoan bi khoa bai dang va binh luan nhieu lan
 CREATE OR REPLACE VIEW View_TaiKhoan_BiKhoaNhieuLan_Thang AS
 SELECT 
