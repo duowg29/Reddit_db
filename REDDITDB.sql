@@ -204,8 +204,8 @@ CREATE TABLE ChienDich (
     MaChienDich NUMBER PRIMARY KEY,
     TieuDe NVARCHAR2(255) NOT NULL,
     NoiDung NCLOB NOT NULL,
-    PhuongThucThanhToan NVARCHAR2(50) NOT NULL
-    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Locked')),
+    PhuongThucThanhToan NVARCHAR2(50) NOT NULL,
+    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Locked'))
 ) TABLESPACE tb_internal;
 
 -- Tao SEQUENCE chung cho viec Insert ID
