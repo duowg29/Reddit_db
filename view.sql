@@ -88,14 +88,18 @@ SELECT
     COUNT(DISTINCT b.MaBaiDang) + COUNT(DISTINCT c.ThoiGianBinhLuan) AS TongSoLanKhoa
 FROM 
     TaiKhoan t
-LEFT JOIN BaiDang b 
-    ON t.MaTaiKhoan = b.MaTaiKhoan 
+LEFT JOIN TaiKhoan_Dang_BaiDang d
+    ON t.MaTaiKhoan = d.MaTaiKhoan
+    AND EXTRACT(MONTH FROM d.ThoiGianDangBai) = EXTRACT(MONTH FROM SYSDATE)
+    AND EXTRACT(YEAR FROM d.ThoiGianDangBai) = EXTRACT(YEAR FROM SYSDATE)
+LEFT JOIN BaiDang b
+    ON d.MaBaiDang = b.MaBaiDang
     AND b.TrangThai = 'Locked'
-    AND EXTRACT(MONTH FROM b.TepDinhKem) = EXTRACT(MONTH FROM SYSDATE)
-LEFT JOIN TaiKhoan_BinhLuan_BaiDang c 
-    ON t.MaTaiKhoan = c.MaTaiKhoan 
+LEFT JOIN TaiKhoan_BinhLuan_BaiDang c
+    ON t.MaTaiKhoan = c.MaTaiKhoan
     AND c.TrangThai = 'Locked'
     AND EXTRACT(MONTH FROM c.ThoiGianBinhLuan) = EXTRACT(MONTH FROM SYSDATE)
+    AND EXTRACT(YEAR FROM c.ThoiGianBinhLuan) = EXTRACT(YEAR FROM SYSDATE)
 GROUP BY 
     t.MaTaiKhoan, t.TenTaiKhoan
 HAVING 
