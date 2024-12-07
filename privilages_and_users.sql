@@ -33,13 +33,13 @@ ALTER USER backend_developer QUOTA 200M ON tb_internal;
 
 -- Tạo user data_engineer và gán profile
 CREATE USER data_engineer IDENTIFIED BY dataengineer_password
-DEFAULT TABLESPACE tb_index
+DEFAULT TABLESPACE tb_internal
 TEMPORARY TABLESPACE tb_user_temp;
 
 ALTER USER data_engineer PROFILE data_engineer_profile;
 
 -- Cấp quota cho data_engineer
-ALTER USER data_engineer QUOTA 500M ON tb_index;
+ALTER USER data_engineer QUOTA 500M ON tb_internal;
 
 -- Tạo user data_analyst và gán profile
 CREATE USER data_analyst IDENTIFIED BY dataanalyst_password
