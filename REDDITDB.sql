@@ -80,7 +80,7 @@ CREATE TABLE HoiNhom (
     TenNhom NVARCHAR2(50) NOT NULL,
     MoTa NCLOB, -- S? d?ng NCLOB thay v� NTEXT
     NgayThanhLap DATE NOT NULL,
-    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private', 'Locked')),
+    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private', 'Locked'))
 ) TABLESPACE tb_internal;
 
 -- Tao SEQUENCE chung cho viec Insert ID
@@ -115,7 +115,8 @@ END;
 CREATE TABLE PhongNhanTin (
     MaPhongNhanTin NUMBER PRIMARY KEY,
     TenPhong NVARCHAR2(255) DEFAULT 'CHATROOM' NOT NULL,
-    ChuDePhong NVARCHAR2(255)
+    ChuDePhong NVARCHAR2(255),
+    TrangThai VARCHAR2(10) DEFAULT 'Online' CHECK (TrangThai IN ('Online', 'Locked'))
 ) TABLESPACE tb_internal;
 
 -- Tao SEQUENCE chung cho viec Insert ID
@@ -177,7 +178,8 @@ END;
 CREATE TABLE TaiKhoanQuangCao (
     MaTaiKhoanQuangCao NUMBER PRIMARY KEY,
     TenDoanhNghiep NVARCHAR2(255) UNIQUE NOT NULL,
-    LinhVuc NVARCHAR2(255) NOT NULL
+    LinhVuc NVARCHAR2(255) NOT NULL,
+    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private', 'Locked'))
 ) TABLESPACE tb_internal;
 
 -- Tao SEQUENCE chung cho viec Insert ID
@@ -203,6 +205,7 @@ CREATE TABLE ChienDich (
     TieuDe NVARCHAR2(255) NOT NULL,
     NoiDung NCLOB NOT NULL,
     PhuongThucThanhToan NVARCHAR2(50) NOT NULL
+    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Locked')),
 ) TABLESPACE tb_internal;
 
 -- Tao SEQUENCE chung cho viec Insert ID
