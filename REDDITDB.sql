@@ -46,7 +46,7 @@ END;
 CREATE TABLE BaiDang (
     MaBaiDang NUMBER PRIMARY KEY,
     MaTaiKhoan NUMBER NOT NULL,
-    TieuDe NVARCHAR2(255),
+    TieuDe NVARCHAR2(100),
     NoiDung NCLOB NOT NULL, 
     TepDinhKem VARCHAR2(100),
     The VARCHAR2(50),
@@ -78,7 +78,7 @@ END;
 CREATE TABLE HoiNhom (
     MaHoiNhom NUMBER PRIMARY KEY,
     TenNhom NVARCHAR2(50) NOT NULL,
-    MoTa NCLOB, -- S? d?ng NCLOB thay v� NTEXT
+    MoTa NCLOB,
     NgayThanhLap DATE NOT NULL,
     TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private', 'Locked'))
 ) TABLESPACE tb_internal;
@@ -139,9 +139,9 @@ END;
 --
 CREATE TABLE BaoCao (
     MaBaoCao NUMBER PRIMARY KEY,
-    TieuDe NVARCHAR2(255) NOT NULL,
-    ChuDe NVARCHAR2(255) NOT NULL,
-    NoiDung CLOB NOT NULL,
+    TieuDe NVARCHAR2(100) NOT NULL,
+    ChuDe NVARCHAR2(100) NOT NULL,
+    NoiDung NCLOB NOT NULL,
     MinhChung VARCHAR2(100),
     ThoiGianBaoCao TIMESTAMP NOT NULL 
 ) TABLESPACE tb_internal;
@@ -177,8 +177,8 @@ END;
 --
 CREATE TABLE TaiKhoanQuangCao (
     MaTaiKhoanQuangCao NUMBER PRIMARY KEY,
-    TenDoanhNghiep NVARCHAR2(255) UNIQUE NOT NULL,
-    LinhVuc NVARCHAR2(255) NOT NULL,
+    TenDoanhNghiep NVARCHAR2(100) UNIQUE NOT NULL,
+    LinhVuc NVARCHAR2(100) NOT NULL,
     TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private', 'Locked'))
 ) TABLESPACE tb_internal;
 
@@ -386,7 +386,7 @@ CREATE TABLE TaiKhoan_NhanTin_PhongNhanTin (
     MaTaiKhoan NUMBER NOT NULL,
     MaPhongNhanTin NUMBER NOT NULL,
 	NoiDungNhanTin NCLOB NOT NULL,
-	ThoiGianNhanTin DATE DEFAULT SYSDATE NOT NULL ,
+	ThoiGianNhanTin TIMESTAMP DEFAULT SYSDATE NOT NULL ,
 	TepDinhKem VARCHAR2(100),
     PRIMARY KEY (MaTaiKhoan, MaPhongNhanTin),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
