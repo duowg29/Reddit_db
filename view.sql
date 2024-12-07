@@ -78,19 +78,25 @@ AND NOT EXISTS (
 
 --7. Cac tai khoan bi khoa bai dang va binh luan nhieu lan
 CREATE OR REPLACE VIEW View_TaiKhoan_BiKhoaNhieuLan_Thang AS
-SELECT u.MaNguoiDung,
-       u.TenNguoiDung,
-       COUNT(DISTINCT p.MaBaiDang) AS SoLanKhoaBaiDang,
-       COUNT(DISTINCT c.MaBinhLuan) AS SoLanKhoaBinhLuan,
-       COUNT(DISTINCT p.MaBaiDang) + COUNT(DISTINCT c.MaBinhLuan) AS TongSoLanKhoa
-FROM NguoiDung u
-LEFT JOIN BaiDang p ON u.MaNguoiDung = p.MaNguoiDung 
-    AND p.TrangThai = 'Locked'
-    AND TRUNC(p.NgayTao, 'MM') = TRUNC(SYSDATE, 'MM')  -- Dieu kien loc bai dang trong thang nay
-LEFT JOIN BinhLuan c ON u.MaNguoiDung = c.MaNguoiDung 
+SELECT 
+    t.MaTaiKhoan,
+    t.TenTaiKhoan,
+    COUNT(DISTINCT b.MaBaiDang) AS SoLanKhoaBaiDang,
+    COUNT(DISTINCT c.ThoiGianBinhLuan) AS SoLanKhoaBinhLuan,
+    COUNT(DISTINCT b.MaBaiDang) + COUNT(DISTINCT c.ThoiGianBinhLuan) AS TongSoLanKhoa
+FROM 
+    TaiKhoan t
+LEFT JOIN BaiDang b 
+    ON t.MaTaiKhoan = b.MaTaiKhoan 
+    AND b.TrangThai = 'Locked'
+    AND EXTRACT(MONTH FROM b.TepDinhKem) = EXTRACT(MONTH FROM SYSDATE)
+LEFT JOIN TaiKhoan_BinhLuan_BaiDang c 
+    ON t.MaTaiKhoan = c.MaTaiKhoan 
     AND c.TrangThai = 'Locked'
-    AND TRUNC(c.NgayTao, 'MM') = TRUNC(SYSDATE, 'MM')  -- Dieu kien loc binh luan trong thang nay
-GROUP BY u.MaNguoiDung, u.TenNguoiDung
-HAVING COUNT(DISTINCT p.MaBaiDang) > 10 OR COUNT(DISTINCT c.MaBinhLuan) > 20
-ORDER BY TongSoLanKhoa DESC;
-
+    AND EXTRACT(MONTH FROM c.ThoiGianBinhLuan) = EXTRACT(MONTH FROM SYSDATE)
+GROUP BY 
+    t.MaTaiKhoan, t.TenTaiKhoan
+HAVING 
+    COUNT(DISTINCT b.MaBaiDang) > 10 OR COUNT(DISTINCT c.ThoiGianBinhLuan) > 20
+ORDER BY 
+    TongSoLanKhoa DESC;

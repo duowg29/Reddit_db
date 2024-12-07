@@ -1,4 +1,4 @@
---2. Cap nhat trang thai bai dang khi cap nhat trang thai tai khoan thanh khoa
+--1. Cap nhat trang thai bai dang khi cap nhat trang thai tai khoan thanh khoa
 CREATE OR REPLACE TRIGGER trg_update_BaiDang_TrangThai
 AFTER UPDATE OF TrangThai ON TaiKhoan
 FOR EACH ROW
@@ -20,7 +20,7 @@ BEGIN
     END IF;
 END;
 /
---3. Cap nhap trang thai binh luan neu cap nhap trang thai tai khoan thanh khoa
+--2. Cap nhap trang thai binh luan neu cap nhap trang thai tai khoan thanh khoa
 CREATE OR REPLACE TRIGGER trg_update_comment_status_on_account_locked
 AFTER UPDATE OF TrangThai ON TaiKhoan
 FOR EACH ROW
@@ -33,7 +33,7 @@ BEGIN
 END;
 /
 
---4. Cap nhat trang thai binh luan khi cap nhat trang thai bai viet thanh khoa
+--3. Cap nhat trang thai binh luan khi cap nhat trang thai bai viet thanh khoa
 CREATE OR REPLACE TRIGGER trg_update_comment_status_on_post_locked
 AFTER UPDATE OF TrangThai ON BaiDang
 FOR EACH ROW
@@ -46,7 +46,7 @@ BEGIN
 END;
 /
 
---5. Gioi han so bai dang hang ngay
+--4. Gioi han so bai dang hang ngay
 CREATE OR REPLACE TRIGGER trg_limit_daily_posts
 BEFORE INSERT ON BaiDang
 FOR EACH ROW
@@ -65,7 +65,7 @@ BEGIN
 END;
 /
 
---6. Gioi han so luot tuong tac lien tuc cua mot tai khoan trong mot thoi gian ngan
+--5. Gioi han so luot tuong tac lien tuc cua mot tai khoan trong mot thoi gian ngan
 CREATE OR REPLACE TRIGGER trg_limit_daily_posts
 BEFORE INSERT ON BaiDang
 FOR EACH ROW
