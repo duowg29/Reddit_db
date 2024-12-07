@@ -1,0 +1,16 @@
+system
+RedditDB@123
+db_admin
+dbadmin_password
+db_developer
+dbdeveloper_password
+backend_developer
+backenddeveloper_password
+data_engineer
+dataengineer_password
+data_analyst
+dataanalyst_password
+supervisor_user
+supervisor_password
+end_user
+enduser_password
