@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 --1. Cap nhat trang thai bai dang khi cap nhat trang thai tai khoan thanh khoa
+=======
+--2. Cap nhat trang thai bai dang khi cap nhat trang thai tai khoan thanh khoa
+>>>>>>> 81c3790b69473948c06733224ecfdbcdcad4dde1
 CREATE OR REPLACE TRIGGER trg_update_BaiDang_TrangThai
 AFTER UPDATE OF TrangThai ON TaiKhoan
 FOR EACH ROW
@@ -33,8 +37,12 @@ BEGIN
 END;
 /
 
+<<<<<<< HEAD
 
 --3. Cap nhat trang thai binh luan khi cap nhat trang thai bai viet thanh khoa
+=======
+--4. Cap nhat trang thai binh luan khi cap nhat trang thai bai viet thanh khoa
+>>>>>>> 81c3790b69473948c06733224ecfdbcdcad4dde1
 CREATE OR REPLACE TRIGGER trg_update_comment_status_on_post_locked
 AFTER UPDATE OF TrangThai ON BaiDang
 FOR EACH ROW
@@ -66,22 +74,28 @@ BEGIN
 END;
 /
 
+<<<<<<< HEAD
 --5. Gioi han so luot tuong tac lien tuc cua mot tai khoan trong mot thoi gian ngan
 CREATE OR REPLACE TRIGGER trg_limit_interactions
 BEFORE INSERT ON TaiKhoan_TuongTac_BaiDang
+=======
+--6. Gioi han so luot tuong tac lien tuc cua mot tai khoan trong mot thoi gian ngan
+CREATE OR REPLACE TRIGGER trg_limit_daily_posts
+BEFORE INSERT ON BaiDang
+>>>>>>> 81c3790b69473948c06733224ecfdbcdcad4dde1
 FOR EACH ROW
 DECLARE
-    v_recent_interactions INTEGER;
+    v_count INTEGER;
 BEGIN
     SELECT COUNT(*)
-    INTO v_recent_interactions
-    FROM TaiKhoan_TuongTac_BaiDang
+    INTO v_count
+    FROM TaiKhoan_Dang_BaiDang
     WHERE MaTaiKhoan = :NEW.MaTaiKhoan
-      AND MaBaiDang = :NEW.MaBaiDang
-      AND ThoiGianTuongTac > SYSDATE - INTERVAL '1' MINUTE;
+      AND TRUNC(ThoiGianDangBai) = TRUNC(SYSDATE);
 
-    IF v_recent_interactions >= 50 THEN
-        RAISE_APPLICATION_ERROR(-20006, 'Ban khong the tuong tac qua 50 lan tren cung mot bai viet trong vong 1 phut!');
+    IF v_count >= 20 THEN
+        RAISE_APPLICATION_ERROR(-20002, 'Tai khoan nay vuot qua gioi han 20 bai dang 1 ngay!');
     END IF;
 END;
 /
+
