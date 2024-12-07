@@ -79,7 +79,8 @@ CREATE TABLE HoiNhom (
     MaHoiNhom NUMBER PRIMARY KEY,
     TenNhom NVARCHAR2(50) NOT NULL,
     MoTa NCLOB, -- S? d?ng NCLOB thay v� NTEXT
-    NgayThanhLap DATE NOT NULL
+    NgayThanhLap DATE NOT NULL,
+    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Private', 'Locked')),
 ) TABLESPACE tb_internal;
 
 -- Tao SEQUENCE chung cho viec Insert ID
