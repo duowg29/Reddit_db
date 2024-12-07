@@ -87,8 +87,7 @@ GRANT CREATE SESSION TO DBAdmin;
 GRANT DBA TO DBAdmin;
 
 -- Cac quyen lien quan den sao luu/phuc hoi
-GRANT BACKUP ANY TABLE TO DBAdmin;
-GRANT FLASHBACK ANY TABLE TO DBAdmin;
+GRANT SYSBACKUP TO db_admin;
 
 -- C?p quy?n SELECT, INSERT, UPDATE, DELETE cho DBAdmin tr�n c�c b?ng ch�nh
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO DBAdmin;
