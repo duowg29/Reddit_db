@@ -72,7 +72,7 @@ BEGIN
     END IF;
 END;
 
---5. Cap nhat trang thai bai dang thanh locked
+--5. Cap nhat trang thai bai dang
 SET SERVEROUTPUT ON
 DECLARE
     p_MaBaiDang NUMBER;
@@ -81,11 +81,11 @@ BEGIN
 
     -- Cap nhat trang thai bai đang thanh locked
     UPDATE BaiDang
-    SET TrangThai = 'locked'
+    SET TrangThai = 'Locked'
     WHERE MaBaiDang = p_MaBaiDang;
 
     -- Thông báo thành công
-    DBMS_OUTPUT.PUT_LINE('Bai dang da bi khoa');
+    DBMS_OUTPUT.PUT_LINE('Cap nhat trang thai thanh cong');
 END;
 /
 
