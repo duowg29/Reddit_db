@@ -252,7 +252,7 @@ GRANT SELECT ANY TABLE TO DataAnalyst;
 
 -- Cho phep tao view
 GRANT CREATE VIEW TO DataAnalyst; 
-GRANT ALTER ANY VIEW TO DataAnalyst;
+--GRANT ALTER ANY VIEW TO DataAnalyst;
 
 -- 6. Giam sat vien (Supervisor)
 -- Nhiem vu: Theo doi hoat dong chung cua he thong, khong thuc hien cac thay doi lon.
