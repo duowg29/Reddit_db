@@ -156,14 +156,30 @@ GRANT CREATE TRIGGER TO BackendDeveloper; -- Cap quyen tao trigger
 GRANT ALTER ANY TRIGGER TO BackendDeveloper; -- Cap quyen thay doi bat ky trigger nao trong he thong
 
 -- Cap quyen thao tac tren cac bang chinh (CAN TAO BANG TRUOC KHI CHAY)
-GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON PhongNhanTin TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON BaoCao TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoanQuangCao TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ChienDich TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON MucTieu TO BackendDeveloper;
-GRANT SELECT, INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON BaiDang TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON PhongNhanTin TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON BaoCao TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoanQuangCao TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON ChienDich TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON MucTieu TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON QuangCao TO BackendDeveloper;
+
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_Dang_BaiDang TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_TuongTac_BaiDang TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_BinhLuan_BaiDang TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_QuanLy_BaiDang TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_Lap_HoiNhom TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_ThamGia_HoiNhom TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_Lap_PhongNhanTin TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_NhanTin_PhongNhanTin TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_NapTien_TaiKhoan TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_Lap_TaiKhoanQuangCao TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoanQuangCao_DangKy_ChienDich TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON ChienDich_Co_MucTieu TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON ChienDich_Co_QuangCao TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON BaiDang_Thuoc_HoiNhom TO BackendDeveloper;
+GRANT SELECT, INSERT, UPDATE ON TaiKhoan_Gui_BaoCao TO BackendDeveloper;
 
 -- 4. Ky su du lieu (Data Engineer)
 -- Nhiem vu: Thiet ke, xay dung, va duy tri co so du lieu; xu ly du lieu tu nhieu nguon.
@@ -184,16 +200,34 @@ GRANT CREATE PROCEDURE TO DataEngineer;
 
 -- Cap quyen thao tac tren du lieu (Can tao bang truoc)
 GRANT SELECT ANY TABLE TO DataEngineer;
-GRANT INSERT, UPDATE, DELETE ON TaiKhoan TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON BaiDang TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON PhongNhanTin TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON BaoCao TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON TaiKhoanQuangCao TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON ChienDich TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON MucTieu TO BackendDeveloper;
-GRANT INSERT, UPDATE, DELETE ON QuangCao TO BackendDeveloper;
+GRANT INSERT, UPDATE ON TaiKhoan TO BackendDeveloper;
+GRANT INSERT, UPDATE ON BaiDang TO BackendDeveloper;
+GRANT INSERT, UPDATE ON PhongNhanTin TO BackendDeveloper;
+GRANT INSERT, UPDATE ON BaoCao TO BackendDeveloper;
+GRANT INSERT, UPDATE ON TaiKhoanQuangCao TO BackendDeveloper;
+GRANT INSERT, UPDATE ON ChienDich TO BackendDeveloper;
+GRANT INSERT, UPDATE ON MucTieu TO BackendDeveloper;
+GRANT INSERT, UPDATE ON QuangCao TO BackendDeveloper;
 
--- Cap quyen truy cap bang he thong (can DBA trao quyen)
+
+GRANT INSERT, UPDATE ON TaiKhoan_Dang_BaiDang TO DataEngineer;
+GRANT INSERT, UPDATE ON TaiKhoan_TuongTac_BaiDang TO DataEngineer;
+GRANT INSERT, UPDATE ON TaiKhoan_BinhLuan_BaiDang TO DataEngineer;
+GRANT INSERT, UPDATE ON TaiKhoan_QuanLy_BaiDang TO DataEngineer;
+GRANT INSERT, UPDATE ON TaiKhoan_Lap_HoiNhom TO DataEngineer;
+GRANT INSERT, UPDATE ON TaiKhoan_ThamGia_HoiNhom TO DataEngineer;
+GRANT INSERT, UPDATE ON TaiKhoan_Lap_PhongNhanTin TO DataEngineer;
+GRANT INSERT, UPDATE ON TaiKhoan_NhanTin_PhongNhanTin TO DataEngineer;
+GRANT INSERT, UPDATE ON TaiKhoan_NapTien_TaiKhoan TO DataEngineer;
+GRANT INSERT, UPDATE ON TaiKhoan_Lap_TaiKhoanQuangCao TO DataEngineer;
+GRANT INSERT, UPDATE ON TaiKhoanQuangCao_DangKy_ChienDich TO DataEngineer;
+GRANT INSERT, UPDATE ON ChienDich_Co_MucTieu TO DataEngineer;
+GRANT INSERT, UPDATE ON ChienDich_Co_QuangCao TO DataEngineer;
+GRANT INSERT, UPDATE ON BaiDang_Thuoc_HoiNhom TO DataEngineer;
+GRANT INSERT, UPDATE ON TaiKhoan_Gui_BaoCao TO DataEngineer;
+
+
+-- Cap quyen truy cap bang he thong (can SYSDBA trao quyen)
 GRANT SELECT ON DBA_TABLES TO DataEngineer;
 GRANT SELECT ON DBA_TAB_COLUMNS TO DataEngineer;
 GRANT SELECT ON DBA_INDEXES TO DataEngineer;
@@ -201,10 +235,10 @@ GRANT SELECT ON DBA_INDEXES TO DataEngineer;
 -- Trao quyen exec proc, func, package (can chi dinh)
 --GRANT EXECUTE ON <FUNCTION_NAME> TO <USER>;
 
--- Trao quyen tao va huy index (can dba trao quyen)
+-- Trao quyen tao va huy index (can sysdba trao quyen)
 GRANT CREATE ANY INDEX, DROP ANY INDEX TO DataEngineer;
 
--- Cap quyen thuc thi thu tuc toi uu hoa (Can DBA trao quyen)
+-- Cap quyen thuc thi thu tuc toi uu hoa (Can SYSDBA trao quyen)
 GRANT EXECUTE ON DBMS_STATS TO DataEngineer;
 
 -- 5. Nha phan tich du lieu (Data Analyst)
@@ -238,7 +272,6 @@ GRANT ANALYZE ANY TO Supervisor;
 -- 7. Nguoi dung (End-User)
 -- Nhiem vu: Su dung cac tinh nang co ban cua he thong nhu xem va tuong tac voi du lieu.
 CREATE ROLE EndUser;
-GRANT CONNECT TO EndUser;
 
 GRANT CREATE SESSION TO EndUser; -- Cho phep dang nhap vao co so du lieu
 
