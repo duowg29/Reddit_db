@@ -116,7 +116,7 @@ CREATE TABLE PhongNhanTin (
     MaPhongNhanTin NUMBER PRIMARY KEY,
     TenPhong NVARCHAR2(255) DEFAULT 'CHATROOM' NOT NULL,
     ChuDePhong NVARCHAR2(255),
-    TrangThai VARCHAR2(10) DEFAULT 'Online' CHECK (TrangThai IN ('Online', 'Locked'))
+    TrangThai VARCHAR2(10) DEFAULT 'Public' CHECK (TrangThai IN ('Public', 'Locked'))
 ) TABLESPACE tb_internal;
 
 -- Tao SEQUENCE chung cho viec Insert ID

@@ -216,17 +216,16 @@ CREATE OR REPLACE PROCEDURE BaiDangUpvoteCaoNhat
 AS
     v_MaBaiDang    BaiDang.MaBaiDang%TYPE;
     v_TieuDe       BaiDang.TieuDe%TYPE;
-    v_NoiDung      BaiDang.NoiDung%TYPE;
     v_SoUpvote     NUMBER;
 
 BEGIN
     -- Tim bai dang co so luong upvote cao nhat
-    SELECT bd.MaBaiDang, bd.TieuDe, bd.NoiDung, MAX(tt.Upvote)
-    INTO v_MaBaiDang, v_TieuDe, v_NoiDung, v_SoUpvote
+    SELECT bd.MaBaiDang, bd.TieuDe, MAX(tt.Upvote)
+    INTO v_MaBaiDang, v_TieuDe, v_SoUpvote
     FROM BaiDang bd 
     JOIN TaiKhoan_TuongTac_BaiDang tt
     ON bd.MaBaiDang = tt.MaBaiDang
-    GROUP BY bd.MaBaiDang, bd.TieuDe, bd.NoiDung
+    GROUP BY bd.MaBaiDang, bd.TieuDe
     ORDER BY MAX(tt.Upvote) DESC
     FETCH FIRST 1 ROWS ONLY;
 
@@ -234,7 +233,6 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Bai dang co luong upvote cao nhat:');
     DBMS_OUTPUT.PUT_LINE('Ma bai dang: ' || v_MaBaiDang);
     DBMS_OUTPUT.PUT_LINE('Tieu de: ' || v_TieuDe);
-    DBMS_OUTPUT.PUT_LINE('Noi dung: ' || v_NoiDung);
     DBMS_OUTPUT.PUT_LINE('So luong upvote: ' || v_SoUpvote);
 
 EXCEPTION
