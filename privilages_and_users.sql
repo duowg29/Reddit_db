@@ -226,20 +226,21 @@ GRANT INSERT, UPDATE ON ChienDich_Co_QuangCao TO DataEngineer;
 GRANT INSERT, UPDATE ON BaiDang_Thuoc_HoiNhom TO DataEngineer;
 GRANT INSERT, UPDATE ON TaiKhoan_Gui_BaoCao TO DataEngineer;
 
+-- Trao quyen tao va huy index (can sysdba trao quyen)
+GRANT CREATE ANY INDEX, DROP ANY INDEX TO DataEngineer;
 
--- Cap quyen truy cap bang he thong (can SYSDBA trao quyen)
-GRANT SELECT ON DBA_TABLES TO DataEngineer;
-GRANT SELECT ON DBA_TAB_COLUMNS TO DataEngineer;
-GRANT SELECT ON DBA_INDEXES TO DataEngineer;
+---- Cap quyen truy cap bang he thong (can SYSDBA trao quyen va chi dinh cu the)
+--GRANT SELECT ON DBA_TABLES TO DataEngineer;
+--GRANT SELECT ON DBA_TAB_COLUMNS TO DataEngineer;
+--GRANT SELECT ON DBA_INDEXES TO DataEngineer;
+
 
 -- Trao quyen exec proc, func, package (can chi dinh)
 --GRANT EXECUTE ON <FUNCTION_NAME> TO <USER>;
 
--- Trao quyen tao va huy index (can sysdba trao quyen)
-GRANT CREATE ANY INDEX, DROP ANY INDEX TO DataEngineer;
+---- Cap quyen thuc thi thu tuc toi uu hoa (Can SYSDBA trao quyen chi dinh cu the)
+--GRANT EXECUTE ON DBMS_STATS TO DataEngineer;
 
--- Cap quyen thuc thi thu tuc toi uu hoa (Can SYSDBA trao quyen)
-GRANT EXECUTE ON DBMS_STATS TO DataEngineer;
 
 -- 5. Nha phan tich du lieu (Data Analyst)
 -- Nhiem vu: Phan tich va truc quan hoa du lieu, tao view de ho tro bao cao.
