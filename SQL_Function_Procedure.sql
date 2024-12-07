@@ -11,7 +11,7 @@ FETCH FIRST 5 ROWS ONLY;
 
 
 
---2. Danh sách các bài đăng có số lượt xem lớn hơn 1000000
+--2. Danh sách các bài đăng có số lượt xem lớn hơn 10
 SELECT 
     MaBaiDang,
     TieuDe,
