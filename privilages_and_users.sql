@@ -188,9 +188,11 @@ CREATE ROLE DataEngineer;
 -- Cap quyen dang nhap
 GRANT CREATE SESSION TO DataEngineer;
 
-
 -- Cap quyen thao tac cau truc co so du lieu
-GRANT CREATE TABLE TO DataEngineer;
+GRANT CREATE TABLE TO DataEngineer; -- Tao bang moi
+GRANT INSERT ANY TABLE TO DataEngineer; -- Chen du lieu vao moi bang
+GRANT UPDATE ANY TABLE TO DataEngineer; -- Cap nhat du lieu trong moi bang
+GRANT DELETE ANY TABLE TO DataEngineer; -- Xoa du lieu tu moi bang
 GRANT ALTER ANY TABLE TO DataEngineer;
 GRANT CREATE SEQUENCE TO DataEngineer;
 GRANT CREATE VIEW TO DataEngineer;
