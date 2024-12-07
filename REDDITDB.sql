@@ -287,7 +287,7 @@ CREATE TABLE TaiKhoan_Dang_BaiDang (
     PRIMARY KEY (MaTaiKhoan, MaBaiDang),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaBaiDang) REFERENCES BaiDang(MaBaiDang)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 -- T?o trigger ?? ki?m tra r�ng bu?c cho ThoiGianDangBai
 CREATE OR REPLACE TRIGGER trg_TaiKhoan_Dang_BaiDang_ThoiGianDangBai
 BEFORE INSERT OR UPDATE ON TaiKhoan_Dang_BaiDang
@@ -309,7 +309,7 @@ CREATE TABLE TaiKhoan_TuongTac_BaiDang (
     PRIMARY KEY (MaTaiKhoan, MaBaiDang),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaBaiDang) REFERENCES BaiDang(MaBaiDang)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 -- T?o trigger ?? ki?m tra r�ng bu?c cho ThoiGianDangBai
 CREATE OR REPLACE TRIGGER trg_TaiKhoan_TuongTac_BaiDang_ThoiGianTuongTac
 BEFORE INSERT OR UPDATE ON TaiKhoan_TuongTac_BaiDang
@@ -332,7 +332,7 @@ CREATE TABLE TaiKhoan_BinhLuan_BaiDang (
     PRIMARY KEY (MaTaiKhoan, MaBaiDang, ThoiGianBinhLuan),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaBaiDang) REFERENCES BaiDang(MaBaiDang)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 -- T?o trigger ?? ki?m tra r�ng bu?c cho ThoiGianBinhLuan
 CREATE OR REPLACE TRIGGER trg_TaiKhoan_BinhLuan_BaiDang_ThoiGianBinhLuan
@@ -352,7 +352,7 @@ CREATE TABLE TaiKhoan_QuanLy_BaiDang (
     PRIMARY KEY (MaTaiKhoan, MaBaiDang),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaBaiDang) REFERENCES BaiDang(MaBaiDang)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 --
 CREATE TABLE TaiKhoan_Lap_HoiNhom (
@@ -361,7 +361,7 @@ CREATE TABLE TaiKhoan_Lap_HoiNhom (
     PRIMARY KEY (MaTaiKhoan, MaHoiNhom),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaHoiNhom) REFERENCES HoiNhom(MaHoiNhom)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 --
 CREATE TABLE TaiKhoan_ThamGia_HoiNhom (
@@ -370,7 +370,7 @@ CREATE TABLE TaiKhoan_ThamGia_HoiNhom (
     PRIMARY KEY (MaTaiKhoan, MaHoiNhom),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaHoiNhom) REFERENCES HoiNhom(MaHoiNhom)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 --
 CREATE TABLE TaiKhoan_Lap_PhongNhanTin (
@@ -379,7 +379,7 @@ CREATE TABLE TaiKhoan_Lap_PhongNhanTin (
     PRIMARY KEY (MaTaiKhoan, MaPhongNhanTin),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaPhongNhanTin) REFERENCES PhongNhanTin(MaPhongNhanTin)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 --
 CREATE TABLE TaiKhoan_NhanTin_PhongNhanTin (
@@ -391,7 +391,7 @@ CREATE TABLE TaiKhoan_NhanTin_PhongNhanTin (
     PRIMARY KEY (MaTaiKhoan, MaPhongNhanTin),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaPhongNhanTin) REFERENCES PhongNhanTin(MaPhongNhanTin)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 -- T?o trigger ?? ki?m tra r�ng bu?c cho ThoiGianNhanTin
 CREATE OR REPLACE TRIGGER trg_TaiKhoan_NhanTin_PhongNhanTin_ThoiGianNhanTin
 BEFORE INSERT OR UPDATE ON TaiKhoan_NhanTin_PhongNhanTin
@@ -413,7 +413,7 @@ CREATE TABLE TaiKhoan_NapTien_TaiKhoan (
     SoVangNhanDuoc NUMBER NOT NULL,
     PRIMARY KEY (MaTaiKhoan, MaGiaoDich),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 --
 CREATE TABLE TaiKhoan_Lap_TaiKhoanQuangCao (
@@ -422,7 +422,7 @@ CREATE TABLE TaiKhoan_Lap_TaiKhoanQuangCao (
     PRIMARY KEY (MaTaiKhoan, MaTaiKhoanQuangCao),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaTaiKhoanQuangCao) REFERENCES TaiKhoanQuangCao(MaTaiKhoanQuangCao)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 --
 CREATE TABLE TaiKhoanQuangCao_DangKy_ChienDich (
@@ -435,7 +435,7 @@ CREATE TABLE TaiKhoanQuangCao_DangKy_ChienDich (
     PRIMARY KEY (MaTaiKhoanQuangCao, MaChienDich, MaGiaoDich),
     FOREIGN KEY (MaTaiKhoanQuangCao) REFERENCES TaiKhoanQuangCao(MaTaiKhoanQuangCao),
     FOREIGN KEY (MaChienDich) REFERENCES ChienDich(MaChienDich)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 --
 CREATE TABLE ChienDich_Co_MucTieu (
@@ -444,7 +444,7 @@ CREATE TABLE ChienDich_Co_MucTieu (
     PRIMARY KEY (MaChienDich, MaMucTieu),
     FOREIGN KEY (MaChienDich) REFERENCES ChienDich(MaChienDich),
     FOREIGN KEY (MaMucTieu) REFERENCES MucTieu(MaMucTieu)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 --
 CREATE TABLE ChienDich_Co_QuangCao (
@@ -453,7 +453,7 @@ CREATE TABLE ChienDich_Co_QuangCao (
     PRIMARY KEY (MaChienDich, MaQuangCao),
     FOREIGN KEY (MaChienDich) REFERENCES ChienDich(MaChienDich),
     FOREIGN KEY (MaQuangCao) REFERENCES QuangCao(MaQuangCao)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 --
 CREATE TABLE BaiDang_Thuoc_HoiNhom (
@@ -462,7 +462,7 @@ CREATE TABLE BaiDang_Thuoc_HoiNhom (
     PRIMARY KEY (MaBaiDang, MaHoiNhom),
     FOREIGN KEY (MaBaiDang) REFERENCES BaiDang(MaBaiDang),
     FOREIGN KEY (MaHoiNhom) REFERENCES HoiNhom(MaHoiNhom)
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 --
 CREATE TABLE TaiKhoan_Gui_BaoCao (
@@ -471,7 +471,7 @@ CREATE TABLE TaiKhoan_Gui_BaoCao (
     PRIMARY KEY (MaTaiKhoan, MaBaoCao),
     FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan),
     FOREIGN KEY (MaBaoCao) REFERENCES BaoCao(MaBaoCao) 
-) TABLESPACE tb_index;
+) TABLESPACE tb_internal;
 
 -- Thủ tục tăng điểm đóng góp và cập nhật hạng tài khoản 
 CREATE OR REPLACE PROCEDURE CapNhatDiemDongGop IS

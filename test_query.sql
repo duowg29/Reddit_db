@@ -63,6 +63,9 @@ DROP PROFILE supervisor_profile;
 DROP PROFILE end_user_profile;
 
 -- Lien quan den User
+-- Kiem tra user dang chay
+SELECT USER FROM dual;
+
 --Liet ke cac user
 SELECT USERNAME 
 FROM ALL_USERS 

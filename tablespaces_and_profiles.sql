@@ -12,15 +12,6 @@ AUTOEXTEND ON
 NEXT 10M 
 MAXSIZE UNLIMITED;
 
--- Tao Tablespace index
--- Luu y: vi tri datafile tu tao nhe :)
-CREATE TABLESPACE tb_index
-DATAFILE 'C:/BA/Year 3 Semester 1/6 He quan tri co so du lieu/Bai tap lon/reddit_dbms_github/tablespace/tb_index_datafile.dbf' 
-SIZE 100M 
-AUTOEXTEND ON 
-NEXT 10M 
-MAXSIZE UNLIMITED;
-
 -- Tao Temporary Tablespace
 -- Luu y: vi tri datafile tu tao nhe :)
 CREATE TEMPORARY TABLESPACE tb_user_temp 

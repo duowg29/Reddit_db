@@ -1,53 +1,76 @@
 -- USER CREATION
 
 -- Tao va gan profile cho DB Admin
+-- Tạo user db_admin và gán profile
 CREATE USER db_admin IDENTIFIED BY dbadmin_password
 DEFAULT TABLESPACE tb_internal
 TEMPORARY TABLESPACE tb_user_temp;
 
 ALTER USER db_admin PROFILE db_admin_profile;
 
--- Tao va gan profile cho Database Developer
+-- Cấp quota cho db_admin
+ALTER USER db_admin QUOTA UNLIMITED ON tb_internal;
+
+-- Tạo user db_developer và gán profile
 CREATE USER db_developer IDENTIFIED BY dbdeveloper_password
 DEFAULT TABLESPACE tb_internal
 TEMPORARY TABLESPACE tb_user_temp;
 
 ALTER USER db_developer PROFILE db_developer_profile;
 
--- Tao va gan profile cho Back-end Developer
+-- Cấp quota cho db_developer
+ALTER USER db_developer QUOTA 200M ON tb_internal;
+
+-- Tạo user backend_developer và gán profile
 CREATE USER backend_developer IDENTIFIED BY backenddeveloper_password
 DEFAULT TABLESPACE tb_internal
 TEMPORARY TABLESPACE tb_user_temp;
 
 ALTER USER backend_developer PROFILE backend_developer_profile;
 
--- Tao va gan profile cho Data Engineer
+-- Cấp quota cho backend_developer
+ALTER USER backend_developer QUOTA 200M ON tb_internal;
+
+-- Tạo user data_engineer và gán profile
 CREATE USER data_engineer IDENTIFIED BY dataengineer_password
-DEFAULT TABLESPACE tb_index
+DEFAULT TABLESPACE tb_internal
 TEMPORARY TABLESPACE tb_user_temp;
 
 ALTER USER data_engineer PROFILE data_engineer_profile;
 
--- Tao va gan profile cho Data Analyst
+-- Cấp quota cho data_engineer
+ALTER USER data_engineer QUOTA 500M ON tb_internal;
+
+-- Tạo user data_analyst và gán profile
 CREATE USER data_analyst IDENTIFIED BY dataanalyst_password
 DEFAULT TABLESPACE tb_internal
 TEMPORARY TABLESPACE tb_user_temp;
 
 ALTER USER data_analyst PROFILE data_analyst_profile;
 
--- Tao va gan profile cho Supervisor
+-- Cấp quota cho data_analyst
+ALTER USER data_analyst QUOTA 300M ON tb_internal;
+
+-- Tạo user supervisor_user và gán profile
 CREATE USER supervisor_user IDENTIFIED BY supervisor_password
 DEFAULT TABLESPACE tb_internal
 TEMPORARY TABLESPACE tb_user_temp;
 
 ALTER USER supervisor_user PROFILE supervisor_profile;
 
--- Tao va gan profile cho End User
+-- Cấp quota cho supervisor_user
+ALTER USER supervisor_user QUOTA 100M ON tb_internal;
+
+-- Tạo user end_user và gán profile
 CREATE USER end_user IDENTIFIED BY enduser_password
 DEFAULT TABLESPACE tb_internal
 TEMPORARY TABLESPACE tb_user_temp;
 
 ALTER USER end_user PROFILE end_user_profile;
+
+-- Cấp quota cho end_user
+ALTER USER end_user QUOTA 50M ON tb_internal;
+
 
 
 -- ROLE CREATION
@@ -144,7 +167,6 @@ CREATE ROLE BackendDeveloper;
 
 -- Cap quyen dang nhap
 GRANT CREATE SESSION TO BackendDeveloper;
-GRANT CREATE SEQUENCE TO BackendDeveloper;
 
 -- Cap quyen thao tac thu tuc
 GRANT CREATE PROCEDURE TO BackendDeveloper; -- Cap quyen tao thu tuc
@@ -188,9 +210,11 @@ CREATE ROLE DataEngineer;
 -- Cap quyen dang nhap
 GRANT CREATE SESSION TO DataEngineer;
 
-
 -- Cap quyen thao tac cau truc co so du lieu
-GRANT CREATE TABLE TO DataEngineer;
+GRANT CREATE TABLE TO DataEngineer; -- Tao bang moi
+GRANT INSERT ANY TABLE TO DataEngineer; -- Chen du lieu vao moi bang
+GRANT UPDATE ANY TABLE TO DataEngineer; -- Cap nhat du lieu trong moi bang
+GRANT DELETE ANY TABLE TO DataEngineer; -- Xoa du lieu tu moi bang
 GRANT ALTER ANY TABLE TO DataEngineer;
 GRANT CREATE SEQUENCE TO DataEngineer;
 GRANT CREATE VIEW TO DataEngineer;
@@ -256,8 +280,6 @@ GRANT SELECT ANY TABLE TO DataAnalyst;
 GRANT CREATE VIEW TO DataAnalyst; 
 --GRANT ALTER ANY VIEW TO DataAnalyst;
 
-GRANT CREATE SEQUENCE TO DataAnalyst;
-
 -- 6. Giam sat vien (Supervisor)
 -- Nhiem vu: Theo doi hoat dong chung cua he thong, khong thuc hien cac thay doi lon.
 -- Tao vai tro Giam sat vien
@@ -272,9 +294,6 @@ GRANT SELECT ANY TABLE TO Supervisor;
 
 -- Quyen phan tich
 GRANT ANALYZE ANY TO Supervisor;
-
---
-GRANT CREATE SEQUENCE TO Supervisor;
 
 -- 7. Nguoi dung (End-User)
 -- Nhiem vu: Su dung cac tinh nang co ban cua he thong nhu xem va tuong tac voi du lieu.
