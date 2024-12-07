@@ -67,8 +67,6 @@ GRANT DBA TO DBAdmin;
 GRANT BACKUP ANY TABLE TO DBAdmin;
 GRANT FLASHBACK ANY TABLE TO DBAdmin;
 
-
-
 -- C?p quy?n SELECT, INSERT, UPDATE, DELETE cho DBAdmin tr�n c�c b?ng ch�nh
 GRANT SELECT, INSERT, UPDATE, DELETE ON TaiKhoan TO DBAdmin;
 GRANT SELECT, INSERT, UPDATE, DELETE ON BaiDang TO DBAdmin;
@@ -254,6 +252,7 @@ GRANT SELECT ANY TABLE TO DataAnalyst;
 
 -- Cho phep tao view
 GRANT CREATE VIEW TO DataAnalyst; 
+GRANT ALTER ANY VIEW TO DataAnalyst;
 
 -- 6. Giam sat vien (Supervisor)
 -- Nhiem vu: Theo doi hoat dong chung cua he thong, khong thuc hien cac thay doi lon.
