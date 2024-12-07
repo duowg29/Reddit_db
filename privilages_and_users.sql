@@ -109,6 +109,7 @@ CREATE ROLE DatabaseDeveloper;
 
 -- Quyen dang nhap
 GRANT CREATE SESSION TO DatabaseDeveloper;
+GRANT CREATE SEQUENCE TO DatabaseDeveloper;
 
 -- Trao quyen tren mot so view chi dinh
 --GRANT SELECT ON view_name TO BackendDeveloper;
@@ -143,6 +144,7 @@ CREATE ROLE BackendDeveloper;
 
 -- Cap quyen dang nhap
 GRANT CREATE SESSION TO BackendDeveloper;
+GRANT CREATE SEQUENCE TO BackendDeveloper;
 
 -- Cap quyen thao tac thu tuc
 GRANT CREATE PROCEDURE TO BackendDeveloper; -- Cap quyen tao thu tuc
@@ -254,6 +256,8 @@ GRANT SELECT ANY TABLE TO DataAnalyst;
 GRANT CREATE VIEW TO DataAnalyst; 
 --GRANT ALTER ANY VIEW TO DataAnalyst;
 
+GRANT CREATE SEQUENCE TO DataAnalyst;
+
 -- 6. Giam sat vien (Supervisor)
 -- Nhiem vu: Theo doi hoat dong chung cua he thong, khong thuc hien cac thay doi lon.
 -- Tao vai tro Giam sat vien
@@ -269,11 +273,16 @@ GRANT SELECT ANY TABLE TO Supervisor;
 -- Quyen phan tich
 GRANT ANALYZE ANY TO Supervisor;
 
+--
+GRANT CREATE SEQUENCE TO Supervisor;
+
 -- 7. Nguoi dung (End-User)
 -- Nhiem vu: Su dung cac tinh nang co ban cua he thong nhu xem va tuong tac voi du lieu.
 CREATE ROLE EndUser;
 
 GRANT CREATE SESSION TO EndUser; -- Cho phep dang nhap vao co so du lieu
+
+GRANT CREATE SEQUENCE TO EndUser;
 
 -- C?p quy?n SELECT, INSERT, UPDATE cho EndUser tr�n c�c b?ng ch�nh
 GRANT SELECT, INSERT, UPDATE ON TaiKhoan TO EndUser;
