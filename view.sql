@@ -95,11 +95,13 @@ LEFT JOIN TaiKhoan_Dang_BaiDang d
 LEFT JOIN BaiDang b
     ON d.MaBaiDang = b.MaBaiDang
     AND b.TrangThai = 'Locked'
+    AND b.MaTaiKhoan != t.MaTaiKhoan  
 LEFT JOIN TaiKhoan_BinhLuan_BaiDang c
     ON t.MaTaiKhoan = c.MaTaiKhoan
     AND c.TrangThai = 'Locked'
     AND EXTRACT(MONTH FROM c.ThoiGianBinhLuan) = EXTRACT(MONTH FROM SYSDATE)
     AND EXTRACT(YEAR FROM c.ThoiGianBinhLuan) = EXTRACT(YEAR FROM SYSDATE)
+    AND c.MaTaiKhoan != t.MaTaiKhoan
 GROUP BY 
     t.MaTaiKhoan, t.TenTaiKhoan
 HAVING 
