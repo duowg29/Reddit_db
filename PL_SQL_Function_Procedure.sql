@@ -161,48 +161,6 @@ BEGIN
     END IF;
 END;
 
--- 9. Gui tin nhan vào phong
-SET SERVEROUTPUT ON;
-DECLARE
-    v_MaTaiKhoan NUMBER := &v_MaTaiKhoan;
-    v_MaPhongNhanTin NUMBER := &v_MaPhongNhanTin;
-    v_NoiDungNhanTin NCLOB := '&v_NoiDungNhanTin';
-    v_TepDinhKem VARCHAR2(100) := '&v_TepDinhKem';
-    v_count NUMBER;
-BEGIN
-    -- Kiem tra tai khoan co ton tai khong
-    SELECT COUNT(*) INTO v_count 
-    FROM TaiKhoan 
-    WHERE MaTaiKhoan = v_MaTaiKhoan;
-    
-    IF v_count = 0 THEN
-        DBMS_OUTPUT.PUT_LINE('Tai khoan khong ton tai.');
-        RETURN;
-    END IF;
-
-    -- Kiem tra phong nhan tin co ton tai khong
-    SELECT COUNT(*) INTO v_count 
-    FROM PhongNhanTin 
-    WHERE MaPhongNhanTin = v_MaPhongNhanTin;
-    
-    IF v_count = 0 THEN
-        DBMS_OUTPUT.PUT_LINE('Phong nhan tin khong ton tai.');
-        RETURN;
-    END IF;
-
-    -- Chèn dữ liệu tin nhắn vào bảng
-    INSERT INTO TaiKhoan_NhanTin_PhongNhanTin(MaTaiKhoan, MaPhongNhanTin, NoiDungNhanTin, TepDinhKem) 
-    VALUES(v_MaTaiKhoan, v_MaPhongNhanTin, v_NoiDungNhanTin, v_TepDinhKem);
-
-    -- Thông báo gửi tin thành công
-    DBMS_OUTPUT.PUT_LINE('Gui tin nhan thanh cong.');
-EXCEPTION
-    -- Bắt và xử lý mọi lỗi khác
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Loi khi gui tin nhan: ' || SQLERRM);
-END;
-/
-
 --QUAN LY CHIEN DICH QUANG CAO
 --10. Cap nhat thong tin chien dich
 BEGIN
@@ -224,9 +182,8 @@ SoluongTKQC
 RETURN NUMBER
 AS Soluong NUMBER;
 BEGIN
-    SELECT COUNT(*) INTO Soluong
-    FROM TaiKhoan_Lap_TaiKhoanQuangCao
-
+    SELECT COUNT(MaTaiKhoan) INTO Soluong
+    FROM TaiKhoan_Lap_TaiKhoanQuangCao;
     RETURN Soluong;
 END;
 SELECT SoluongTKQC FROM DUAL;
@@ -286,7 +243,7 @@ EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Loi xay ra: ' || SQLERRM);
 END;
-EXEC BaiDangUpvoteCaoNhat
+EXEC BaiDangUpvoteCaoNhat;
 
 --14. Thong ke TOP 5 chien dich có chi phi quang cao cao nhat
 CREATE OR REPLACE PROCEDURE TOP5_EXPENSIVE_CAMPAIGNS 
@@ -305,4 +262,4 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE('Chien dich: ' || rec.TieuDe || ', Tong chi phi quang cao: ' || rec.TongChiPhi);
     END LOOP;
 END;
-EXEC TOP5_EXPENSIVE_CAMPAIGNS 
+EXEC TOP5_EXPENSIVE_CAMPAIGNS;
