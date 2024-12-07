@@ -20,7 +20,7 @@ SELECT
 FROM 
     BaiDang
 WHERE 
-    LuotXem > 1000000
+    LuotXem > 10
 ORDER BY 
     LuotXem DESC;
 
@@ -116,7 +116,7 @@ SELECT
 FROM 
     TaiKhoan
 WHERE 
-    LOWER(QuocGia) = 'Viet Nam';
+    QuocGia = 'VN';
 
 
 --10. thống kê 10 bài đăng có lượt upvote cao nhất:
