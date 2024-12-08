@@ -106,7 +106,7 @@ BEGIN
                     FROM TaiKhoan_ThamGia_HoiNhom
                     WHERE MaHoiNhom= p_MaHoiNhom)
         LOOP
-            DBMS_OUTPUT.PUT_LINE(rec.MaTaiKhoan);
+            DBMS_OUTPUT.PUT_LINE('Ma tai khoan: ' || rec.MaTaiKhoan);
         END LOOP;
     END IF;
 END;
@@ -198,7 +198,7 @@ BEGIN
     END IF;
 END;
 
---11. ƒêua ra so luong tai khoan dang ky tai khoan quang cao
+--11. ƒ?ua ra so luong tai khoan dang ky tai khoan quang cao
 CREATE OR REPLACE FUNCTION
 SoluongTKQC
 RETURN NUMBER
