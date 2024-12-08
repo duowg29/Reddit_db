@@ -70,7 +70,7 @@
 
 **NOTE**: Lỗi này xảy ra do khi mình tắt máy thì DB sẽ về chế độ MOUNT, ta cần chuyển nó về OPEN mới có thể sử dụng. 1 Phần nữa là do mình đang sử dụng PDB thay cho CDB nên sẽ phải chuyển Session về PDB (Bước 2).
 B1: Mở CMD
-B2: Paste lệnh: sqlplus / as sysdba
+B2: Paste lệnh: sqlplus/ as sysdba
 B3: Paste lệnh: ALTER SESSION SET CONTAINER = "REDDITDBPDB1";
 B4: Paste lệnh: ALTER DATABASE OPEN;
 B5: Kiểm tra lại xem đã OPEN chưa bằng lệnh: ALTER DATABASE OPEN;
