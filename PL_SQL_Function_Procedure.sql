@@ -161,6 +161,28 @@ BEGIN
     END IF;
 END;
 
+-- 9. Dua ra danh sach tin nhan theo ma tai khoan
+SET SERVEROUTPUT ON;
+DECLARE
+    v_MaTaiKhoan NUMBER := &v_MaTaiKhoan;
+    v_count NUMBER;
+BEGIN
+    -- Kiem tra tai khoan co ton tai khong
+    SELECT COUNT(*) INTO v_count 
+    FROM TaiKhoan 
+    WHERE MaTaiKhoan = v_MaTaiKhoan;
+    
+    IF v_count = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Tai khoan khong ton tai.');
+    ELSE
+        FOR rec IN (SELECT MaPhongNhanTin, NoiDungNhanTin
+                    FROM TaiKhoan_NhanTin_PhongNhanTin
+                    WHERE MaTaiKhoan=v_MaTaiKhoan)
+        LOOP 
+            DBMS_OUTPUT.PUT_LINE(rec.MaPhongNhanTin||' |'||rec.NoiDungNhanTin);
+        END LOOP;
+    END IF;
+END;
 --QUAN LY CHIEN DICH QUANG CAO
 --10. Cap nhat thong tin chien dich
 BEGIN
