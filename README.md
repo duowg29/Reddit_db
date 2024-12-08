@@ -76,18 +76,32 @@ B4: Paste lệnh: ALTER DATABASE OPEN;
 B5: Kiểm tra lại xem đã OPEN chưa bằng lệnh: ALTER DATABASE OPEN;
 
 Bọn em chỉ là sinh viên đang học thôi ạ, mong mọi người không đánh giá quá khắt khe
+
 We are just students who are still learning, so we hope everyone won't judge us too harshly.
+
 हम सिर्फ छात्र हैं जो अभी पढ़ाई कर रहे हैं, इसलिए हम आशा करते हैं कि हर कोई हमें ज्यादा कठोरता से जज नहीं करेगा।
+
 我们只是正在学习的学生，希望大家不要对我们过于苛刻
+
 Solo somos estudiantes que están aprendiendo, esperamos que todos no nos juzguen demasiado severamente.
+
 Nous ne sommes que des étudiants en apprentissage, nous espérons que tout le monde ne nous jugera pas trop sévèrement.
+
 Мы всего лишь студенты, которые еще учатся, надеемся, что все не будут нас слишком строго оценивать.
+
 私たちはまだ学んでいる学生に過ぎませんので、皆さんに厳しく評価されないことを願っています。
+
 우리는 단지 공부 중인 학생일 뿐이니, 모두가 너무 엄격하게 평가하지 않기를 바랍니다.
+
 نحن مجرد طلاب ما زلنا نتعلم، نأمل ألا يقيمنا الجميع بصرامة زائدة.
+
 Somos apenas estudantes que ainda estão aprendendo, esperamos que todos não nos julguem com muita severidade.
+
 Siamo solo studenti che stanno ancora imparando, speriamo che tutti non ci giudichino troppo severamente.
+
 Biz sadece öğrenen öğrencileriz, umarız herkes bizi çok sert değerlendirmez.
+
 Jesteśmy tylko studentami, którzy się jeszcze uczą, mamy nadzieję, że wszyscy nie będą nas oceniać zbyt surowo.
+
 Jsme jen studenti, kteří se ještě učí, doufáme, že nás lidé nebude hodnotit příliš přísně.
 
