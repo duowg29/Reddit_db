@@ -16,15 +16,28 @@ FETCH FIRST 10 ROWS ONLY;
 SELECT * FROM View_Top10TaiKhoan_DiemDongGop;
 --3. 10 bai dang co luot tuong tac cao nhat
 CREATE OR REPLACE VIEW View_Top10Posts_ByInteractions AS
-SELECT b.MaBaiDang, b.TieuDe, TO_CHAR(b.NoiDung) AS NoiDung, b.LuotXem, 
-       SUM(CASE WHEN t.Upvote = 1 THEN 1 ELSE 0 END) AS SoUpvote,
-       SUM(CASE WHEN t.Downvote = 1 THEN 1 ELSE 0 END) AS SoDownvote
-FROM BaiDang b
-LEFT JOIN TaiKhoan_TuongTac_BaiDang t ON b.MaBaiDang = t.MaBaiDang
-GROUP BY b.MaBaiDang, b.TieuDe, TO_CHAR(b.NoiDung), b.LuotXem
-ORDER BY (SUM(CASE WHEN t.Upvote = 1 THEN 1 ELSE 0 END) - 
-          SUM(CASE WHEN t.Downvote = 1 THEN 1 ELSE 0 END)) DESC
+SELECT 
+    b.MaBaiDang, 
+    b.TieuDe, 
+    TO_CHAR(b.NoiDung) AS NoiDung, 
+    b.LuotXem, 
+    COALESCE(SUM(t.Upvote), 0) AS SoUpvote,
+    COALESCE(SUM(t.Downvote), 0) AS SoDownvote
+FROM 
+    BaiDang b
+LEFT JOIN 
+    TaiKhoan_TuongTac_BaiDang t 
+ON 
+    b.MaBaiDang = t.MaBaiDang
+GROUP BY 
+    b.MaBaiDang, 
+    b.TieuDe, 
+    TO_CHAR(b.NoiDung), 
+    b.LuotXem
+ORDER BY 
+    (COALESCE(SUM(t.Upvote), 0) - COALESCE(SUM(t.Downvote), 0)) DESC
 FETCH FIRST 10 ROWS ONLY;
+
 SELECT * FROM View_Top10Posts_ByInteractions;
 
 --4. cac chien dich quang cao co chi phi cao nhat
