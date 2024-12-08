@@ -2,11 +2,12 @@
 ALTER SESSION SET CONTAINER = REDDITDBPDB1;
 
 --DATAFILE 'E:/Subjects/HQTCSDL/BTL/tablespace/tb_internal_datafile.dbf' 
+--DATAFILE 'C:/BA/Year 3 Semester 1/6 He quan tri co so du lieu/Bai tap lon/reddit_dbms_github/tablespace/tb_internal_datafile.dbf' 
 
 -- Tao Tablespace chinh
 -- Luu y: vi tri datafile tu tao nhe :)
 CREATE TABLESPACE tb_internal
-DATAFILE 'D:/Subjects/HQTCSDL/BTL/tablespace/tb_internal_datafile.dbf' 
+DATAFILE 'C:/BA/Year 3 Semester 1/6 He quan tri co so du lieu/Bai tap lon/reddit_dbms_github/tablespace/tb_internal_datafile.dbf' 
 SIZE 100M 
 AUTOEXTEND ON 
 NEXT 10M 
@@ -15,7 +16,7 @@ MAXSIZE UNLIMITED;
 -- Tao Temporary Tablespace
 -- Luu y: vi tri datafile tu tao nhe :)
 CREATE TEMPORARY TABLESPACE tb_user_temp 
-TEMPFILE 'D:/Subjects/HQTCSDL/BTL/tablespace/tb_user_temp_datafile.dbf' 
+TEMPFILE 'C:/BA/Year 3 Semester 1/6 He quan tri co so du lieu/Bai tap lon/reddit_dbms_github/tablespace/tb_user_temp_datafile.dbf' 
 SIZE 50M 
 AUTOEXTEND ON 
 NEXT 5M 

@@ -6,14 +6,14 @@ FROM TaiKhoan
 LEFT JOIN BaiDang ON TaiKhoan.MaTaiKhoan = BaiDang.MaTaiKhoan
 GROUP BY TaiKhoan.MaTaiKhoan, TaiKhoan.TenTaiKhoan
 ORDER BY SoLuongBaiDang DESC;
-SELECT * FROM View_ThongKeBaiDang
+SELECT * FROM View_ThongKeBaiDang;
 --2. Top 10 tai khoan co diem dong gop cao nhat
 CREATE OR REPLACE VIEW View_Top10TaiKhoan_DiemDongGop AS
 SELECT MaTaiKhoan, TenTaiKhoan, Email, DiemDongGop
 FROM TaiKhoan
 ORDER BY DiemDongGop DESC
 FETCH FIRST 10 ROWS ONLY;
-SELECT * FROM View_Top10TaiKhoan_DiemDongGop
+SELECT * FROM View_Top10TaiKhoan_DiemDongGop;
 --3. 10 bai dang co luot tuong tac cao nhat
 CREATE OR REPLACE VIEW View_Top10Posts_ByInteractions AS
 SELECT b.MaBaiDang, b.TieuDe, TO_CHAR(b.NoiDung) AS NoiDung, b.LuotXem, 
@@ -25,7 +25,7 @@ GROUP BY b.MaBaiDang, b.TieuDe, TO_CHAR(b.NoiDung), b.LuotXem
 ORDER BY (SUM(CASE WHEN t.Upvote = 1 THEN 1 ELSE 0 END) - 
           SUM(CASE WHEN t.Downvote = 1 THEN 1 ELSE 0 END)) DESC
 FETCH FIRST 10 ROWS ONLY;
-SELECT * FROM View_Top10Posts_ByInteractions
+SELECT * FROM View_Top10Posts_ByInteractions;
 
 --4. cac chien dich quang cao co chi phi cao nhat
 CREATE OR REPLACE VIEW View_Top10ChienDich_ByChiPhi AS
@@ -35,7 +35,7 @@ JOIN MucTieu m ON c.MaChienDich = m.MaChienDich
 GROUP BY c.MaChienDich, c.TieuDe
 ORDER BY SUM(m.ChiPhi) DESC
 FETCH FIRST 10 ROWS ONLY;
-SELECT * FROM View_Top10ChienDich_ByChiPhi
+SELECT * FROM View_Top10ChienDich_ByChiPhi;
 
 
 --5. nguoi dung co tong so tien nap cao nhat
@@ -45,7 +45,7 @@ FROM TaiKhoan_NapTien_TaiKhoan
 GROUP BY MaTaiKhoan
 ORDER BY TongTienNap DESC
 FETCH FIRST 10 ROWS ONLY;
-SELECT * FROM View_Top10TaiKhoan_ByNapTien
+SELECT * FROM View_Top10TaiKhoan_ByNapTien;
 
 --6.Tai khoan khong hoat dong trong 30 ngay
 CREATE OR REPLACE VIEW View_TaiKhoan_Inactive AS
