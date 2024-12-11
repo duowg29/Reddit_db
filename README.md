@@ -42,8 +42,6 @@
   - ChienDich (Chiến dịch quảng cáo)
   - MucTieu (Mục tiêu chiến dịch)
 
-- **tb_index**:
-
   - TaiKhoan_Dang_BaiDang (Quan hệ giữa người dùng và bài đăng)
   - TaiKhoan_TuongTac_BaiDang (Quan hệ giữa người dùng và bài đăng mà họ tương tác)
   - TaiKhoan_BinhLuan_BaiDang (Bình luận của người dùng trên bài đăng)
@@ -104,4 +102,3 @@ Biz sadece öğrenen öğrencileriz, umarız herkes bizi çok sert değerlendirm
 Jesteśmy tylko studentami, którzy się jeszcze uczą, mamy nadzieję, że wszyscy nie będą nas oceniać zbyt surowo.
 
 Jsme jen studenti, kteří se ještě učí, doufáme, že nás lidé nebude hodnotit příliš přísně.
-
